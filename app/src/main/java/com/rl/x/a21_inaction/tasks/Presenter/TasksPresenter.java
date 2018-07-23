@@ -19,15 +19,13 @@ public class TasksPresenter implements TasksContract.Presenter {
 
 
     private TasksContract.View view;
-    private Context applicationContext;
 
     private TaskModel model;
 
 
     public TasksPresenter(TasksContract.View view, Context applicationContext) {
-        this.view = view;
-        this.applicationContext = applicationContext;
 
+        this.view = view;
         model = new TaskModel(applicationContext);
     }
 
@@ -37,16 +35,18 @@ public class TasksPresenter implements TasksContract.Presenter {
      */
     @Override
     public void setupRecyclerViewWithAdapter() {
+
         view.setupRecyclerViewWithAdapter();
     }
 
 
     /**
-     * insert mock tasks into database
+     * retrieve tasks from application Database
      */
     @Override
-    public void insertMockTasksIntoDatabase() {
-        model.insertMockTasks();
+    public void retrieveAndDisplayTasks() {
+
+        view.displayTasks(model.retrieveTasks());
     }
 
 
@@ -57,23 +57,32 @@ public class TasksPresenter implements TasksContract.Presenter {
      */
     @Override
     public void insertTaskIntoDatabase(String name) {
-        final Task newTask = new Task(name);
 
-        model.insertTask(newTask);
+        model.insertTask(new Task(name));
     }
 
 
     /**
-     * retrieve tasks from application Database
-     *
-     * @return List of tasks
+     * insert mock tasks into database for testing
      */
     @Override
-    public void retrieveAndDisplayTasks() {
-        
-        List<Task> taskList = model.retrieveTasks();
-        view.displayTasks(taskList);
+    public void insertMockTasksIntoDatabase() {
 
+        model.insertMockTasks();
+    }
+
+
+    /**
+     * delete task from application database then refresh tasks
+     *
+     * @param task
+     */
+    @Override
+    public void deleteTask(Task task) {
+
+        model.deleteTask(task);
+
+        view.refreshTasks(model.retrieveTasks());
     }
 
 
@@ -112,23 +121,11 @@ public class TasksPresenter implements TasksContract.Presenter {
     }
 
 
-    /**
-     * delete task from application database then refresh tasks recyclerView
-     *
-     * @param task
-     */
-    @Override
-    public void deleteTask(final Task task) {
-        model.deleteTask(task);
-        view.refreshTasks(model.retrieveTasks());
-    }
-
-
     @Override
     public void start() {
+
         setupRecyclerViewWithAdapter();
         retrieveAndDisplayTasks();
         setupSwipeTaskFun();
-
     }
 }

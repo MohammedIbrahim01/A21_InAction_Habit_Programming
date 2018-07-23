@@ -13,7 +13,19 @@ import java.util.List;
 
 public interface AchievementContract {
 
+    interface Model {
+
+        List<Achievement> retrieveAchievements();
+
+        void insertAchievement(Achievement achievement);
+
+        void insertMockAchievements();
+
+        void deleteAchievement(Achievement achievement);
+    }
+
     interface View {
+
         void displayAchievements(List<Achievement> achievementList);
 
         AchievementsAdapter getAdapter();

@@ -7,6 +7,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import com.rl.x.a21_inaction.achievements.AchievementContract;
 import com.rl.x.a21_inaction.achievements.model.Achievement;
 import com.rl.x.a21_inaction.achievements.model.AchievementDao;
+import com.rl.x.a21_inaction.achievements.model.AchievementModel;
 import com.rl.x.a21_inaction.database.AppDatabase;
 import com.rl.x.a21_inaction.day_zero.model.ExpectationDao;
 import com.rl.x.a21_inaction.tasks.model.Task;
@@ -17,73 +18,71 @@ import java.util.concurrent.Executor;
 
 public class AchievementPresenter implements AchievementContract.Presenter {
 
-    private Context applicationContext;
     private AchievementContract.View view;
 
-    private Executor diskIO;
-    private AchievementDao achievementDao;
+    private AchievementModel model;
+
 
     public AchievementPresenter(Context applicationContext, AchievementContract.View view) {
-        this.applicationContext = applicationContext;
-        this.view = view;
 
-        diskIO = AppExecutors.getInstance().getDiskIO();
-        achievementDao = AppDatabase.getInstance(applicationContext).achievementDao();
+        this.view = view;
+        model = new AchievementModel(applicationContext);
     }
 
+
+    /**
+     * setup recyclerView with adapter
+     */
     @Override
     public void setupRecyclerViewWithAdapter() {
+
         view.setupRecyclerViewWithAdapter();
     }
 
+    /**
+     * retrieve Achievements from database
+     */
     @Override
     public void retrieveAndDisplayAchievements() {
-        diskIO.execute(new Runnable() {
-            @Override
-            public void run() {
-                //retrieve achievements
-                List<Achievement> achievementList = achievementDao.getAllAchievements();
 
-                //display achievements
-                view.displayAchievements(achievementList);
-            }
-        });
+        view.displayAchievements(model.retrieveAchievements());
     }
 
+
+    /**
+     * insert Achievement into database
+     *
+     * @param name
+     */
     @Override
     public void insertAchievementIntoDatabase(String name) {
-        final Achievement newAchievement = new Achievement(name);
 
-        diskIO.execute(new Runnable() {
-            @Override
-            public void run() {
-                achievementDao.insertAchievement(newAchievement);
-            }
-        });
+        model.insertAchievement(new Achievement(name));
     }
 
+
+    /**
+     * insert Achievements into database for testing
+     *
+     */
     @Override
     public void insertMockAchievementsIntoDatabase() {
 
-        diskIO.execute(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 4; i++) {
-                    achievementDao.insertAchievement(new Achievement("achievement #" + i));
-                }
-            }
-        });
-
+        model.insertMockAchievements();
     }
 
+
+    /**
+     * delete achievement from database then refresh achievements
+     *
+     * @param achievement
+     */
     @Override
-    public void deleteAchievement(final Achievement achievement) {
-        diskIO.execute(new Runnable() {
-            @Override
-            public void run() {
-                achievementDao.deleteAchievement(achievement);
-            }
-        });
+    public void deleteAchievement(Achievement achievement) {
+
+        model.deleteAchievement(achievement);
+
+        view.refreshAchievementRecyclerView(model.retrieveAchievements());
     }
 
 

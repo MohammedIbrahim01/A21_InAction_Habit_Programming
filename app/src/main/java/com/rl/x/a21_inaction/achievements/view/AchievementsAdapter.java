@@ -43,6 +43,7 @@ public class AchievementsAdapter extends RecyclerView.Adapter<AchievementsAdapte
 
     @Override
     public int getItemCount() {
+
         return achievementList.size();
     }
 
