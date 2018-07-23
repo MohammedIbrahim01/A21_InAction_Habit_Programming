@@ -7,10 +7,12 @@ import android.content.Context;
 
 import com.rl.x.a21_inaction.achievements.model.Achievement;
 import com.rl.x.a21_inaction.achievements.model.AchievementDao;
+import com.rl.x.a21_inaction.day_zero.model.Expectation;
+import com.rl.x.a21_inaction.day_zero.model.ExpectationDao;
 import com.rl.x.a21_inaction.tasks.model.Task;
 import com.rl.x.a21_inaction.tasks.model.TaskDao;
 
-@Database(entities = {Task.class, Achievement.class}, version = 2, exportSchema = false)
+@Database(entities = {Task.class, Achievement.class, Expectation.class}, version = 3, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final Object LOCK = new Object();
@@ -21,7 +23,6 @@ public abstract class AppDatabase extends RoomDatabase {
         if (sInstance == null) {
             if (sInstance == null) {
                 sInstance = Room.databaseBuilder(applicationContext, AppDatabase.class, NAME_DATABASE)
-                        .fallbackToDestructiveMigration()
                         .build();
             }
         }
@@ -29,6 +30,9 @@ public abstract class AppDatabase extends RoomDatabase {
     }
 
     public abstract TaskDao taskDao();
+
     public abstract AchievementDao achievementDao();
+
+    public abstract ExpectationDao expectationDao();
 
 }

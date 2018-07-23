@@ -148,7 +148,7 @@ public class TasksPresenter implements TasksContract.Presenter {
 
                 //refresh tasks recyclerView
                 List<Task> taskList = taskDao.getAllTasks();
-                view.refreshTasksRecyclerView(taskList);
+                view.refreshTasks(taskList);
             }
         });
     }

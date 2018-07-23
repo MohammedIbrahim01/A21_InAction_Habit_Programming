@@ -21,7 +21,7 @@ public interface TasksContract {
 
         RecyclerView getTasksRecyclerView();
 
-        void refreshTasksRecyclerView(List<Task> taskList);
+        void refreshTasks(List<Task> taskList);
 
         void setupRecyclerViewWithAdapter();
     }

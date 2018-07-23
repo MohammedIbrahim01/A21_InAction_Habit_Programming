@@ -37,6 +37,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         adapter = new TasksAdapter();
 
         presenter = new TasksPresenter(this, getActivity().getApplicationContext());
+        presenter.insertMockTasksIntoDatabase();
         presenter.start();
 
         return view;
@@ -70,7 +71,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
     }
 
     @Override
-    public void refreshTasksRecyclerView(final List<Task> taskList) {
+    public void refreshTasks(final List<Task> taskList) {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
