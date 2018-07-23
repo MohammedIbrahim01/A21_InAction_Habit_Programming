@@ -3,11 +3,13 @@ package com.rl.x.a21_inaction.tasks.Presenter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 
 import com.rl.x.a21_inaction.database.AppDatabase;
 import com.rl.x.a21_inaction.tasks.TasksContract;
 import com.rl.x.a21_inaction.tasks.model.Task;
 import com.rl.x.a21_inaction.tasks.model.TaskDao;
+import com.rl.x.a21_inaction.tasks.model.TaskModel;
 import com.rl.x.a21_inaction.utils.AppExecutors;
 
 import java.util.List;
@@ -19,16 +21,14 @@ public class TasksPresenter implements TasksContract.Presenter {
     private TasksContract.View view;
     private Context applicationContext;
 
-    private Executor diskIO;
-    private TaskDao taskDao;
+    private TaskModel model;
 
 
     public TasksPresenter(TasksContract.View view, Context applicationContext) {
         this.view = view;
         this.applicationContext = applicationContext;
 
-        diskIO = AppExecutors.getInstance().getDiskIO();
-        taskDao = AppDatabase.getInstance(applicationContext).taskDao();
+        model = new TaskModel(applicationContext);
     }
 
 
@@ -46,15 +46,7 @@ public class TasksPresenter implements TasksContract.Presenter {
      */
     @Override
     public void insertMockTasksIntoDatabase() {
-
-        diskIO.execute(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 4; i++) {
-                    taskDao.insertTask(new Task("task #" + i));
-                }
-            }
-        });
+        model.insertMockTasks();
     }
 
 
@@ -67,12 +59,7 @@ public class TasksPresenter implements TasksContract.Presenter {
     public void insertTaskIntoDatabase(String name) {
         final Task newTask = new Task(name);
 
-        diskIO.execute(new Runnable() {
-            @Override
-            public void run() {
-                taskDao.insertTask(newTask);
-            }
-        });
+        model.insertTask(newTask);
     }
 
 
@@ -83,14 +70,9 @@ public class TasksPresenter implements TasksContract.Presenter {
      */
     @Override
     public void retrieveAndDisplayTasks() {
-
-        diskIO.execute(new Runnable() {
-            @Override
-            public void run() {
-                List<Task> taskList = taskDao.getAllTasks();
-                view.displayTasks(taskList);
-            }
-        });
+        
+        List<Task> taskList = model.retrieveTasks();
+        view.displayTasks(taskList);
 
     }
 
@@ -137,16 +119,8 @@ public class TasksPresenter implements TasksContract.Presenter {
      */
     @Override
     public void deleteTask(final Task task) {
-        diskIO.execute(new Runnable() {
-            @Override
-            public void run() {
-                //delete task from database
-                taskDao.deleteTask(task);
-
-                //refresh tasks recyclerView
-                view.refreshTasks(taskDao.getAllTasks());
-            }
-        });
+        model.deleteTask(task);
+        view.refreshTasks(model.retrieveTasks());
     }
 
 

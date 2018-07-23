@@ -11,6 +11,17 @@ import java.util.List;
 
 public interface TasksContract {
 
+    interface Model {
+
+        List<Task> retrieveTasks();
+
+        void insertTask(Task task);
+
+        void insertMockTasks();
+
+        void deleteTask(Task task);
+    }
+
     interface View {
 
         void displayTasks(List<Task> taskList);
@@ -26,7 +37,7 @@ public interface TasksContract {
         void setupRecyclerViewWithAdapter();
     }
 
-    interface Presenter extends BasePresenter{
+    interface Presenter extends BasePresenter {
 
         void setupRecyclerViewWithAdapter();
 
