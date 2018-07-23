@@ -36,7 +36,6 @@ public class AchievementsFragment extends Fragment implements AchievementContrac
         ButterKnife.bind(this, view);
 
         presenter = new AchievementPresenter(getActivity().getApplicationContext(), this);
-        presenter.insertMockAchievementsIntoDatabase();
         presenter.start();
 
         return view;

@@ -11,6 +11,7 @@ import com.rl.x.a21_inaction.tasks.model.TaskDao;
 import com.rl.x.a21_inaction.utils.AppExecutors;
 
 import java.util.List;
+import java.util.concurrent.Executor;
 
 public class TasksPresenter implements TasksContract.Presenter {
 
@@ -18,10 +19,16 @@ public class TasksPresenter implements TasksContract.Presenter {
     private TasksContract.View view;
     private Context applicationContext;
 
+    private Executor diskIO;
+    private TaskDao taskDao;
+
 
     public TasksPresenter(TasksContract.View view, Context applicationContext) {
         this.view = view;
         this.applicationContext = applicationContext;
+
+        diskIO = AppExecutors.getInstance().getDiskIO();
+        taskDao = AppDatabase.getInstance(applicationContext).taskDao();
     }
 
 
@@ -40,17 +47,12 @@ public class TasksPresenter implements TasksContract.Presenter {
     @Override
     public void insertMockTasksIntoDatabase() {
 
-        AppExecutors.getInstance().getDiskIO().execute(new Runnable() {
+        diskIO.execute(new Runnable() {
             @Override
             public void run() {
-                AppDatabase.getInstance(applicationContext).taskDao()
-                        .insertTask(new Task("task1"));
-                AppDatabase.getInstance(applicationContext).taskDao()
-                        .insertTask(new Task("task2"));
-                AppDatabase.getInstance(applicationContext).taskDao()
-                        .insertTask(new Task("task3"));
-                AppDatabase.getInstance(applicationContext).taskDao()
-                        .insertTask(new Task("task4"));
+                for (int i = 0; i < 4; i++) {
+                    taskDao.insertTask(new Task("task #" + i));
+                }
             }
         });
     }
@@ -65,11 +67,10 @@ public class TasksPresenter implements TasksContract.Presenter {
     public void insertTaskIntoDatabase(String name) {
         final Task newTask = new Task(name);
 
-        AppExecutors.getInstance().getDiskIO().execute(new Runnable() {
+        diskIO.execute(new Runnable() {
             @Override
             public void run() {
-                AppDatabase.getInstance(applicationContext).taskDao()
-                        .insertTask(newTask);
+                taskDao.insertTask(newTask);
             }
         });
     }
@@ -83,17 +84,15 @@ public class TasksPresenter implements TasksContract.Presenter {
     @Override
     public void retrieveAndDisplayTasks() {
 
-        AppExecutors.getInstance().getDiskIO().execute(new Runnable() {
+        diskIO.execute(new Runnable() {
             @Override
             public void run() {
-                List<Task> taskList = AppDatabase.getInstance(applicationContext).taskDao()
-                        .getAllTasks();
+                List<Task> taskList = taskDao.getAllTasks();
                 view.displayTasks(taskList);
             }
         });
 
     }
-
 
 
     /**
@@ -138,17 +137,14 @@ public class TasksPresenter implements TasksContract.Presenter {
      */
     @Override
     public void deleteTask(final Task task) {
-        AppExecutors.getInstance().getDiskIO().execute(new Runnable() {
+        diskIO.execute(new Runnable() {
             @Override
             public void run() {
-                TaskDao taskDao = AppDatabase.getInstance(applicationContext).taskDao();
-
                 //delete task from database
                 taskDao.deleteTask(task);
 
                 //refresh tasks recyclerView
-                List<Task> taskList = taskDao.getAllTasks();
-                view.refreshTasks(taskList);
+                view.refreshTasks(taskDao.getAllTasks());
             }
         });
     }

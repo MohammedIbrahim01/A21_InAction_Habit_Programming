@@ -5,18 +5,26 @@ import android.content.Context;
 import com.rl.x.a21_inaction.database.AppDatabase;
 import com.rl.x.a21_inaction.day_zero.ExpectationContract;
 import com.rl.x.a21_inaction.day_zero.model.Expectation;
+import com.rl.x.a21_inaction.day_zero.model.ExpectationDao;
 import com.rl.x.a21_inaction.utils.AppExecutors;
 
 import java.util.List;
+import java.util.concurrent.Executor;
 
 public class ExpectationPresenter implements ExpectationContract.Presenter {
 
     private Context applicationContext;
     private ExpectationContract.View view;
 
+    private Executor diskIO;
+    private ExpectationDao expectationDao;
+
     public ExpectationPresenter(Context applicationContext, ExpectationContract.View view) {
         this.applicationContext = applicationContext;
         this.view = view;
+
+        diskIO = AppExecutors.getInstance().getDiskIO();
+        expectationDao = AppDatabase.getInstance(applicationContext).expectationDao();
     }
 
     @Override
@@ -26,10 +34,10 @@ public class ExpectationPresenter implements ExpectationContract.Presenter {
 
     @Override
     public void retrieveAndDisplayExpectations() {
-        AppExecutors.getInstance().getDiskIO().execute(new Runnable() {
+        diskIO.execute(new Runnable() {
             @Override
             public void run() {
-                List<Expectation> expectationList = AppDatabase.getInstance(applicationContext).expectationDao().getAllExpectations();
+                List<Expectation> expectationList = expectationDao.getAllExpectations();
                 view.displayExpectations(expectationList);
             }
         });
@@ -40,24 +48,22 @@ public class ExpectationPresenter implements ExpectationContract.Presenter {
 
         final Expectation newExpectation = new Expectation(name);
 
-        AppExecutors.getInstance().getDiskIO().execute(new Runnable() {
+        diskIO.execute(new Runnable() {
             @Override
             public void run() {
-                AppDatabase.getInstance(applicationContext).expectationDao().insertExpectation(newExpectation);
+                expectationDao.insertExpectation(newExpectation);
             }
         });
     }
 
     @Override
     public void insertMockExpectations() {
-
-        AppExecutors.getInstance().getDiskIO().execute(new Runnable() {
+         diskIO.execute(new Runnable() {
             @Override
             public void run() {
-                AppDatabase.getInstance(applicationContext).expectationDao().insertExpectation(new Expectation("Expectation #1"));
-                AppDatabase.getInstance(applicationContext).expectationDao().insertExpectation(new Expectation("Expectation #2"));
-                AppDatabase.getInstance(applicationContext).expectationDao().insertExpectation(new Expectation("Expectation #3"));
-                AppDatabase.getInstance(applicationContext).expectationDao().insertExpectation(new Expectation("Expectation #4"));
+                for (int i = 0; i < 4; i++) {
+                    expectationDao.insertExpectation(new Expectation("Expectation #" + i));
+                }
             }
         });
 
@@ -65,14 +71,14 @@ public class ExpectationPresenter implements ExpectationContract.Presenter {
 
     @Override
     public void deleteExpectation(final Expectation expectation) {
-        AppExecutors.getInstance().getDiskIO().execute(new Runnable() {
+        diskIO.execute(new Runnable() {
             @Override
             public void run() {
                 //delete expectation from app database
-                AppDatabase.getInstance(applicationContext).expectationDao().deleteExpectation(expectation);
+                expectationDao.deleteExpectation(expectation);
 
                 //refresh expectations
-                List<Expectation> expectationList = AppDatabase.getInstance(applicationContext).expectationDao().getAllExpectations();
+                List<Expectation> expectationList = expectationDao.getAllExpectations();
                 view.refreshExpectations(expectationList);
             }
         });
