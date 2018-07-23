@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface TasksContract {
 
-    interface ViewInterface {
+    interface View {
 
         void displayTasks(List<Task> taskList);
 
@@ -26,7 +26,7 @@ public interface TasksContract {
         void setupRecyclerViewWithAdapter();
     }
 
-    interface PresenterInterface extends BasePresenter{
+    interface Presenter extends BasePresenter{
 
         void setupRecyclerViewWithAdapter();
 

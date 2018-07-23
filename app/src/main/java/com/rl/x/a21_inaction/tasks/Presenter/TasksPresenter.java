@@ -12,15 +12,15 @@ import com.rl.x.a21_inaction.utils.AppExecutors;
 
 import java.util.List;
 
-public class TasksPresenter implements TasksContract.PresenterInterface {
+public class TasksPresenter implements TasksContract.Presenter {
 
 
-    private TasksContract.ViewInterface viewInterface;
+    private TasksContract.View view;
     private Context applicationContext;
 
 
-    public TasksPresenter(TasksContract.ViewInterface viewInterface, Context applicationContext) {
-        this.viewInterface = viewInterface;
+    public TasksPresenter(TasksContract.View view, Context applicationContext) {
+        this.view = view;
         this.applicationContext = applicationContext;
     }
 
@@ -30,7 +30,7 @@ public class TasksPresenter implements TasksContract.PresenterInterface {
      */
     @Override
     public void setupRecyclerViewWithAdapter() {
-        viewInterface.setupRecyclerViewWithAdapter();
+        view.setupRecyclerViewWithAdapter();
     }
 
 
@@ -88,7 +88,7 @@ public class TasksPresenter implements TasksContract.PresenterInterface {
             public void run() {
                 List<Task> taskList = AppDatabase.getInstance(applicationContext).taskDao()
                         .getAllTasks();
-                viewInterface.displayTasks(taskList);
+                view.displayTasks(taskList);
             }
         });
 
@@ -101,7 +101,7 @@ public class TasksPresenter implements TasksContract.PresenterInterface {
      */
     @Override
     public void setupSwipeTaskFun() {
-        viewInterface.setupSwipeTaskFun(getItemTouchHelper());
+        view.setupSwipeTaskFun(getItemTouchHelper());
     }
 
 
@@ -122,7 +122,7 @@ public class TasksPresenter implements TasksContract.PresenterInterface {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 //when task was swiped : get that Task then delete it
-                Task swipedTask = viewInterface.getAdapter().getTaskList().get(viewHolder.getAdapterPosition());
+                Task swipedTask = view.getAdapter().getTaskList().get(viewHolder.getAdapterPosition());
                 deleteTask(swipedTask);
             }
         });
@@ -148,7 +148,7 @@ public class TasksPresenter implements TasksContract.PresenterInterface {
 
                 //refresh tasks recyclerView
                 List<Task> taskList = taskDao.getAllTasks();
-                viewInterface.refreshTasksRecyclerView(taskList);
+                view.refreshTasksRecyclerView(taskList);
             }
         });
     }
