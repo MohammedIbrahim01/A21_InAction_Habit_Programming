@@ -10,6 +10,17 @@ import java.util.List;
 
 public interface ExpectationContract {
 
+    interface Model{
+
+        List<Expectation> retrieveExpectations();
+
+        void insertExpectation(Expectation expectation);
+
+        void insertMockExpectation();
+
+        void deleteExpectation(Expectation expectation);
+    }
+
     interface View {
 
         void setupRecyclerViewWithAdapter();
