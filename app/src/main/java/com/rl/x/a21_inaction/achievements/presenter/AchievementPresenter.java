@@ -1,32 +1,30 @@
 package com.rl.x.a21_inaction.achievements.presenter;
 
-import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 
 import com.rl.x.a21_inaction.achievements.AchievementContract;
 import com.rl.x.a21_inaction.achievements.model.Achievement;
-import com.rl.x.a21_inaction.achievements.model.AchievementDao;
 import com.rl.x.a21_inaction.achievements.model.AchievementModel;
 import com.rl.x.a21_inaction.database.AppDatabase;
-import com.rl.x.a21_inaction.day_zero.model.ExpectationDao;
-import com.rl.x.a21_inaction.tasks.model.Task;
 import com.rl.x.a21_inaction.utils.AppExecutors;
 
 import java.util.List;
-import java.util.concurrent.Executor;
 
 public class AchievementPresenter implements AchievementContract.Presenter {
 
     private AchievementContract.View view;
-
     private AchievementModel model;
+    private Fragment fragment;
 
 
-    public AchievementPresenter(Context applicationContext, AchievementContract.View view) {
+    public AchievementPresenter(Fragment fragment, AchievementContract.View view) {
 
         this.view = view;
-        model = new AchievementModel(applicationContext);
+        model = new AchievementModel(fragment.getContext().getApplicationContext());
+        this.fragment = fragment;
     }
 
 
@@ -38,6 +36,20 @@ public class AchievementPresenter implements AchievementContract.Presenter {
 
         view.setupRecyclerViewWithAdapter();
     }
+
+
+    @Override
+    public void retrieveAchievementsLive(){
+
+        LiveData<List<Achievement>> achievementsLive = model.retrieveAchievementsLive();
+        achievementsLive.observe(fragment.getActivity(), new Observer<List<Achievement>>() {
+            @Override
+            public void onChanged(@Nullable List<Achievement> achievementList) {
+                view.displayAchievements(achievementList);
+            }
+        });
+    }
+
 
     /**
      * retrieve Achievements from database
@@ -89,6 +101,7 @@ public class AchievementPresenter implements AchievementContract.Presenter {
     @Override
     public void start() {
         setupRecyclerViewWithAdapter();
-        retrieveAndDisplayAchievements();
+//        retrieveAndDisplayAchievements();
+        retrieveAchievementsLive();
     }
 }

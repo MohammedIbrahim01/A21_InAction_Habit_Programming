@@ -35,7 +35,7 @@ public class AchievementsFragment extends Fragment implements AchievementContrac
         View view = inflater.inflate(R.layout.fragment_achievements, container, false);
         ButterKnife.bind(this, view);
 
-        presenter = new AchievementPresenter(getActivity().getApplicationContext(), this);
+        presenter = new AchievementPresenter(this, this);
         presenter.start();
 
         return view;
@@ -43,14 +43,9 @@ public class AchievementsFragment extends Fragment implements AchievementContrac
 
     @Override
     public void displayAchievements(final List<Achievement> achievementList) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                adapter.setAchievementList(achievementList);
-                adapter.notifyDataSetChanged();
-            }
-        });
 
+        adapter.setAchievementList(achievementList);
+        adapter.notifyDataSetChanged();
     }
 
     @Override

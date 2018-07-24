@@ -1,5 +1,6 @@
 package com.rl.x.a21_inaction.achievements;
 
+import android.arch.lifecycle.LiveData;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
@@ -16,6 +17,8 @@ public interface AchievementContract {
     interface Model {
 
         List<Achievement> retrieveAchievements();
+
+        LiveData<List<Achievement>> retrieveAchievementsLive();
 
         void insertAchievement(Achievement achievement);
 
@@ -42,6 +45,8 @@ public interface AchievementContract {
         void setupRecyclerViewWithAdapter();
 
         void retrieveAndDisplayAchievements();
+
+        void retrieveAchievementsLive();
 
         void insertAchievementIntoDatabase(String name, int day);
 

@@ -1,5 +1,6 @@
 package com.rl.x.a21_inaction.achievements.model;
 
+import android.arch.lifecycle.LiveData;
 import android.content.Context;
 
 import com.rl.x.a21_inaction.achievements.AchievementContract;
@@ -39,6 +40,34 @@ public class AchievementModel implements AchievementContract.Model {
 
         return achievementList;
     }
+
+
+
+    private LiveData<List<Achievement>> achievementListLive;
+    private boolean isFinishLive;
+    /**
+     * retrieve achievements Live
+     *
+     * @return achievement List : LiveDAta
+     */
+    @Override
+    public LiveData<List<Achievement>> retrieveAchievementsLive() {
+
+        isFinishLive = false;
+        diskIOExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                achievementListLive = achievementDao.getAllAchievementsLive();
+                isFinishLive = true;
+            }
+        });
+
+        while (!isFinishLive) ;
+
+        return achievementListLive;
+    }
+
+
 
     @Override
     public void insertAchievement(final Achievement achievement) {
