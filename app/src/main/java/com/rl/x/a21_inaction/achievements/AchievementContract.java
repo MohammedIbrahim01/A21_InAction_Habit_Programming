@@ -44,11 +44,7 @@ public interface AchievementContract {
 
         void setupRecyclerViewWithAdapter();
 
-        void retrieveAndDisplayAchievements();
-
-        void retrieveAchievementsLive();
-
-        void insertAchievementIntoDatabase(String name, int day);
+        void setupAchievementsLive();
 
         void insertMockAchievementsIntoDatabase();
 

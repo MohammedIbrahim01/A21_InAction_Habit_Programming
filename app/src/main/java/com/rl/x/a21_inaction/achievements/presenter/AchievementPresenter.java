@@ -1,15 +1,14 @@
 package com.rl.x.a21_inaction.achievements.presenter;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.rl.x.a21_inaction.achievements.AchievementContract;
 import com.rl.x.a21_inaction.achievements.model.Achievement;
 import com.rl.x.a21_inaction.achievements.model.AchievementModel;
-import com.rl.x.a21_inaction.database.AppDatabase;
-import com.rl.x.a21_inaction.utils.AppExecutors;
+import com.rl.x.a21_inaction.achievements.view.AchievementViewModel;
 
 import java.util.List;
 
@@ -18,6 +17,7 @@ public class AchievementPresenter implements AchievementContract.Presenter {
     private AchievementContract.View view;
     private AchievementModel model;
     private Fragment fragment;
+    private AchievementViewModel viewModel;
 
 
     public AchievementPresenter(Fragment fragment, AchievementContract.View view) {
@@ -25,11 +25,13 @@ public class AchievementPresenter implements AchievementContract.Presenter {
         this.view = view;
         model = new AchievementModel(fragment.getContext().getApplicationContext());
         this.fragment = fragment;
+        viewModel = ViewModelProviders.of(fragment).get(AchievementViewModel.class);
     }
 
 
     /**
      * setup recyclerView with adapter
+     *
      */
     @Override
     public void setupRecyclerViewWithAdapter() {
@@ -39,37 +41,14 @@ public class AchievementPresenter implements AchievementContract.Presenter {
 
 
     @Override
-    public void retrieveAchievementsLive(){
+    public void setupAchievementsLive(){
 
-        LiveData<List<Achievement>> achievementsLive = model.retrieveAchievementsLive();
-        achievementsLive.observe(fragment.getActivity(), new Observer<List<Achievement>>() {
+        viewModel.getAchievementList().observe(fragment.getActivity(), new Observer<List<Achievement>>() {
             @Override
             public void onChanged(@Nullable List<Achievement> achievementList) {
                 view.displayAchievements(achievementList);
             }
         });
-    }
-
-
-    /**
-     * retrieve Achievements from database
-     */
-    @Override
-    public void retrieveAndDisplayAchievements() {
-
-        view.displayAchievements(model.retrieveAchievements());
-    }
-
-
-    /**
-     * insert Achievement into database
-     *
-     * @param name
-     */
-    @Override
-    public void insertAchievementIntoDatabase(String name, int day) {
-
-        model.insertAchievement(new Achievement(name, day));
     }
 
 
@@ -100,8 +79,8 @@ public class AchievementPresenter implements AchievementContract.Presenter {
 
     @Override
     public void start() {
+
         setupRecyclerViewWithAdapter();
-//        retrieveAndDisplayAchievements();
-        retrieveAchievementsLive();
+        setupAchievementsLive();
     }
 }
