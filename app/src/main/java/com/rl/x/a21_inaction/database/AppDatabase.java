@@ -12,7 +12,7 @@ import com.rl.x.a21_inaction.day_zero.model.ExpectationDao;
 import com.rl.x.a21_inaction.tasks.model.Task;
 import com.rl.x.a21_inaction.tasks.model.TaskDao;
 
-@Database(entities = {Task.class, Achievement.class, Expectation.class}, version = 4, exportSchema = false)
+@Database(entities = {Task.class, Achievement.class, Expectation.class}, version = 5, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final Object LOCK = new Object();

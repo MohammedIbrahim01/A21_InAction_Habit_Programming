@@ -3,29 +3,24 @@ package com.rl.x.a21_inaction.tasks.Presenter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 
-import com.rl.x.a21_inaction.database.AppDatabase;
+import com.rl.x.a21_inaction.manager.AppManager;
 import com.rl.x.a21_inaction.tasks.TasksContract;
 import com.rl.x.a21_inaction.tasks.model.Task;
-import com.rl.x.a21_inaction.tasks.model.TaskDao;
 import com.rl.x.a21_inaction.tasks.model.TaskModel;
-import com.rl.x.a21_inaction.utils.AppExecutors;
-
-import java.util.List;
-import java.util.concurrent.Executor;
 
 public class TasksPresenter implements TasksContract.Presenter {
 
 
     private TasksContract.View view;
-
+    private AppManager manager;
     private TaskModel model;
 
 
     public TasksPresenter(TasksContract.View view, Context applicationContext) {
 
         this.view = view;
+        manager = new AppManager(applicationContext);
         model = new TaskModel(applicationContext);
     }
 
@@ -116,6 +111,7 @@ public class TasksPresenter implements TasksContract.Presenter {
                 //when task was swiped : get that Task then delete it
                 Task swipedTask = view.getAdapter().getTaskList().get(viewHolder.getAdapterPosition());
                 deleteTask(swipedTask);
+                manager.addAchievement(swipedTask);
             }
         });
 

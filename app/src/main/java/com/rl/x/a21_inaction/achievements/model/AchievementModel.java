@@ -56,7 +56,7 @@ public class AchievementModel implements AchievementContract.Model {
             @Override
             public void run() {
                 for (int i = 0; i < 4; i++) {
-                    achievementDao.insertAchievement(new Achievement("achievement #" + i));
+                    achievementDao.insertAchievement(new Achievement("achievement #" + i, i));
                 }
             }
         });

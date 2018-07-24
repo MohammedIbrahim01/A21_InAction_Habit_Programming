@@ -12,14 +12,19 @@ public class Achievement {
 
     private String name;
 
+    private int day;
+
     public Achievement(int id, String name) {
+
         this.id = id;
         this.name = name;
     }
 
     @Ignore
-    public Achievement(String name) {
+    public Achievement(String name, int day) {
+
         this.name = name;
+        this.day = day;
     }
 
     public int getId() {
@@ -36,5 +41,13 @@ public class Achievement {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
     }
 }

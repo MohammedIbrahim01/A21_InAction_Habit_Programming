@@ -43,7 +43,7 @@ public interface AchievementContract {
 
         void retrieveAndDisplayAchievements();
 
-        void insertAchievementIntoDatabase(String name);
+        void insertAchievementIntoDatabase(String name, int day);
 
         void insertMockAchievementsIntoDatabase();
 

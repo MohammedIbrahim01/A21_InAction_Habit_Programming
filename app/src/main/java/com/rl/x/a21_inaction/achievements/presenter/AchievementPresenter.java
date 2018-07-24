@@ -55,9 +55,9 @@ public class AchievementPresenter implements AchievementContract.Presenter {
      * @param name
      */
     @Override
-    public void insertAchievementIntoDatabase(String name) {
+    public void insertAchievementIntoDatabase(String name, int day) {
 
-        model.insertAchievement(new Achievement(name));
+        model.insertAchievement(new Achievement(name, day));
     }
 
 

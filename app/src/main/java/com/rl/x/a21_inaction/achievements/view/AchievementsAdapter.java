@@ -37,8 +37,11 @@ public class AchievementsAdapter extends RecyclerView.Adapter<AchievementsAdapte
 
     @Override
     public void onBindViewHolder(@NonNull AchievementsAdapter.ViewHolder holder, int position) {
+
         Achievement currentAchievement = achievementList.get(position);
+
         holder.nameTextView.setText(currentAchievement.getName());
+        holder.dayTextView.setText("Day : " + currentAchievement.getDay());
     }
 
     @Override
@@ -51,6 +54,8 @@ public class AchievementsAdapter extends RecyclerView.Adapter<AchievementsAdapte
 
         @BindView(R.id.achievement_row_name_textView)
         TextView nameTextView;
+        @BindView(R.id.achievement_row_day_textView)
+        TextView dayTextView;
 
         public ViewHolder(View itemView) {
             super(itemView);
