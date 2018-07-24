@@ -12,14 +12,20 @@ public class Task {
 
     private String name;
 
+    private int day;
+
+
     public Task(int id, String name) {
+
         this.id = id;
         this.name = name;
     }
 
     @Ignore
-    public Task(String name) {
+    public Task(String name, int day) {
+
         this.name = name;
+        this.day = day;
     }
 
     public int getId() {
@@ -36,5 +42,13 @@ public class Task {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
     }
 }

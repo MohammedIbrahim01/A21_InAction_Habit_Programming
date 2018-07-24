@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/task_row_name_textView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center"
-    tools:text="task #1" />
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/task_row_name_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="task name" />
+
+    <TextView
+        android:id="@+id/task_row_day_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="day : 1" />
+
+</LinearLayout>

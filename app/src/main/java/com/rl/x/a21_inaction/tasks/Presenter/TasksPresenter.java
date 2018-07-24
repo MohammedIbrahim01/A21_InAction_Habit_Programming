@@ -56,14 +56,15 @@ public class TasksPresenter implements TasksContract.Presenter {
      * @param name
      */
     @Override
-    public void insertTaskIntoDatabase(String name) {
+    public void insertTaskIntoDatabase(String name, int day) {
 
-        model.insertTask(new Task(name));
+        model.insertTask(new Task(name, day));
     }
 
 
     /**
      * insert mock tasks into database for testing
+     *
      */
     @Override
     public void insertMockTasksIntoDatabase() {
@@ -88,6 +89,7 @@ public class TasksPresenter implements TasksContract.Presenter {
 
     /**
      * setup swipe task functionality
+     *
      */
     @Override
     public void setupSwipeTaskFun() {

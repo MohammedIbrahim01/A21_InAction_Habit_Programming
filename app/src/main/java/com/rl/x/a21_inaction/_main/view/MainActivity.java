@@ -16,7 +16,7 @@ import com.rl.x.a21_inaction.utils.AppExecutors;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainContract.View{
+public class MainActivity extends AppCompatActivity implements MainContract.View {
 
     @BindView(R.id.counter_textView)
     TextView counterTextView;
@@ -30,6 +30,13 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+//        AppExecutors.getInstance().getDiskIO().execute(new Runnable() {
+//            @Override
+//            public void run() {
+//                AppDatabase.getInstance(getApplicationContext()).clearAllTables();
+//            }
+//        });
 
         MainPresenter presenter = new MainPresenter(this);
 

@@ -36,9 +36,11 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull TasksAdapter.ViewHolder holder, int position) {
-        Task currentTask = taskList.get(position);
-        holder.nameTextView.setText(currentTask.getName());
 
+        Task currentTask = taskList.get(position);
+
+        holder.nameTextView.setText(currentTask.getName());
+        holder.dayTextView.setText("day : " + currentTask.getDay());
     }
 
     @Override
@@ -52,6 +54,8 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
 
         @BindView(R.id.task_row_name_textView)
         TextView nameTextView;
+        @BindView(R.id.task_row_day_textView)
+        TextView dayTextView;
 
         public ViewHolder(View itemView) {
             super(itemView);
