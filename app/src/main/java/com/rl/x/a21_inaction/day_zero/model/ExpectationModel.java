@@ -22,33 +22,6 @@ public class ExpectationModel implements ExpectationContract.Model {
     }
 
 
-    private List<Expectation> expectationList;
-    private boolean isFinish;
-
-    /**
-     * retrieve expectations from database
-     *
-     * @return
-     */
-    @Override
-    public List<Expectation> retrieveExpectations() {
-
-        isFinish = false;
-
-        diskIOExecutor.execute(new Runnable() {
-            @Override
-            public void run() {
-                expectationList = expectationDao.getAllExpectations();
-                isFinish = true;
-            }
-        });
-
-        while (!isFinish) ;
-
-        return expectationList;
-    }
-
-
     /**
      * insert Expectation to database
      *

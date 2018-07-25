@@ -1,12 +1,17 @@
 package com.rl.x.a21_inaction.day_zero.presenter;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 
 import com.rl.x.a21_inaction.database.AppDatabase;
 import com.rl.x.a21_inaction.day_zero.ExpectationContract;
 import com.rl.x.a21_inaction.day_zero.model.Expectation;
 import com.rl.x.a21_inaction.day_zero.model.ExpectationDao;
 import com.rl.x.a21_inaction.day_zero.model.ExpectationModel;
+import com.rl.x.a21_inaction.day_zero.view.ExpectationViewModel;
 import com.rl.x.a21_inaction.utils.AppExecutors;
 
 import java.util.List;
@@ -16,12 +21,16 @@ public class ExpectationPresenter implements ExpectationContract.Presenter {
 
     private ExpectationContract.View view;
     private ExpectationModel model;
+    private ExpectationViewModel viewModel;
+    private Fragment fragment;
 
 
-    public ExpectationPresenter(Context applicationContext, ExpectationContract.View view) {
+    public ExpectationPresenter(Fragment fragment, ExpectationContract.View view) {
 
         this.view = view;
-        model = new ExpectationModel(applicationContext);
+        model = new ExpectationModel(fragment.getActivity().getApplicationContext());
+        viewModel = ViewModelProviders.of(fragment.getActivity()).get(ExpectationViewModel.class);
+        this.fragment = fragment;
     }
 
     /**
@@ -34,12 +43,18 @@ public class ExpectationPresenter implements ExpectationContract.Presenter {
 
 
     /**
-     * retrieve Expectations from database then display it
+     * setup Expectation ViewModel
+     *
      */
     @Override
-    public void retrieveAndDisplayExpectations() {
+    public void setupExpectationLive() {
 
-        view.displayExpectations(model.retrieveExpectations());
+        viewModel.getExpectations().observe(fragment.getActivity(), new Observer<List<Expectation>>() {
+            @Override
+            public void onChanged(@Nullable List<Expectation> expectationList) {
+                view.refreshExpectations(expectationList);
+            }
+        });
     }
 
 
@@ -57,6 +72,7 @@ public class ExpectationPresenter implements ExpectationContract.Presenter {
 
     /**
      * insert mock Expectations
+     *
      */
     @Override
     public void insertMockExpectations() {
@@ -74,8 +90,6 @@ public class ExpectationPresenter implements ExpectationContract.Presenter {
     public void deleteExpectation(Expectation expectation) {
 
         model.deleteExpectation(expectation);
-
-        view.refreshExpectations(model.retrieveExpectations());
     }
 
 
@@ -87,6 +101,6 @@ public class ExpectationPresenter implements ExpectationContract.Presenter {
     public void start() {
 
         setupRecyclerViewWithAdapter();
-        retrieveAndDisplayExpectations();
+        setupExpectationLive();
     }
 }

@@ -34,7 +34,7 @@ public class DayZeroFragment extends Fragment implements ExpectationContract.Vie
         View view = inflater.inflate(R.layout.fragment_day_zero, container, false);
         ButterKnife.bind(this, view);
 
-        presenter = new ExpectationPresenter(getActivity().getApplicationContext(), this);
+        presenter = new ExpectationPresenter(this, this);
         presenter.start();
 
         return view;
@@ -42,41 +42,28 @@ public class DayZeroFragment extends Fragment implements ExpectationContract.Vie
 
     @Override
     public void setupRecyclerViewWithAdapter() {
+
         expectationsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         expectationsRecyclerView.setAdapter(adapter);
     }
 
-    @Override
-    public void displayExpectations(final List<Expectation> expectationList) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                adapter.setExpectationList(expectationList);
-                adapter.notifyDataSetChanged();
-
-            }
-        });
-    }
 
     @Override
     public void refreshExpectations(final List<Expectation> expectationList) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                adapter.setExpectationList(expectationList);
-                adapter.notifyDataSetChanged();
 
-            }
-        });
+        adapter.setExpectationList(expectationList);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public ExpectationAdapter getAdapter() {
+
         return adapter;
     }
 
     @Override
     public RecyclerView getRecyclerView() {
+
         return expectationsRecyclerView;
     }
 }

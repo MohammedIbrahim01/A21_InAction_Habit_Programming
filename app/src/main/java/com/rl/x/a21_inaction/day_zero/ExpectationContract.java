@@ -12,8 +12,6 @@ public interface ExpectationContract {
 
     interface Model{
 
-        List<Expectation> retrieveExpectations();
-
         void insertExpectation(Expectation expectation);
 
         void insertMockExpectation();
@@ -24,8 +22,6 @@ public interface ExpectationContract {
     interface View {
 
         void setupRecyclerViewWithAdapter();
-
-        void displayExpectations(List<Expectation> expectationList);
 
         void refreshExpectations(List<Expectation> expectationList);
 
@@ -39,7 +35,7 @@ public interface ExpectationContract {
 
         void setupRecyclerViewWithAdapter();
 
-        void retrieveAndDisplayExpectations();
+        void setupExpectationLive();
 
         void insertExpectation(String name);
 
