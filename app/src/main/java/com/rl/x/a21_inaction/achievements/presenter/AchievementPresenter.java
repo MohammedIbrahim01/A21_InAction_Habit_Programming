@@ -46,7 +46,7 @@ public class AchievementPresenter implements AchievementContract.Presenter {
         viewModel.getAchievementList().observe(fragment.getActivity(), new Observer<List<Achievement>>() {
             @Override
             public void onChanged(@Nullable List<Achievement> achievementList) {
-                view.displayAchievements(achievementList);
+                view.refreshAchievements(achievementList);
             }
         });
     }
@@ -72,8 +72,6 @@ public class AchievementPresenter implements AchievementContract.Presenter {
     public void deleteAchievement(Achievement achievement) {
 
         model.deleteAchievement(achievement);
-
-        view.refreshAchievementRecyclerView(model.retrieveAchievements());
     }
 
 

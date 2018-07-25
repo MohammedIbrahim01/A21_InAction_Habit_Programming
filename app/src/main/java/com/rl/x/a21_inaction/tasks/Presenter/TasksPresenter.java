@@ -1,6 +1,10 @@
 package com.rl.x.a21_inaction.tasks.Presenter;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
@@ -8,6 +12,9 @@ import com.rl.x.a21_inaction.manager.AppManager;
 import com.rl.x.a21_inaction.tasks.TasksContract;
 import com.rl.x.a21_inaction.tasks.model.Task;
 import com.rl.x.a21_inaction.tasks.model.TaskModel;
+import com.rl.x.a21_inaction.tasks.view.TasksViewModel;
+
+import java.util.List;
 
 public class TasksPresenter implements TasksContract.Presenter {
 
@@ -15,13 +22,17 @@ public class TasksPresenter implements TasksContract.Presenter {
     private TasksContract.View view;
     private AppManager manager;
     private TaskModel model;
+    private TasksViewModel viewModel;
+    private Fragment fragment;
 
 
-    public TasksPresenter(TasksContract.View view, Context applicationContext) {
+    public TasksPresenter(TasksContract.View view, Fragment fragment) {
 
         this.view = view;
-        manager = new AppManager(applicationContext);
-        model = new TaskModel(applicationContext);
+        manager = new AppManager(fragment.getContext().getApplicationContext());
+        model = new TaskModel(fragment.getContext().getApplicationContext());
+        viewModel = ViewModelProviders.of(fragment.getActivity()).get(TasksViewModel.class);
+        this.fragment = fragment;
     }
 
 
@@ -36,12 +47,18 @@ public class TasksPresenter implements TasksContract.Presenter {
 
 
     /**
-     * retrieve tasks from application Database
+     * setup tasks Live
+     *
      */
     @Override
-    public void retrieveAndDisplayTasks() {
+    public void setupTasksLive() {
 
-        view.displayTasks(model.retrieveTasks());
+        viewModel.getTasks().observe(fragment.getActivity(), new Observer<List<Task>>() {
+            @Override
+            public void onChanged(@Nullable List<Task> tasks) {
+                view.refreshTasks(tasks);
+            }
+        });
     }
 
 
@@ -77,8 +94,6 @@ public class TasksPresenter implements TasksContract.Presenter {
     public void deleteTask(Task task) {
 
         model.deleteTask(task);
-
-        view.refreshTasks(model.retrieveTasks());
     }
 
 
@@ -88,6 +103,7 @@ public class TasksPresenter implements TasksContract.Presenter {
      */
     @Override
     public void setupSwipeTaskFun() {
+
         view.setupSwipeTaskFun(getItemTouchHelper());
     }
 
@@ -123,7 +139,7 @@ public class TasksPresenter implements TasksContract.Presenter {
     public void start() {
 
         setupRecyclerViewWithAdapter();
-        retrieveAndDisplayTasks();
+        setupTasksLive();
         setupSwipeTaskFun();
     }
 }

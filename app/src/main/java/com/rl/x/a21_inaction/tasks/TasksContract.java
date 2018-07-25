@@ -13,8 +13,6 @@ public interface TasksContract {
 
     interface Model {
 
-        List<Task> retrieveTasks();
-
         void insertTask(Task task);
 
         void insertMockTasks();
@@ -23,8 +21,6 @@ public interface TasksContract {
     }
 
     interface View {
-
-        void displayTasks(List<Task> taskList);
 
         void setupSwipeTaskFun(ItemTouchHelper itemTouchHelper);
 
@@ -41,7 +37,7 @@ public interface TasksContract {
 
         void setupRecyclerViewWithAdapter();
 
-        void retrieveAndDisplayTasks();
+        void setupTasksLive();
 
         ItemTouchHelper getItemTouchHelper();
 

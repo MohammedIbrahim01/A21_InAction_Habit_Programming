@@ -41,31 +41,29 @@ public class AchievementsFragment extends Fragment implements AchievementContrac
         return view;
     }
 
-    @Override
-    public void displayAchievements(final List<Achievement> achievementList) {
-
-        adapter.setAchievementList(achievementList);
-        adapter.notifyDataSetChanged();
-    }
 
     @Override
     public AchievementsAdapter getAdapter() {
+
         return adapter;
     }
 
     @Override
     public RecyclerView getRecyclerView() {
+
         return achievementsRecyclerView;
     }
 
     @Override
-    public void refreshAchievementRecyclerView(List<Achievement> achievementList) {
+    public void refreshAchievements(List<Achievement> achievementList) {
+
         adapter.setAchievementList(achievementList);
         adapter.notifyDataSetChanged();
     }
 
     @Override
     public void setupRecyclerViewWithAdapter() {
+
         achievementsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         achievementsRecyclerView.setAdapter(adapter);
     }

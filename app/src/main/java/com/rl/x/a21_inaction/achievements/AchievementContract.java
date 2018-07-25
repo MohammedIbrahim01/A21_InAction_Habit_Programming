@@ -16,10 +16,6 @@ public interface AchievementContract {
 
     interface Model {
 
-        List<Achievement> retrieveAchievements();
-
-        LiveData<List<Achievement>> retrieveAchievementsLive();
-
         void insertAchievement(Achievement achievement);
 
         void insertMockAchievements();
@@ -29,13 +25,11 @@ public interface AchievementContract {
 
     interface View {
 
-        void displayAchievements(List<Achievement> achievementList);
-
         AchievementsAdapter getAdapter();
 
         RecyclerView getRecyclerView();
 
-        void refreshAchievementRecyclerView(List<Achievement> achievementList);
+        void refreshAchievements(List<Achievement> achievementList);
 
         void setupRecyclerViewWithAdapter();
     }

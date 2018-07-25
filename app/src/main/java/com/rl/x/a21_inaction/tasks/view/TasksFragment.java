@@ -36,7 +36,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
 
         adapter = new TasksAdapter();
 
-        presenter = new TasksPresenter(this, getActivity().getApplicationContext());
+        presenter = new TasksPresenter(this, this);
         presenter.start();
 
         return view;
@@ -44,44 +44,33 @@ public class TasksFragment extends Fragment implements TasksContract.View {
 
 
     @Override
-    public void displayTasks(final List<Task> taskList) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                adapter.setTaskList(taskList);
-                adapter.notifyDataSetChanged();
-            }
-        });
-    }
-
-    @Override
     public void setupSwipeTaskFun(ItemTouchHelper itemTouchHelper) {
+
         itemTouchHelper.attachToRecyclerView(tasksRecyclerView);
     }
 
     @Override
     public TasksAdapter getAdapter() {
+
         return adapter;
     }
 
     @Override
     public RecyclerView getTasksRecyclerView() {
+
         return tasksRecyclerView;
     }
 
     @Override
     public void refreshTasks(final List<Task> taskList) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                adapter.setTaskList(taskList);
-                adapter.notifyDataSetChanged();
-            }
-        });
+
+        adapter.setTaskList(taskList);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void setupRecyclerViewWithAdapter() {
+
         tasksRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         tasksRecyclerView.setAdapter(adapter);
     }

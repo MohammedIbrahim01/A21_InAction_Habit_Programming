@@ -16,61 +16,15 @@ public class AchievementModel implements AchievementContract.Model {
     private AchievementDao achievementDao;
 
     public AchievementModel(Context applicationContext) {
+
         diskIOExecutor = AppExecutors.getInstance().getDiskIO();
         achievementDao = AppDatabase.getInstance(applicationContext).achievementDao();
     }
 
 
-    private List<Achievement> achievementList;
-    private boolean isFinish;
-
-    @Override
-    public List<Achievement> retrieveAchievements() {
-
-        isFinish = false;
-        diskIOExecutor.execute(new Runnable() {
-            @Override
-            public void run() {
-                achievementList = achievementDao.getAllAchievements();
-                isFinish = true;
-            }
-        });
-
-        while (!isFinish) ;
-
-        return achievementList;
-    }
-
-
-
-    private LiveData<List<Achievement>> achievementListLive;
-    private boolean isFinishLive;
-    /**
-     * retrieve achievements Live
-     *
-     * @return achievement List : LiveDAta
-     */
-    @Override
-    public LiveData<List<Achievement>> retrieveAchievementsLive() {
-
-        isFinishLive = false;
-        diskIOExecutor.execute(new Runnable() {
-            @Override
-            public void run() {
-                achievementListLive = achievementDao.getAllAchievementsLive();
-                isFinishLive = true;
-            }
-        });
-
-        while (!isFinishLive) ;
-
-        return achievementListLive;
-    }
-
-
-
     @Override
     public void insertAchievement(final Achievement achievement) {
+
         diskIOExecutor.execute(new Runnable() {
             @Override
             public void run() {
@@ -81,6 +35,7 @@ public class AchievementModel implements AchievementContract.Model {
 
     @Override
     public void insertMockAchievements() {
+
         diskIOExecutor.execute(new Runnable() {
             @Override
             public void run() {
@@ -93,6 +48,7 @@ public class AchievementModel implements AchievementContract.Model {
 
     @Override
     public void deleteAchievement(final Achievement achievement) {
+
         diskIOExecutor.execute(new Runnable() {
             @Override
             public void run() {

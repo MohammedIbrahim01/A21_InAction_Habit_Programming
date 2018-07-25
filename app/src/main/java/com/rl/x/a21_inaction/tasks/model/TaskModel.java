@@ -22,33 +22,12 @@ public class TaskModel implements TasksContract.Model {
     private Executor diskIOExecutor;
     private TaskDao taskDao;
 
+
     public TaskModel(Context applicationContext) {
         diskIOExecutor = AppExecutors.getInstance().getDiskIO();
         taskDao = AppDatabase.getInstance(applicationContext).taskDao();
     }
 
-
-    private List<Task> taskList;
-    private boolean isFinish;
-
-
-    @Override
-    public List<Task> retrieveTasks() {
-
-        isFinish = false;
-
-        diskIOExecutor.execute(new Runnable() {
-            @Override
-            public void run() {
-                taskList = taskDao.getAllTasks();
-                isFinish = true;
-            }
-        });
-
-        while (!isFinish);
-
-        return taskList;
-    }
 
     @Override
     public void insertTask(final Task task) {
@@ -59,6 +38,7 @@ public class TaskModel implements TasksContract.Model {
             }
         });
     }
+
 
     @Override
     public void insertMockTasks() {
@@ -72,6 +52,7 @@ public class TaskModel implements TasksContract.Model {
         });
     }
 
+
     @Override
     public void deleteTask(final Task task) {
         diskIOExecutor.execute(new Runnable() {
@@ -82,11 +63,5 @@ public class TaskModel implements TasksContract.Model {
         });
     }
 
-    public class AppCallable implements Callable<List<Task>> {
 
-        @Override
-        public List<Task> call() throws Exception {
-            return taskDao.getAllTasks();
-        }
-    }
 }
