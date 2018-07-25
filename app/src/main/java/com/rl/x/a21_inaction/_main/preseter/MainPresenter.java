@@ -27,4 +27,9 @@ public class MainPresenter implements MainContract.Presenter {
 
         view.setupTabLayoutAndViewPager(adapter);
     }
+
+    @Override
+    public void goAddHabit() {
+        view.goAddHabit();
+    }
 }

@@ -13,10 +13,14 @@ public interface MainContract {
         void setupTabLayoutAndViewPager(AppFragmentPagerAdapter adapter);
 
         FragmentManager getAppSupportFragmentManager();
+
+        void goAddHabit();
     }
 
     interface Presenter{
 
         void setupTabLayoutAndViewPager();
+
+        void goAddHabit();
     }
 }
