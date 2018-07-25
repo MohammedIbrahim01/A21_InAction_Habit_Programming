@@ -16,7 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".habit.view.NewHabitActivity"></activity>
+        <activity android:name=".habit.view.NewHabitActivity" />
+        <activity android:name=".habit.view.AddTaskActivity" />
+        <activity android:name=".habit.view.AddExpectationActivity"></activity>
     </application>
 
 </manifest>
