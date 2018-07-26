@@ -61,6 +61,11 @@ public class NewHabitActivity extends AppCompatActivity implements HabitContract
     }
 
     @Override
+    public String getHabitName() {
+        return habitNameEditText.getText().toString();
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.add_task_button:

@@ -20,6 +20,9 @@ public interface TaskDao {
     @Insert
     void insertTask(Task task);
 
+    @Insert
+    void insertAllTask(List<Task> taskList);
+
     @Delete
     void deleteTask(Task task);
 }

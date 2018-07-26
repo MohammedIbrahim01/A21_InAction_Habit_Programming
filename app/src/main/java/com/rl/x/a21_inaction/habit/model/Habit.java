@@ -3,7 +3,9 @@ package com.rl.x.a21_inaction.habit.model;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
 
+import com.rl.x.a21_inaction.day_zero.model.Expectation;
 import com.rl.x.a21_inaction.tasks.model.Task;
 
 import java.util.List;
@@ -14,20 +16,26 @@ public class Habit {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    private String habitName;
+    private String name;
 
+    @TypeConverters(TasksListConverter.class)
     private List<Task> taskList;
 
-    public Habit(int id, String habitName, List<Task> taskList) {
+    @TypeConverters(ExpectationsListConverter.class)
+    private List<Expectation> expectationList;
+
+    public Habit(int id, String name, List<Task> taskList, List<Expectation> expectationList) {
         this.id = id;
-        this.habitName = habitName;
+        this.name = name;
         this.taskList = taskList;
+        this.expectationList = expectationList;
     }
 
     @Ignore
-    public Habit(String habitName, List<Task> taskList) {
-        this.habitName = habitName;
+    public Habit(String name, List<Task> taskList, List<Expectation> expectationList) {
+        this.name = name;
         this.taskList = taskList;
+        this.expectationList = expectationList;
     }
 
     public int getId() {
@@ -38,12 +46,12 @@ public class Habit {
         this.id = id;
     }
 
-    public String getHabitName() {
-        return habitName;
+    public String getName() {
+        return name;
     }
 
-    public void setHabitName(String habitName) {
-        this.habitName = habitName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Task> getTaskList() {
@@ -52,5 +60,13 @@ public class Habit {
 
     public void setTaskList(List<Task> taskList) {
         this.taskList = taskList;
+    }
+
+    public List<Expectation> getExpectationList() {
+        return expectationList;
+    }
+
+    public void setExpectationList(List<Expectation> expectationList) {
+        this.expectationList = expectationList;
     }
 }

@@ -17,19 +17,27 @@ public interface HabitContract {
 
         void saveNewTempExpectation(TempExpectation tempExpectation);
 
-        void saveNewHabit(Habit habit);
+        void saveNewHabit(String name);
 
-        List<TempTask> getAllTempTasks();
+        void displayHabitTasks();
 
-        List<TempExpectation> getAllTempExpectations();
+        void displayHabitExpectations();
 
-        void saveTempTasksInRealTaskDatabase();
+        List<TempTask> getAllTempTasksThenDeleteTempTasksFromDatabase();
 
-        void saveTempExpectationsInRealExpectationDatabase();
+        List<TempExpectation> getAllTempExpectationsThenDeleteTempExpectationsFromDatabase();
 
-        void removeTempTasks();
+        List<Task> getTasksFromTempTasks();
 
-        void removeTempExpectations();
+        List<Expectation> getExpectationsFromTempExpectations();
+
+//        void saveTempTasksInRealTaskDatabase();
+//
+//        void saveTempExpectationsInRealExpectationDatabase();
+
+        void deleteTempTasks();
+
+        void deleteTempExpectations();
     }
 
     interface AddTaskView {
@@ -53,6 +61,8 @@ public interface HabitContract {
         void goAddExpectation();
 
         void finishActivity();
+
+        String getHabitName();
     }
 
     interface Presenter extends BasePresenter {
@@ -66,7 +76,5 @@ public interface HabitContract {
         void goAddExpectation();
 
         void saveNewHabit();
-
-        void removeTempTasksAndExpectations();
     }
 }

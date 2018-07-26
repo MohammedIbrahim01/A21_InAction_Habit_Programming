@@ -10,16 +10,16 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Converters {
+public class TasksListConverter {
 
     @TypeConverter
-    public static String toJson(List<Task> taskList) {
+    public static String taskListToJson(List<Task> taskList) {
 
         return new Gson().toJson(taskList);
     }
 
     @TypeConverter
-    public static List<Task> toTaskList(String json) {
+    public static List<Task> JsonToTaskList(String json) {
 
         Type type = new TypeToken<ArrayList<Task>>(){}.getType();
 

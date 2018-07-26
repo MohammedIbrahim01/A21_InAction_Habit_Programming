@@ -20,6 +20,9 @@ public interface ExpectationDao {
     @Insert
     void insertExpectation(Expectation expectation);
 
+    @Insert
+    void insertAllExpectation(List<Expectation> expectationList);
+
     @Delete
     void deleteExpectation(Expectation expectation);
 

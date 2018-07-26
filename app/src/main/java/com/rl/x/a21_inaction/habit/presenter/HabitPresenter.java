@@ -1,16 +1,11 @@
 package com.rl.x.a21_inaction.habit.presenter;
 
 import android.content.Context;
-import android.util.Log;
 
-import com.rl.x.a21_inaction.day_zero.model.Expectation;
 import com.rl.x.a21_inaction.habit.HabitContract;
 import com.rl.x.a21_inaction.habit.model.HabitModel;
 import com.rl.x.a21_inaction.habit.model.TempExpectation;
 import com.rl.x.a21_inaction.habit.model.TempTask;
-import com.rl.x.a21_inaction.tasks.model.Task;
-
-import java.util.List;
 
 public class HabitPresenter implements HabitContract.Presenter {
 
@@ -65,21 +60,14 @@ public class HabitPresenter implements HabitContract.Presenter {
     @Override
     public void saveNewHabit() {
 
-        model.saveTempTasksInRealTaskDatabase();
-        model.saveTempExpectationsInRealExpectationDatabase();
+        model.saveNewHabit(newHabitView.getHabitName());
 
-        removeTempTasksAndExpectations();
+        model.displayHabitTasks();
+
+        model.displayHabitExpectations();
 
         newHabitView.finishActivity();
     }
-
-    @Override
-    public void removeTempTasksAndExpectations() {
-
-        model.removeTempTasks();
-        model.removeTempExpectations();
-    }
-
 
     @Override
     public void start() {

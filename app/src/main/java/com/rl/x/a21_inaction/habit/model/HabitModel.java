@@ -19,6 +19,7 @@ public class HabitModel implements HabitContract.Model {
     private Executor diskIOExecutor;
     private TempTaskDao tempTaskDao;
     private TempExpectationDao tempExpectationDao;
+    private HabitDao habitDao;
 
     private TaskDao taskDao;
     private ExpectationDao expectationDao;
@@ -28,6 +29,7 @@ public class HabitModel implements HabitContract.Model {
         diskIOExecutor = AppExecutors.getInstance().getDiskIO();
         tempTaskDao = AppDatabase.getInstance(applicationContext).tempTaskDao();
         tempExpectationDao = AppDatabase.getInstance(applicationContext).tempExpectationDao();
+        habitDao = AppDatabase.getInstance(applicationContext).habitDao();
 
         taskDao = AppDatabase.getInstance(applicationContext).taskDao();
         expectationDao = AppDatabase.getInstance(applicationContext).expectationDao();
@@ -58,7 +60,36 @@ public class HabitModel implements HabitContract.Model {
     }
 
     @Override
-    public void saveNewHabit(Habit habit) {
+    public void saveNewHabit(String name) {
+
+        List<Task> taskList = getTasksFromTempTasks();
+        List<Expectation> expectationList = getExpectationsFromTempExpectations();
+
+        final Habit habit = new Habit(name, taskList, expectationList);
+        diskIOExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                habitDao.insertHabit(habit);
+            }
+        });
+    }
+
+    @Override
+    public void displayHabitTasks() {
+
+        diskIOExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                taskDao.insertAllTask(habitDao.getHabit("nofap").getTaskList());
+                expectationDao.insertAllExpectation(habitDao.getHabit("nofap").getExpectationList());
+            }
+        });
+    }
+
+    @Override
+    public void displayHabitExpectations() {
 
     }
 
@@ -67,7 +98,7 @@ public class HabitModel implements HabitContract.Model {
     private Boolean haveTempTasks;
 
     @Override
-    public List<TempTask> getAllTempTasks() {
+    public List<TempTask> getAllTempTasksThenDeleteTempTasksFromDatabase() {
 
         haveTempTasks = false;
         diskIOExecutor.execute(new Runnable() {
@@ -81,6 +112,8 @@ public class HabitModel implements HabitContract.Model {
 
         while (!haveTempTasks) ;
 
+        deleteTempTasks();
+
         return tempTaskList;
     }
 
@@ -89,7 +122,7 @@ public class HabitModel implements HabitContract.Model {
     private Boolean haveTempExpectations;
 
     @Override
-    public List<TempExpectation> getAllTempExpectations() {
+    public List<TempExpectation> getAllTempExpectationsThenDeleteTempExpectationsFromDatabase() {
 
         haveTempExpectations = false;
         diskIOExecutor.execute(new Runnable() {
@@ -103,45 +136,74 @@ public class HabitModel implements HabitContract.Model {
 
         while (!haveTempExpectations) ;
 
+        deleteTempExpectations();
+
         return tempExpectationList;
     }
 
+
     @Override
-    public void saveTempTasksInRealTaskDatabase() {
+    public List<Task> getTasksFromTempTasks() {
 
-        List<TempTask> tempTasks = getAllTempTasks();
+        List<Task> taskList = new ArrayList<>();
+        List<TempTask> tempTasks = getAllTempTasksThenDeleteTempTasksFromDatabase();
 
-        for (final TempTask tempTask : tempTasks) {
+        for (TempTask tempTask : tempTasks) {
 
-            diskIOExecutor.execute(new Runnable() {
-                @Override
-                public void run() {
-
-                    taskDao.insertTask(new Task(tempTask.getName()));
-                }
-            });
+            taskList.add(new Task(tempTask.getName()));
         }
+        return taskList;
     }
 
     @Override
-    public void saveTempExpectationsInRealExpectationDatabase() {
+    public List<Expectation> getExpectationsFromTempExpectations() {
 
-        List<TempExpectation> tempExpectations = getAllTempExpectations();
+        List<Expectation> expectationList = new ArrayList<>();
+        List<TempExpectation> tempExpectations = getAllTempExpectationsThenDeleteTempExpectationsFromDatabase();
 
-        for (final TempExpectation tempExpectation : tempExpectations) {
+        for (TempExpectation tempExpectation : tempExpectations) {
 
-            diskIOExecutor.execute(new Runnable() {
-                @Override
-                public void run() {
-
-                    expectationDao.insertExpectation(new Expectation(tempExpectation.getName()));
-                }
-            });
+            expectationList.add(new Expectation(tempExpectation.getName()));
         }
+        return expectationList;
     }
 
+//    @Override
+//    public void saveTempTasksInRealTaskDatabase() {
+//
+//        List<TempTask> tempTasks = getAllTempTasksThenDeleteTempTasksFromDatabase();
+//
+//        for (final TempTask tempTask : tempTasks) {
+//
+//            diskIOExecutor.execute(new Runnable() {
+//                @Override
+//                public void run() {
+//
+//                    taskDao.insertTask(new Task(tempTask.getName()));
+//                }
+//            });
+//        }
+//    }
+
+//    @Override
+//    public void saveTempExpectationsInRealExpectationDatabase() {
+//
+//        List<TempExpectation> tempExpectations = getAllTempExpectationsThenDeleteTempExpectationsFromDatabase();
+//
+//        for (final TempExpectation tempExpectation : tempExpectations) {
+//
+//            diskIOExecutor.execute(new Runnable() {
+//                @Override
+//                public void run() {
+//
+//                    expectationDao.insertExpectation(new Expectation(tempExpectation.getName()));
+//                }
+//            });
+//        }
+//    }
+
     @Override
-    public void removeTempTasks() {
+    public void deleteTempTasks() {
 
         diskIOExecutor.execute(new Runnable() {
             @Override
@@ -153,7 +215,7 @@ public class HabitModel implements HabitContract.Model {
     }
 
     @Override
-    public void removeTempExpectations() {
+    public void deleteTempExpectations() {
 
         diskIOExecutor.execute(new Runnable() {
             @Override
