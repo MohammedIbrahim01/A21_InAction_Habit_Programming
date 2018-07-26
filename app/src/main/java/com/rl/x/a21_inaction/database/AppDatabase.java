@@ -3,12 +3,14 @@ package com.rl.x.a21_inaction.database;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
 import com.rl.x.a21_inaction.achievements.model.Achievement;
 import com.rl.x.a21_inaction.achievements.model.AchievementDao;
 import com.rl.x.a21_inaction.day_zero.model.Expectation;
 import com.rl.x.a21_inaction.day_zero.model.ExpectationDao;
+import com.rl.x.a21_inaction.habit.model.Converters;
 import com.rl.x.a21_inaction.habit.model.TempExpectation;
 import com.rl.x.a21_inaction.habit.model.TempExpectationDao;
 import com.rl.x.a21_inaction.habit.model.TempTask;
@@ -17,6 +19,7 @@ import com.rl.x.a21_inaction.tasks.model.Task;
 import com.rl.x.a21_inaction.tasks.model.TaskDao;
 
 @Database(entities = {Task.class, Achievement.class, Expectation.class, TempTask.class, TempExpectation.class}, version = 7, exportSchema = false)
+@TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final Object LOCK = new Object();

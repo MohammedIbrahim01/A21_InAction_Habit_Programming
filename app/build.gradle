@@ -45,5 +45,6 @@ dependencies {
     def lifecycle_version = "1.1.1"
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
 
-
+    //Gson
+    implementation 'com.google.code.gson:gson:2.8.5'
 }
