@@ -9,10 +9,14 @@ import com.rl.x.a21_inaction.achievements.model.Achievement;
 import com.rl.x.a21_inaction.achievements.model.AchievementDao;
 import com.rl.x.a21_inaction.day_zero.model.Expectation;
 import com.rl.x.a21_inaction.day_zero.model.ExpectationDao;
+import com.rl.x.a21_inaction.habit.model.TempExpectation;
+import com.rl.x.a21_inaction.habit.model.TempExpectationDao;
+import com.rl.x.a21_inaction.habit.model.TempTask;
+import com.rl.x.a21_inaction.habit.model.TempTaskDao;
 import com.rl.x.a21_inaction.tasks.model.Task;
 import com.rl.x.a21_inaction.tasks.model.TaskDao;
 
-@Database(entities = {Task.class, Achievement.class, Expectation.class}, version = 6, exportSchema = false)
+@Database(entities = {Task.class, Achievement.class, Expectation.class, TempTask.class, TempExpectation.class}, version = 7, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final Object LOCK = new Object();
@@ -35,4 +39,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract ExpectationDao expectationDao();
 
+    public abstract TempTaskDao tempTaskDao();
+
+    public abstract TempExpectationDao tempExpectationDao();
 }

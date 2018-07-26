@@ -12,8 +12,6 @@ public class Task {
 
     private String name;
 
-    private int day;
-
 
     public Task(int id, String name) {
 
@@ -22,10 +20,9 @@ public class Task {
     }
 
     @Ignore
-    public Task(String name, int day) {
+    public Task(String name) {
 
         this.name = name;
-        this.day = day;
     }
 
     public int getId() {
@@ -44,11 +41,4 @@ public class Task {
         this.name = name;
     }
 
-    public int getDay() {
-        return day;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
-    }
 }

@@ -23,6 +23,6 @@ public class AppManager {
     }
 
     public void addAchievement(Task swipedTask) {
-        achievementModel.insertAchievement(new Achievement(swipedTask.getName(), swipedTask.getDay()));
+        achievementModel.insertAchievement(new Achievement(swipedTask.getName()));
     }
 }

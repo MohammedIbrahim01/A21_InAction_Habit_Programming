@@ -40,7 +40,6 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
         Task currentTask = taskList.get(position);
 
         holder.nameTextView.setText(currentTask.getName());
-        holder.dayTextView.setText("day : " + currentTask.getDay());
     }
 
     @Override

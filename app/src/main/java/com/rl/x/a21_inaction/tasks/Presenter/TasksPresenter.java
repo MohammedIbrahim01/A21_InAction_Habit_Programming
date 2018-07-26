@@ -68,9 +68,9 @@ public class TasksPresenter implements TasksContract.Presenter {
      * @param name
      */
     @Override
-    public void insertTaskIntoDatabase(String name, int day) {
+    public void insertTaskIntoDatabase(String name) {
 
-        model.insertTask(new Task(name, day));
+        model.insertTask(new Task(name));
     }
 
 

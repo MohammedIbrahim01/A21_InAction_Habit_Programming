@@ -28,7 +28,7 @@ public class AddTaskActivity extends AppCompatActivity  implements HabitContract
         setContentView(R.layout.activity_add_task);
         ButterKnife.bind(this);
 
-        presenter = new HabitPresenter();
+        presenter = new HabitPresenter(getApplicationContext());
         presenter.setAddTaskView(this);
 
         saveTaskButton.setOnClickListener(this);
@@ -47,6 +47,6 @@ public class AddTaskActivity extends AppCompatActivity  implements HabitContract
     @Override
     public void onClick(View view) {
 
-        presenter.saveNewTaskTemp();
+        presenter.saveNewTempTask();
     }
 }

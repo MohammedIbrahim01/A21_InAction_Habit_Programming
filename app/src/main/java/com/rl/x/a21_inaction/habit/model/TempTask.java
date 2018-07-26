@@ -1,26 +1,24 @@
-package com.rl.x.a21_inaction.achievements.model;
+package com.rl.x.a21_inaction.habit.model;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity(tableName = "achievements")
-public class Achievement {
+@Entity(tableName = "tempTasks")
+public class TempTask {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
 
     private String name;
 
-    public Achievement(int id, String name) {
-
+    public TempTask(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
     @Ignore
-    public Achievement(String name) {
-
+    public TempTask(String name) {
         this.name = name;
     }
 
@@ -39,5 +37,4 @@ public class Achievement {
     public void setName(String name) {
         this.name = name;
     }
-
 }

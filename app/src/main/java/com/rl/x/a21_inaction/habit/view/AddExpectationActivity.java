@@ -28,7 +28,7 @@ public class AddExpectationActivity extends AppCompatActivity implements HabitCo
         setContentView(R.layout.activity_add_expectation);
         ButterKnife.bind(this);
 
-        presenter = new HabitPresenter();
+        presenter = new HabitPresenter(getApplicationContext());
         presenter.setAddExpectationView(this);
 
         saveExpectationButton.setOnClickListener(this);
@@ -49,6 +49,6 @@ public class AddExpectationActivity extends AppCompatActivity implements HabitCo
     @Override
     public void onClick(View view) {
 
-        presenter.saveNewExpectationTemp();
+        presenter.saveNewTempExpectation();
     }
 }

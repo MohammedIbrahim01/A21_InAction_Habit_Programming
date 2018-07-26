@@ -1,15 +1,27 @@
 package com.rl.x.a21_inaction.habit.presenter;
 
+import android.content.Context;
+import android.util.Log;
+
+import com.rl.x.a21_inaction.day_zero.model.Expectation;
 import com.rl.x.a21_inaction.habit.HabitContract;
+import com.rl.x.a21_inaction.habit.model.HabitModel;
+import com.rl.x.a21_inaction.habit.model.TempExpectation;
+import com.rl.x.a21_inaction.habit.model.TempTask;
 import com.rl.x.a21_inaction.tasks.model.Task;
+
+import java.util.List;
 
 public class HabitPresenter implements HabitContract.Presenter {
 
     private HabitContract.AddTaskView addTaskView;
     private HabitContract.NewHabitView newHabitView;
     private HabitContract.AddExpectationView addExpectationView;
+    private HabitModel model;
 
-    public HabitPresenter() {
+    public HabitPresenter(Context applicationContext) {
+
+        model = new HabitModel(applicationContext);
     }
 
     public void setAddExpectationView(HabitContract.AddExpectationView addExpectationView) {
@@ -25,9 +37,9 @@ public class HabitPresenter implements HabitContract.Presenter {
     }
 
     @Override
-    public void saveNewTaskTemp() {
+    public void saveNewTempTask() {
 
-        String taskName = addTaskView.getNewTaskName();
+        model.saveNewTempTask(new TempTask(addTaskView.getNewTaskName()));
         addTaskView.finishActivity();
     }
 
@@ -38,9 +50,9 @@ public class HabitPresenter implements HabitContract.Presenter {
     }
 
     @Override
-    public void saveNewExpectationTemp() {
+    public void saveNewTempExpectation() {
 
-        String expectationName = addExpectationView.getNewExpectationName();
+        model.saveNewTempExpectation(new TempExpectation(addExpectationView.getNewExpectationName()));
         addExpectationView.finishActivity();
     }
 
@@ -53,8 +65,21 @@ public class HabitPresenter implements HabitContract.Presenter {
     @Override
     public void saveNewHabit() {
 
+        model.saveTempTasksInRealTaskDatabase();
+        model.saveTempExpectationsInRealExpectationDatabase();
+
+        removeTempTasksAndExpectations();
+
         newHabitView.finishActivity();
     }
+
+    @Override
+    public void removeTempTasksAndExpectations() {
+
+        model.removeTempTasks();
+        model.removeTempExpectations();
+    }
+
 
     @Override
     public void start() {

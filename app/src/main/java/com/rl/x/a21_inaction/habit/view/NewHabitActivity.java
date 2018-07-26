@@ -33,7 +33,7 @@ public class NewHabitActivity extends AppCompatActivity implements HabitContract
         setContentView(R.layout.activity_new_habit);
         ButterKnife.bind(this);
 
-        presenter = new HabitPresenter();
+        presenter = new HabitPresenter(getApplicationContext());
         presenter.setNewHabitView(this);
 
         addTaskButton.setOnClickListener(this);
