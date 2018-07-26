@@ -8,7 +8,7 @@ import android.arch.persistence.room.TypeConverters;
 import com.rl.x.a21_inaction.day_zero.model.Expectation;
 import com.rl.x.a21_inaction.tasks.model.Task;
 
-import java.util.List;
+import java.util.ArrayList;
 
 @Entity(tableName = "habits")
 public class Habit {
@@ -19,12 +19,12 @@ public class Habit {
     private String name;
 
     @TypeConverters(TasksListConverter.class)
-    private List<Task> taskList;
+    private ArrayList taskList;
 
     @TypeConverters(ExpectationsListConverter.class)
-    private List<Expectation> expectationList;
+    private ArrayList expectationList;
 
-    public Habit(int id, String name, List<Task> taskList, List<Expectation> expectationList) {
+    public Habit(int id, String name, ArrayList<Task> taskList, ArrayList<Expectation> expectationList) {
         this.id = id;
         this.name = name;
         this.taskList = taskList;
@@ -32,7 +32,7 @@ public class Habit {
     }
 
     @Ignore
-    public Habit(String name, List<Task> taskList, List<Expectation> expectationList) {
+    public Habit(String name, ArrayList<Task> taskList, ArrayList<Expectation> expectationList) {
         this.name = name;
         this.taskList = taskList;
         this.expectationList = expectationList;
@@ -54,19 +54,19 @@ public class Habit {
         this.name = name;
     }
 
-    public List<Task> getTaskList() {
+    public ArrayList getTaskList() {
         return taskList;
     }
 
-    public void setTaskList(List<Task> taskList) {
+    public void setTaskList(ArrayList taskList) {
         this.taskList = taskList;
     }
 
-    public List<Expectation> getExpectationList() {
+    public ArrayList getExpectationList() {
         return expectationList;
     }
 
-    public void setExpectationList(List<Expectation> expectationList) {
+    public void setExpectationList(ArrayList<Expectation> expectationList) {
         this.expectationList = expectationList;
     }
 }

@@ -21,8 +21,7 @@ import com.rl.x.a21_inaction.habit.model.TempTaskDao;
 import com.rl.x.a21_inaction.tasks.model.Task;
 import com.rl.x.a21_inaction.tasks.model.TaskDao;
 
-@Database(entities = {Task.class, Achievement.class, Expectation.class, TempTask.class, TempExpectation.class, Habit.class}, version = 9, exportSchema = false)
-@TypeConverters({ExpectationsListConverter.class, TasksListConverter.class})
+@Database(entities = {Task.class, Achievement.class, Expectation.class, TempTask.class, TempExpectation.class, Habit.class}, version = 10, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final Object LOCK = new Object();

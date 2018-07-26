@@ -62,8 +62,8 @@ public class HabitModel implements HabitContract.Model {
     @Override
     public void saveNewHabit(String name) {
 
-        List<Task> taskList = getTasksFromTempTasks();
-        List<Expectation> expectationList = getExpectationsFromTempExpectations();
+        ArrayList<Task> taskList = getTasksFromTempTasks();
+        ArrayList<Expectation> expectationList = getExpectationsFromTempExpectations();
 
         final Habit habit = new Habit(name, taskList, expectationList);
         diskIOExecutor.execute(new Runnable() {
@@ -83,7 +83,6 @@ public class HabitModel implements HabitContract.Model {
             public void run() {
 
                 taskDao.insertAllTask(habitDao.getHabit("nofap").getTaskList());
-                expectationDao.insertAllExpectation(habitDao.getHabit("nofap").getExpectationList());
             }
         });
     }
@@ -91,6 +90,13 @@ public class HabitModel implements HabitContract.Model {
     @Override
     public void displayHabitExpectations() {
 
+        diskIOExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                expectationDao.insertAllExpectation(habitDao.getHabit("nofap").getExpectationList());
+            }
+        });
     }
 
 
@@ -143,9 +149,9 @@ public class HabitModel implements HabitContract.Model {
 
 
     @Override
-    public List<Task> getTasksFromTempTasks() {
+    public ArrayList<Task> getTasksFromTempTasks() {
 
-        List<Task> taskList = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
         List<TempTask> tempTasks = getAllTempTasksThenDeleteTempTasksFromDatabase();
 
         for (TempTask tempTask : tempTasks) {
@@ -156,9 +162,9 @@ public class HabitModel implements HabitContract.Model {
     }
 
     @Override
-    public List<Expectation> getExpectationsFromTempExpectations() {
+    public ArrayList<Expectation> getExpectationsFromTempExpectations() {
 
-        List<Expectation> expectationList = new ArrayList<>();
+        ArrayList<Expectation> expectationList = new ArrayList<>();
         List<TempExpectation> tempExpectations = getAllTempExpectationsThenDeleteTempExpectationsFromDatabase();
 
         for (TempExpectation tempExpectation : tempExpectations) {
