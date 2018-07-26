@@ -14,7 +14,7 @@ import com.rl.x.a21_inaction.habit.presenter.HabitPresenter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class NewHabitActivity extends AppCompatActivity implements HabitContract.NewHabitView, View.OnClickListener {
+public class NewHabitActivity extends AppCompatActivity implements HabitContract.View, View.OnClickListener {
 
     private HabitPresenter presenter;
 
@@ -33,8 +33,7 @@ public class NewHabitActivity extends AppCompatActivity implements HabitContract
         setContentView(R.layout.activity_new_habit);
         ButterKnife.bind(this);
 
-        presenter = new HabitPresenter(getApplicationContext());
-        presenter.setNewHabitView(this);
+        presenter = new HabitPresenter(getApplicationContext(), this);
 
         addTaskButton.setOnClickListener(this);
         addExpectationButton.setOnClickListener(this);
@@ -43,27 +42,18 @@ public class NewHabitActivity extends AppCompatActivity implements HabitContract
 
 
     @Override
-    public void goAddTask() {
-
-        startActivity(new Intent(NewHabitActivity.this, AddTaskActivity.class));
-    }
-
-    @Override
-    public void goAddExpectation() {
-
-        startActivity(new Intent(NewHabitActivity.this, AddExpectationActivity.class));
-    }
-
-    @Override
     public void finishActivity() {
 
         finish();
     }
 
+
     @Override
     public String getHabitName() {
+
         return habitNameEditText.getText().toString();
     }
+
 
     @Override
     public void onClick(View view) {

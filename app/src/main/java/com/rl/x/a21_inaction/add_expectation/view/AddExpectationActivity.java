@@ -1,4 +1,4 @@
-package com.rl.x.a21_inaction.habit.view;
+package com.rl.x.a21_inaction.add_expectation.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,15 +7,17 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.rl.x.a21_inaction.R;
+import com.rl.x.a21_inaction.add_expectation.AddExpectationContract;
+import com.rl.x.a21_inaction.add_expectation.presenter.AddExpectationPresenter;
 import com.rl.x.a21_inaction.habit.HabitContract;
 import com.rl.x.a21_inaction.habit.presenter.HabitPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AddExpectationActivity extends AppCompatActivity implements HabitContract.AddExpectationView, View.OnClickListener {
+public class AddExpectationActivity extends AppCompatActivity implements AddExpectationContract.View, View.OnClickListener {
 
-    private HabitPresenter presenter;
+    private AddExpectationPresenter presenter;
 
     @BindView(R.id.expectation_name_editText)
     EditText expectationNameEditText;
@@ -28,8 +30,7 @@ public class AddExpectationActivity extends AppCompatActivity implements HabitCo
         setContentView(R.layout.activity_add_expectation);
         ButterKnife.bind(this);
 
-        presenter = new HabitPresenter(getApplicationContext());
-        presenter.setAddExpectationView(this);
+        presenter = new AddExpectationPresenter(getApplicationContext(), this);
 
         saveExpectationButton.setOnClickListener(this);
     }
@@ -49,6 +50,6 @@ public class AddExpectationActivity extends AppCompatActivity implements HabitCo
     @Override
     public void onClick(View view) {
 
-        presenter.saveNewTempExpectation();
+        presenter.insertTempExpectation();
     }
 }

@@ -1,4 +1,4 @@
-package com.rl.x.a21_inaction.habit.model;
+package com.rl.x.a21_inaction.add_task.model;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;

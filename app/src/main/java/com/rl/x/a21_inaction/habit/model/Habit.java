@@ -9,6 +9,7 @@ import com.rl.x.a21_inaction.day_zero.model.Expectation;
 import com.rl.x.a21_inaction.tasks.model.Task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity(tableName = "habits")
 public class Habit {
@@ -18,11 +19,12 @@ public class Habit {
 
     private String name;
 
-    @TypeConverters(TasksListConverter.class)
-    private ArrayList taskList;
+    @TypeConverters({ExpectationsListConverter.class})
+    private ArrayList<Expectation> expectationList;
 
-    @TypeConverters(ExpectationsListConverter.class)
-    private ArrayList expectationList;
+    @TypeConverters(TasksListConverter.class)
+    private ArrayList<Task> taskList;
+
 
     public Habit(int id, String name, ArrayList<Task> taskList, ArrayList<Expectation> expectationList) {
         this.id = id;
@@ -54,7 +56,7 @@ public class Habit {
         this.name = name;
     }
 
-    public ArrayList getTaskList() {
+    public ArrayList<Task> getTaskList() {
         return taskList;
     }
 
@@ -62,7 +64,7 @@ public class Habit {
         this.taskList = taskList;
     }
 
-    public ArrayList getExpectationList() {
+    public ArrayList<Expectation> getExpectationList() {
         return expectationList;
     }
 

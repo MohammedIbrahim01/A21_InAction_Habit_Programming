@@ -3,21 +3,18 @@ package com.rl.x.a21_inaction.database;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
-import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
 import com.rl.x.a21_inaction.achievements.model.Achievement;
 import com.rl.x.a21_inaction.achievements.model.AchievementDao;
 import com.rl.x.a21_inaction.day_zero.model.Expectation;
 import com.rl.x.a21_inaction.day_zero.model.ExpectationDao;
-import com.rl.x.a21_inaction.habit.model.ExpectationsListConverter;
 import com.rl.x.a21_inaction.habit.model.Habit;
 import com.rl.x.a21_inaction.habit.model.HabitDao;
-import com.rl.x.a21_inaction.habit.model.TasksListConverter;
-import com.rl.x.a21_inaction.habit.model.TempExpectation;
-import com.rl.x.a21_inaction.habit.model.TempExpectationDao;
-import com.rl.x.a21_inaction.habit.model.TempTask;
-import com.rl.x.a21_inaction.habit.model.TempTaskDao;
+import com.rl.x.a21_inaction.add_expectation.model.TempExpectation;
+import com.rl.x.a21_inaction.add_expectation.model.TempExpectationDao;
+import com.rl.x.a21_inaction.add_task.model.TempTask;
+import com.rl.x.a21_inaction.add_task.model.TempTaskDao;
 import com.rl.x.a21_inaction.tasks.model.Task;
 import com.rl.x.a21_inaction.tasks.model.TaskDao;
 
@@ -32,7 +29,6 @@ public abstract class AppDatabase extends RoomDatabase {
         if (sInstance == null) {
             if (sInstance == null) {
                 sInstance = Room.databaseBuilder(applicationContext, AppDatabase.class, NAME_DATABASE)
-                        .fallbackToDestructiveMigration()
                         .build();
             }
         }

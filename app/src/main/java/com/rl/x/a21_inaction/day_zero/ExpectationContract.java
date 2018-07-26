@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.rl.x.a21_inaction.BasePresenter;
 import com.rl.x.a21_inaction.day_zero.model.Expectation;
+import com.rl.x.a21_inaction.add_expectation.model.TempExpectation;
 import com.rl.x.a21_inaction.day_zero.view.ExpectationAdapter;
 
 import java.util.List;

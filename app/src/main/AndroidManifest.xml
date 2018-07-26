@@ -17,8 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".habit.view.NewHabitActivity" />
-        <activity android:name=".habit.view.AddTaskActivity" />
-        <activity android:name=".habit.view.AddExpectationActivity"></activity>
+        <activity android:name=".add_task.view.AddTaskActivity" />
+        <activity android:name=".add_expectation.view.AddExpectationActivity"></activity>
     </application>
 
 </manifest>
