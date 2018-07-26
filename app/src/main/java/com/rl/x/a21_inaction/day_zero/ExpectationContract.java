@@ -18,6 +18,8 @@ public interface ExpectationContract {
         void insertMockExpectation();
 
         void deleteExpectation(Expectation expectation);
+
+        void insertExpectationList(List<Expectation> expectationListFromHabit);
     }
 
     interface View {

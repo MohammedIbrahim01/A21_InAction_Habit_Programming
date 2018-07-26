@@ -8,4 +8,10 @@
         android:title="new habit"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/action_new_day"
+        android:orderInCategory="1"
+        android:title="new day"
+        app:showAsAction="ifRoom" />
+
 </menu>

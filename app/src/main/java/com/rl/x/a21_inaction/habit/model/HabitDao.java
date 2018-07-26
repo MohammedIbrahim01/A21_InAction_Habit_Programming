@@ -15,6 +15,9 @@ public interface HabitDao {
     @Query("SELECT * FROM habits WHERE name = :name")
     Habit getHabit(String name);
 
+    @Query("SELECT * FROM habits")
+    Habit getHabit();
+
     @Insert
     void insertHabit(Habit habit);
 }

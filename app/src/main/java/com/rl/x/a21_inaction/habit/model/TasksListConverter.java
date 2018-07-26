@@ -13,15 +13,15 @@ import java.util.List;
 public class TasksListConverter {
 
     @TypeConverter
-    public static String taskListToJson(ArrayList<Task> taskList) {
+    public static String taskListToJson(List<Task> taskList) {
 
         return new Gson().toJson(taskList);
     }
 
     @TypeConverter
-    public static ArrayList<Task> JsonToTaskList(String json) {
+    public static List<Task> JsonToTaskList(String json) {
 
-        Type type = new TypeToken<ArrayList<Task>>(){}.getType();
+        Type type = new TypeToken<List<Task>>(){}.getType();
 
         return new Gson().fromJson(json, type);
     }

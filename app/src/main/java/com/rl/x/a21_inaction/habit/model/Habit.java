@@ -19,14 +19,13 @@ public class Habit {
 
     private String name;
 
-    @TypeConverters({ExpectationsListConverter.class})
-    private ArrayList<Expectation> expectationList;
-
     @TypeConverters(TasksListConverter.class)
-    private ArrayList<Task> taskList;
+    private List<Task> taskList;
 
+    @TypeConverters({ExpectationsListConverter.class})
+    private List<Expectation> expectationList;
 
-    public Habit(int id, String name, ArrayList<Task> taskList, ArrayList<Expectation> expectationList) {
+    public Habit(int id, String name, List<Task> taskList, List<Expectation> expectationList) {
         this.id = id;
         this.name = name;
         this.taskList = taskList;
@@ -34,7 +33,7 @@ public class Habit {
     }
 
     @Ignore
-    public Habit(String name, ArrayList<Task> taskList, ArrayList<Expectation> expectationList) {
+    public Habit(String name, List<Task> taskList, List<Expectation> expectationList) {
         this.name = name;
         this.taskList = taskList;
         this.expectationList = expectationList;
@@ -56,19 +55,19 @@ public class Habit {
         this.name = name;
     }
 
-    public ArrayList<Task> getTaskList() {
+    public List<Task> getTaskList() {
         return taskList;
     }
 
-    public void setTaskList(ArrayList taskList) {
+    public void setTaskList(List<Task> taskList) {
         this.taskList = taskList;
     }
 
-    public ArrayList<Expectation> getExpectationList() {
+    public List<Expectation> getExpectationList() {
         return expectationList;
     }
 
-    public void setExpectationList(ArrayList<Expectation> expectationList) {
+    public void setExpectationList(List<Expectation> expectationList) {
         this.expectationList = expectationList;
     }
 }

@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+//
 //        AppExecutors.getInstance().getDiskIO().execute(new Runnable() {
 //            @Override
 //            public void run() {
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 //            }
 //        });
 
-        presenter = new MainPresenter(this);
+        presenter = new MainPresenter(getApplicationContext(), this);
 
         presenter.setupTabLayoutAndViewPager();
 
@@ -61,8 +61,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_add_habit :
+            case R.id.action_add_habit:
                 presenter.goAddHabit();
+                break;
+            case R.id.action_new_day:
+                presenter.displayDayTasks();
                 break;
         }
         return super.onOptionsItemSelected(item);

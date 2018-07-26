@@ -14,15 +14,15 @@ import java.util.List;
 public class ExpectationsListConverter {
 
     @TypeConverter
-    public static String expectationListToJson(ArrayList<Exception> exceptionList) {
+    public static String expectationListToJson(List<Expectation> expectationList) {
 
-        return new Gson().toJson(exceptionList);
+        return new Gson().toJson(expectationList);
     }
 
     @TypeConverter
-    public static ArrayList<Exception> JsonToExpectationList(String json) {
+    public static List<Expectation> JsonToExpectationList(String json) {
 
-        Type type = new TypeToken<ArrayList<Expectation>>(){}.getType();
+        Type type = new TypeToken<List<Expectation>>(){}.getType();
 
         return new Gson().fromJson(json, type);
     }

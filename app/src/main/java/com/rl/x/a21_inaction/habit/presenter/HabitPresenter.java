@@ -1,5 +1,6 @@
 package com.rl.x.a21_inaction.habit.presenter;
 
+import android.app.Activity;
 import android.content.Context;
 
 import com.rl.x.a21_inaction.habit.HabitContract;
@@ -12,11 +13,11 @@ public class HabitPresenter implements HabitContract.Presenter {
     private HabitModel model;
     private AppManager manager;
 
-    public HabitPresenter(Context applicationContext, HabitContract.View view) {
+    public HabitPresenter(Activity newHabitActivity, HabitContract.View view) {
 
         this.view = view;
-        model = new HabitModel(applicationContext);
-        manager = new AppManager(applicationContext);
+        model = new HabitModel(newHabitActivity.getApplicationContext());
+        manager = new AppManager(newHabitActivity.getApplicationContext(), newHabitActivity);
     }
 
 
@@ -35,7 +36,9 @@ public class HabitPresenter implements HabitContract.Presenter {
     @Override
     public void saveNewHabit() {
 
-        model.saveNewHabit(view.getHabitName());
+        model.saveNewHabit(view.getHabitName(), manager.getTaskListFromTemp(), manager.getExpectationListFromTemp());
+
+        manager.insertExpectationList();
 
         view.finishActivity();
     }

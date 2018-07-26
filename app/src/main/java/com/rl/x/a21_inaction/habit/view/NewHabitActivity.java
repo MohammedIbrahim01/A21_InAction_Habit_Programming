@@ -1,5 +1,7 @@
 package com.rl.x.a21_inaction.habit.view;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +17,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class NewHabitActivity extends AppCompatActivity implements HabitContract.View, View.OnClickListener {
+
+    public Activity CONTEXT = NewHabitActivity.this;
 
     private HabitPresenter presenter;
 
@@ -33,7 +37,7 @@ public class NewHabitActivity extends AppCompatActivity implements HabitContract
         setContentView(R.layout.activity_new_habit);
         ButterKnife.bind(this);
 
-        presenter = new HabitPresenter(getApplicationContext(), this);
+        presenter = new HabitPresenter(this, this);
 
         addTaskButton.setOnClickListener(this);
         addExpectationButton.setOnClickListener(this);

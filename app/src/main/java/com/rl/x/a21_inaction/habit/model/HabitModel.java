@@ -17,21 +17,18 @@ public class HabitModel implements HabitContract.Model {
 
     private Executor diskIOExecutor;
     private HabitDao habitDao;
-    private AppManager manager;
-
 
     public HabitModel(Context applicationContext) {
 
         diskIOExecutor = AppExecutors.getInstance().getDiskIO();
         habitDao = AppDatabase.getInstance(applicationContext).habitDao();
-        manager = new AppManager(applicationContext);
     }
 
     @Override
-    public void saveNewHabit(String name) {
+    public void saveNewHabit(String name, List<Task> taskListFromTemp, List<Expectation> expectationListFromTemp) {
 
-        List<Task> taskList = manager.getTaskListFromTemp();
-        List<Expectation> expectationList = manager.getExpectationListFromTemp();
+        List<Task> taskList = taskListFromTemp;
+        List<Expectation> expectationList = expectationListFromTemp;
 
         final Habit habit = new Habit(name, taskList, expectationList);
 
@@ -44,4 +41,46 @@ public class HabitModel implements HabitContract.Model {
         });
     }
 
+
+    private List<Task> dayTasks = new ArrayList<>();
+    private Boolean haveDayTasks;
+
+    public List<Task> getDayTasks() {
+
+        haveDayTasks = false;
+
+        diskIOExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                dayTasks = habitDao.getHabit().getTaskList();
+                haveDayTasks = true;
+            }
+        });
+
+        while (!haveDayTasks);
+
+        return dayTasks;
+    }
+
+    private List<Expectation> habitExpectations = new ArrayList<>();
+    private Boolean haveHabitExpectations;
+
+    public List<Expectation> getHabitExpectations() {
+
+        haveHabitExpectations = false;
+
+        diskIOExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                habitExpectations = habitDao.getHabit().getExpectationList();
+                haveHabitExpectations = true;
+            }
+        });
+
+        while (!haveHabitExpectations);
+
+        return habitExpectations;
+    }
 }

@@ -22,5 +22,7 @@ public interface MainContract {
         void setupTabLayoutAndViewPager();
 
         void goAddHabit();
+
+        void displayDayTasks();
     }
 }

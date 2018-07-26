@@ -7,6 +7,7 @@ import com.rl.x.a21_inaction.database.AppDatabase;
 import com.rl.x.a21_inaction.tasks.TasksContract;
 import com.rl.x.a21_inaction.utils.AppExecutors;
 
+import java.util.List;
 import java.util.concurrent.Executor;
 
 public class TaskModel implements TasksContract.Model {
@@ -31,6 +32,18 @@ public class TaskModel implements TasksContract.Model {
             @Override
             public void run() {
                 taskDao.insertTask(task);
+            }
+        });
+    }
+
+    @Override
+    public void insertTaskList(final List<Task> taskList) {
+
+        diskIOExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                taskDao.insertAllTask(taskList);
             }
         });
     }

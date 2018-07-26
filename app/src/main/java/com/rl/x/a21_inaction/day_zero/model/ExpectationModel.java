@@ -79,4 +79,16 @@ public class ExpectationModel implements ExpectationContract.Model {
             }
         });
     }
+
+    @Override
+    public void insertExpectationList(final List<Expectation> expectationListFromHabit) {
+
+        diskIOExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                expectationDao.insertAllExpectation(expectationListFromHabit);
+            }
+        });
+    }
 }
