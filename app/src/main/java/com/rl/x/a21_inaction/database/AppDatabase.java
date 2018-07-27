@@ -25,15 +25,20 @@ public abstract class AppDatabase extends RoomDatabase {
     public static final String NAME_DATABASE = "name-database";
     private static AppDatabase sInstance;
 
+
     public static AppDatabase getInstance(Context applicationContext) {
+
         if (sInstance == null) {
-            if (sInstance == null) {
+
+            synchronized (LOCK) {
+
                 sInstance = Room.databaseBuilder(applicationContext, AppDatabase.class, NAME_DATABASE)
                         .build();
             }
         }
         return sInstance;
     }
+
 
     public abstract TaskDao taskDao();
 
