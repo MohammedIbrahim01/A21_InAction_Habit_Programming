@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-//
+
 //        AppExecutors.getInstance().getDiskIO().execute(new Runnable() {
 //            @Override
 //            public void run() {

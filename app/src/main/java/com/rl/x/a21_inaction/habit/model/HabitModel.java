@@ -68,7 +68,7 @@ public class HabitModel implements HabitContract.Model {
             @Override
             public void run() {
 
-                dayTasks = habitDao.getHabit().getTaskList();
+                dayTasks = habitDao.getAllHabits().get(0).getTaskList();
                 haveDayTasks = true;
             }
         });
