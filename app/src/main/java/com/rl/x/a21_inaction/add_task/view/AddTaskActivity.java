@@ -54,6 +54,7 @@ public class AddTaskActivity extends AppCompatActivity  implements AddTaskContra
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, timePicker.getCurrentHour());
         calendar.set(Calendar.MINUTE, timePicker.getCurrentMinute());
+        calendar.set(Calendar.SECOND, 0);
 
         return calendar;
     }

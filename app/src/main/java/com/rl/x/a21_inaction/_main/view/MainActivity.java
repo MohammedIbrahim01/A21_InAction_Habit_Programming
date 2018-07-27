@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
             case R.id.action_new_day:
                 presenter.displayDayTasks();
+                presenter.scheduleDayTasks();
                 break;
         }
 

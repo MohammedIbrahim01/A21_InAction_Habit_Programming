@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.rl.x.a21_inaction">
 
+    <uses-permission android:name="android.permission.SET_ALARM" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <receiver android:name=".utils.SchedulerReceiver" />
+
         <activity android:name="._main.view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,6 +22,7 @@
         <activity android:name=".habit.view.NewHabitActivity" />
         <activity android:name=".add_task.view.AddTaskActivity" />
         <activity android:name=".add_expectation.view.AddExpectationActivity"></activity>
+
     </application>
 
 </manifest>

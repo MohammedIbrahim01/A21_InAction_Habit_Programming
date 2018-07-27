@@ -44,6 +44,12 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
+    public void scheduleDayTasks() {
+
+        manager.scheduleDayTasks();
+    }
+
+    @Override
     public void start() {
 
         setupTabLayoutAndViewPager();

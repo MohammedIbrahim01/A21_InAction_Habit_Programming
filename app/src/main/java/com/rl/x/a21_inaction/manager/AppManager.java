@@ -18,11 +18,14 @@ import com.rl.x.a21_inaction.tasks.model.Task;
 import com.rl.x.a21_inaction.tasks.model.TaskModel;
 import com.rl.x.a21_inaction.add_task.model.TempTask;
 import com.rl.x.a21_inaction.add_task.view.AddTaskActivity;
+import com.rl.x.a21_inaction.utils.Scheduler;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AppManager {
+
+    Context applicationContext;
 
     private Activity activity;
     private TaskModel taskModel;
@@ -62,6 +65,9 @@ public class AppManager {
      * @param applicationContext
      */
     private void initAllModels(Context applicationContext) {
+
+        this.applicationContext = applicationContext;
+
         taskModel = new TaskModel(applicationContext);
         achievementModel = new AchievementModel(applicationContext);
         expectationModel = new ExpectationModel(applicationContext);
@@ -185,4 +191,18 @@ public class AppManager {
 
         expectationModel.insertExpectationList(getExpectationListFromHabit());
     }
+
+
+    public void scheduleDayTasks() {
+
+        List<Task> taskList = getTaskListFromHabit();
+
+        Scheduler scheduler = new Scheduler(applicationContext);
+
+        for (Task task : taskList) {
+
+            scheduler.schedule(task);
+        }
+    }
+
 }

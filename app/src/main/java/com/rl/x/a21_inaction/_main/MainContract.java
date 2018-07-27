@@ -23,5 +23,7 @@ public interface MainContract {
         void goAddHabit();
 
         void displayDayTasks();
+
+        void scheduleDayTasks();
     }
 }
