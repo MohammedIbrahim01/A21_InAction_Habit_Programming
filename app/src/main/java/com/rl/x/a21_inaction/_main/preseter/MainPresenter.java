@@ -1,8 +1,11 @@
 package com.rl.x.a21_inaction._main.preseter;
 
 import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 
 import com.rl.x.a21_inaction._main.MainContract;
+import com.rl.x.a21_inaction._main.model.MainModel;
 import com.rl.x.a21_inaction._main.view.AppFragmentPagerAdapter;
 import com.rl.x.a21_inaction.achievements.view.AchievementsFragment;
 import com.rl.x.a21_inaction.day_zero.view.DayZeroFragment;
@@ -11,26 +14,36 @@ import com.rl.x.a21_inaction.tasks.view.TasksFragment;
 
 public class MainPresenter implements MainContract.Presenter {
 
+    private FragmentActivity fragmentActivity;
+    private MainModel model;
     private MainContract.View view;
     private AppManager manager;
 
-    public MainPresenter(Activity activity, MainContract.View view) {
 
+    public MainPresenter(FragmentActivity fragmentActivity, MainContract.View view) {
+
+        this.fragmentActivity = fragmentActivity;
+        this.model = new MainModel();
         this.view = view;
-        manager = new AppManager(activity.getApplicationContext(), activity);
+        manager = new AppManager(fragmentActivity.getApplicationContext(), fragmentActivity);
     }
 
+
+    /**
+     * get fragmentPagerAdapter from model then pass it to view to setupTabLayoutAndViewPager
+     */
     @Override
     public void setupTabLayoutAndViewPager() {
 
-        AppFragmentPagerAdapter adapter = new AppFragmentPagerAdapter(view.getAppSupportFragmentManager());
-        adapter.addFragment(new TasksFragment(), "tasks");
-        adapter.addFragment(new AchievementsFragment(), "achievements");
-        adapter.addFragment(new DayZeroFragment(), "day zero");
-
-        view.setupTabLayoutAndViewPager(adapter);
+        FragmentManager supportFragmentManager = fragmentActivity.getSupportFragmentManager();
+        AppFragmentPagerAdapter fragmentPagerAdapter = model.getFragmentPagerAdapter(supportFragmentManager);
+        view.setupTabLayoutAndViewPager(fragmentPagerAdapter);
     }
 
+
+    /**
+     * manager responsibility
+     */
     @Override
     public void goAddHabit() {
 
@@ -38,15 +51,22 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
 
+    /**
+     * manager responsibility
+     */
     @Override
     public void clearDatabase() {
 
         manager.clearDatabase();
     }
 
-    @Override
-    public void start() {
 
-        setupTabLayoutAndViewPager();
+    /**
+     * manager responsibility
+     */
+    @Override
+    public void stopTime() {
+
+        manager.stopTime();
     }
 }

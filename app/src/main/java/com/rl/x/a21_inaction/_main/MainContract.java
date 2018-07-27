@@ -9,19 +9,24 @@ import com.rl.x.a21_inaction._main.view.AppFragmentPagerAdapter;
 
 public interface MainContract {
 
-    interface View {
+    interface Model {
 
-        void setupTabLayoutAndViewPager(AppFragmentPagerAdapter adapter);
-
-        FragmentManager getAppSupportFragmentManager();
+        AppFragmentPagerAdapter getFragmentPagerAdapter(FragmentManager appSupportFragmentManager);
     }
 
-    interface Presenter extends BasePresenter{
+    interface View {
+
+        void setupTabLayoutAndViewPager(AppFragmentPagerAdapter fragmentPagerAdapter);
+    }
+
+    interface Presenter {
 
         void setupTabLayoutAndViewPager();
 
         void goAddHabit();
 
         void clearDatabase();
+
+        void stopTime();
     }
 }

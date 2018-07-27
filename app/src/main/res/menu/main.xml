@@ -9,9 +9,9 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/action_new_day"
+        android:id="@+id/action_stop_Time"
         android:orderInCategory="1"
-        android:title="new day"
+        android:title="stop time"
         app:showAsAction="ifRoom" />
 
 </menu>
