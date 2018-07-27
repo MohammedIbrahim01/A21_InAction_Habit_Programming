@@ -36,6 +36,7 @@ public class AchievementsFragment extends Fragment implements AchievementContrac
         ButterKnife.bind(this, view);
 
         presenter = new AchievementPresenter(this, this);
+
         presenter.start();
 
         return view;
@@ -43,26 +44,14 @@ public class AchievementsFragment extends Fragment implements AchievementContrac
 
 
     @Override
-    public AchievementsAdapter getAdapter() {
-
-        return adapter;
-    }
-
-    @Override
-    public RecyclerView getRecyclerView() {
-
-        return achievementsRecyclerView;
-    }
-
-    @Override
-    public void refreshAchievements(List<Achievement> achievementList) {
+    public void setAchievements(List<Achievement> achievementList) {
 
         adapter.setAchievementList(achievementList);
         adapter.notifyDataSetChanged();
     }
 
     @Override
-    public void setupRecyclerViewWithAdapter() {
+    public void attachRecyclerViewWithAdapter() {
 
         achievementsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         achievementsRecyclerView.setAdapter(adapter);

@@ -15,11 +15,13 @@ public class AchievementViewModel extends AndroidViewModel {
 
     private LiveData<List<Achievement>> achievementList;
 
+
     public AchievementViewModel(@NonNull final Application application) {
         super(application);
+
         achievementList = AppDatabase.getInstance(application.getApplicationContext()).achievementDao().getAllAchievementsLive();
-        Log.i("WWW", "AchievementViewModel: fetch achievements");
     }
+
 
     public LiveData<List<Achievement>> getAchievementList() {
         return achievementList;

@@ -12,9 +12,6 @@ import java.util.List;
 public interface AchievementDao {
 
     @Query("SELECT * FROM achievements")
-    List<Achievement> getAllAchievements();
-
-    @Query("SELECT * FROM achievements")
     LiveData<List<Achievement>> getAllAchievementsLive();
 
     @Insert

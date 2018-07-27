@@ -20,20 +20,26 @@ public class AchievementsAdapter extends RecyclerView.Adapter<AchievementsAdapte
 
     private List<Achievement> achievementList = new ArrayList<>();
 
+
     public List<Achievement> getAchievementList() {
         return achievementList;
     }
 
+
     public void setAchievementList(List<Achievement> achievementList) {
+
         this.achievementList = achievementList;
     }
+
 
     @NonNull
     @Override
     public AchievementsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.achievement_row, parent, false);
         return new ViewHolder(view);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull AchievementsAdapter.ViewHolder holder, int position) {
@@ -43,11 +49,13 @@ public class AchievementsAdapter extends RecyclerView.Adapter<AchievementsAdapte
         holder.nameTextView.setText(currentAchievement.getName());
     }
 
+
     @Override
     public int getItemCount() {
 
         return achievementList.size();
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -55,6 +63,7 @@ public class AchievementsAdapter extends RecyclerView.Adapter<AchievementsAdapte
         TextView nameTextView;
         @BindView(R.id.achievement_row_day_textView)
         TextView dayTextView;
+
 
         public ViewHolder(View itemView) {
             super(itemView);

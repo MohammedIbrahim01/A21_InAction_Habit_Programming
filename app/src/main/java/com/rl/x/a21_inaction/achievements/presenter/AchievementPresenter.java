@@ -14,52 +14,44 @@ import java.util.List;
 
 public class AchievementPresenter implements AchievementContract.Presenter {
 
-    private AchievementContract.View view;
-    private AchievementModel model;
     private Fragment fragment;
+    private AchievementModel model;
+    private AchievementContract.View view;
     private AchievementViewModel viewModel;
 
 
     public AchievementPresenter(Fragment fragment, AchievementContract.View view) {
 
-        this.view = view;
-        model = new AchievementModel(fragment.getContext().getApplicationContext());
         this.fragment = fragment;
-        viewModel = ViewModelProviders.of(fragment).get(AchievementViewModel.class);
+        model = new AchievementModel(fragment.getContext().getApplicationContext());
+        this.view = view;
+        viewModel = ViewModelProviders.of(fragment.getActivity()).get(AchievementViewModel.class);
     }
 
 
     /**
-     * setup recyclerView with adapter
-     *
+     * attach recyclerView with adapter
      */
     @Override
-    public void setupRecyclerViewWithAdapter() {
+    public void attachRecyclerViewWithAdapter() {
 
-        view.setupRecyclerViewWithAdapter();
+        view.attachRecyclerViewWithAdapter();
     }
 
 
+    /**
+     * set observer to LiveData AchievementList and set AchievementList on change
+     */
     @Override
-    public void setupAchievementsLive(){
+    public void setupAchievementsLive() {
 
         viewModel.getAchievementList().observe(fragment.getActivity(), new Observer<List<Achievement>>() {
             @Override
             public void onChanged(@Nullable List<Achievement> achievementList) {
-                view.refreshAchievements(achievementList);
+
+                view.setAchievements(achievementList);
             }
         });
-    }
-
-
-    /**
-     * insert Achievements into database for testing
-     *
-     */
-    @Override
-    public void insertMockAchievementsIntoDatabase() {
-
-        model.insertMockAchievements();
     }
 
 
@@ -78,7 +70,7 @@ public class AchievementPresenter implements AchievementContract.Presenter {
     @Override
     public void start() {
 
-        setupRecyclerViewWithAdapter();
+        attachRecyclerViewWithAdapter();
         setupAchievementsLive();
     }
 }

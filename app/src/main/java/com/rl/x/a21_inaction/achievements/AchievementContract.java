@@ -18,32 +18,23 @@ public interface AchievementContract {
 
         void insertAchievement(Achievement achievement);
 
-        void insertMockAchievements();
-
         void deleteAchievement(Achievement achievement);
     }
 
     interface View {
 
-        AchievementsAdapter getAdapter();
+        void setAchievements(List<Achievement> achievementList);
 
-        RecyclerView getRecyclerView();
-
-        void refreshAchievements(List<Achievement> achievementList);
-
-        void setupRecyclerViewWithAdapter();
+        void attachRecyclerViewWithAdapter();
     }
 
     interface Presenter extends BasePresenter {
 
-        void setupRecyclerViewWithAdapter();
+        void attachRecyclerViewWithAdapter();
 
         void setupAchievementsLive();
 
-        void insertMockAchievementsIntoDatabase();
-
         void deleteAchievement(Achievement achievement);
-
     }
 
 }
