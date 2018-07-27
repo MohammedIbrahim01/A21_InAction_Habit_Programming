@@ -29,10 +29,12 @@ public class TaskModel implements TasksContract.Model {
         diskIOExecutor.execute(new Runnable() {
             @Override
             public void run() {
+
                 taskDao.insertTask(task);
             }
         });
     }
+
 
     @Override
     public void insertTaskList(final List<Task> taskList) {
@@ -53,6 +55,7 @@ public class TaskModel implements TasksContract.Model {
         diskIOExecutor.execute(new Runnable() {
             @Override
             public void run() {
+
                 taskDao.deleteTask(task);
             }
         });

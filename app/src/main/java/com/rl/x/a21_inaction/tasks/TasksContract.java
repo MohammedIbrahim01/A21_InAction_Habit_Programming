@@ -13,8 +13,6 @@ public interface TasksContract {
 
     interface Model {
 
-        void insertTask(Task task);
-
         void insertTaskList(List<Task> taskList);
 
         void deleteTask(Task task);
@@ -22,32 +20,25 @@ public interface TasksContract {
 
     interface View {
 
-        void setupSwipeTaskFun(ItemTouchHelper itemTouchHelper);
+        void setupSwipeTaskFunctionality(ItemTouchHelper itemTouchHelper);
 
         TasksAdapter getAdapter();
 
-        RecyclerView getTasksRecyclerView();
+        void setTasks(List<Task> taskList);
 
-        void refreshTasks(List<Task> taskList);
-
-        void setupRecyclerViewWithAdapter();
+        void attachRecyclerViewWithAdapter();
     }
 
     interface Presenter extends BasePresenter {
 
-        void setupRecyclerViewWithAdapter();
+        void attachRecyclerViewWithAdapter();
 
         void setupTasksLive();
 
         ItemTouchHelper getItemTouchHelper();
 
-        void setupSwipeTaskFun();
-
-//        void insertTaskIntoDatabase(String name);
-
-//        void insertMockTasksIntoDatabase();
+        void setupSwipeTaskFunctionality();
 
         void deleteTask(Task task);
-
     }
 }

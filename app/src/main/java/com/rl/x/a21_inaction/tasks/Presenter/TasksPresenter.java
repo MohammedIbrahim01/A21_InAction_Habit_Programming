@@ -2,7 +2,6 @@ package com.rl.x.a21_inaction.tasks.Presenter;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -18,38 +17,35 @@ import java.util.List;
 
 public class TasksPresenter implements TasksContract.Presenter {
 
-
-    private TasksContract.View view;
-    private AppManager manager;
-    private TaskModel model;
-    private TasksViewModel viewModel;
     private Fragment fragment;
+    private TaskModel model;
+    private TasksContract.View view;
+    private TasksViewModel viewModel;
+    private AppManager manager;
 
 
-    public TasksPresenter(TasksContract.View view, Fragment fragment) {
+    public TasksPresenter(Fragment fragment,TasksContract.View view) {
 
-        this.view = view;
-        manager = new AppManager(fragment.getContext().getApplicationContext());
-        model = new TaskModel(fragment.getContext().getApplicationContext());
-        viewModel = ViewModelProviders.of(fragment.getActivity()).get(TasksViewModel.class);
         this.fragment = fragment;
+        model = new TaskModel(fragment.getContext().getApplicationContext());
+        this.view = view;
+        viewModel = ViewModelProviders.of(fragment.getActivity()).get(TasksViewModel.class);
+        manager = new AppManager(fragment.getContext().getApplicationContext());
     }
 
 
     /**
      * setup recyclerView with adapter
-     *
      */
     @Override
-    public void setupRecyclerViewWithAdapter() {
+    public void attachRecyclerViewWithAdapter() {
 
-        view.setupRecyclerViewWithAdapter();
+        view.attachRecyclerViewWithAdapter();
     }
 
 
     /**
      * setup tasks Live
-     *
      */
     @Override
     public void setupTasksLive() {
@@ -57,33 +53,11 @@ public class TasksPresenter implements TasksContract.Presenter {
         viewModel.getTasks().observe(fragment.getActivity(), new Observer<List<Task>>() {
             @Override
             public void onChanged(@Nullable List<Task> tasks) {
-                view.refreshTasks(tasks);
+
+                view.setTasks(tasks);
             }
         });
     }
-
-
-//    /**
-//     * insert task into database
-//     *
-//     * @param name
-//     */
-//    @Override
-//    public void insertTaskIntoDatabase(String name) {
-//
-//        model.insertTask(new Task(name));
-//    }
-
-
-//    /**
-//     * insert mock tasks into database for testing
-//     *
-//     */
-//    @Override
-//    public void insertMockTasksIntoDatabase() {
-//
-//        model.insertMockTasks();
-//    }
 
 
     /**
@@ -100,12 +74,11 @@ public class TasksPresenter implements TasksContract.Presenter {
 
     /**
      * setup swipe task functionality
-     *
      */
     @Override
-    public void setupSwipeTaskFun() {
+    public void setupSwipeTaskFunctionality() {
 
-        view.setupSwipeTaskFun(getItemTouchHelper());
+        view.setupSwipeTaskFunctionality(getItemTouchHelper());
     }
 
 
@@ -125,10 +98,11 @@ public class TasksPresenter implements TasksContract.Presenter {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+
                 //when task was swiped : get that Task then delete it
                 Task swipedTask = view.getAdapter().getTaskList().get(viewHolder.getAdapterPosition());
                 deleteTask(swipedTask);
-                manager.addAchievement(swipedTask);
+                manager.addAchievementFromTask(swipedTask);
             }
         });
 
@@ -139,8 +113,8 @@ public class TasksPresenter implements TasksContract.Presenter {
     @Override
     public void start() {
 
-        setupRecyclerViewWithAdapter();
+        attachRecyclerViewWithAdapter();
         setupTasksLive();
-        setupSwipeTaskFun();
+        setupSwipeTaskFunctionality();
     }
 }

@@ -5,6 +5,8 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
 
+import com.rl.x.a21_inaction.utils.converters.CalendarConverter;
+
 import java.util.Calendar;
 
 @Entity(tableName = "tasks")
@@ -29,6 +31,7 @@ public class Task {
         this.habitName = habitName;
     }
 
+
     @Ignore
     public Task(String name, Calendar calendar, String habitName) {
 
@@ -36,6 +39,7 @@ public class Task {
         this.calendar = calendar;
         this.habitName = habitName;
     }
+
 
     public int getId() {
         return id;

@@ -5,7 +5,7 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
 
-import com.rl.x.a21_inaction.tasks.model.CalendarConverter;
+import com.rl.x.a21_inaction.utils.converters.CalendarConverter;
 
 import java.util.Calendar;
 

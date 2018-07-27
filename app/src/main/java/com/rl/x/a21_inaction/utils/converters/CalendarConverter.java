@@ -1,4 +1,4 @@
-package com.rl.x.a21_inaction.tasks.model;
+package com.rl.x.a21_inaction.utils.converters;
 
 import android.arch.persistence.room.TypeConverter;
 

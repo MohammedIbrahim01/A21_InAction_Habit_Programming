@@ -22,11 +22,12 @@ import butterknife.ButterKnife;
 
 public class TasksFragment extends Fragment implements TasksContract.View {
 
-    TasksAdapter adapter;
+    TasksAdapter adapter = new TasksAdapter();
     TasksPresenter presenter;
 
     @BindView(R.id.tasks_recyclerView)
     RecyclerView tasksRecyclerView;
+
 
     @Nullable
     @Override
@@ -34,9 +35,8 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         android.view.View view = inflater.inflate(R.layout.fragment_tasks, container, false);
         ButterKnife.bind(this, view);
 
-        adapter = new TasksAdapter();
-
         presenter = new TasksPresenter(this, this);
+
         presenter.start();
 
         return view;
@@ -44,10 +44,11 @@ public class TasksFragment extends Fragment implements TasksContract.View {
 
 
     @Override
-    public void setupSwipeTaskFun(ItemTouchHelper itemTouchHelper) {
+    public void setupSwipeTaskFunctionality(ItemTouchHelper itemTouchHelper) {
 
         itemTouchHelper.attachToRecyclerView(tasksRecyclerView);
     }
+
 
     @Override
     public TasksAdapter getAdapter() {
@@ -55,21 +56,17 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         return adapter;
     }
 
-    @Override
-    public RecyclerView getTasksRecyclerView() {
-
-        return tasksRecyclerView;
-    }
 
     @Override
-    public void refreshTasks(final List<Task> taskList) {
+    public void setTasks(final List<Task> taskList) {
 
         adapter.setTaskList(taskList);
         adapter.notifyDataSetChanged();
     }
 
+
     @Override
-    public void setupRecyclerViewWithAdapter() {
+    public void attachRecyclerViewWithAdapter() {
 
         tasksRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         tasksRecyclerView.setAdapter(adapter);

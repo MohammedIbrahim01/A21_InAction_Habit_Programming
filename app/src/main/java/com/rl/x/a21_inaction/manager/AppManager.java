@@ -115,7 +115,7 @@ public class AppManager {
      *
      * @param swipedTask
      */
-    public void addAchievement(Task swipedTask) {
+    public void addAchievementFromTask(Task swipedTask) {
 
         achievementModel.insertAchievement(new Achievement(swipedTask.getName()));
     }
