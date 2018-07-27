@@ -20,7 +20,7 @@ public class AddTaskPresenter implements AddTaskContract.Presenter {
     @Override
     public void insertTempTask() {
 
-        model.insertTempTask(new TempTask(view.getNewTaskName(), view.getNewTaskCalendar()));
+        model.insertTempTask(new TempTask(view.getNewTaskName(), view.getNewTaskCalendar(), view.getHabitName()));
         view.finishActivity();
     }
 }

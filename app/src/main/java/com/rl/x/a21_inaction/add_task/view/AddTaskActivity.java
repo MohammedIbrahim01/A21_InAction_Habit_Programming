@@ -1,5 +1,6 @@
 package com.rl.x.a21_inaction.add_task.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,8 @@ import butterknife.ButterKnife;
 
 public class AddTaskActivity extends AppCompatActivity  implements AddTaskContract.View, View.OnClickListener {
 
+    public static final String NAME_HABIT = "name-habit";
+
     private AddTaskPresenter presenter;
 
     @BindView(R.id.task_name_editText)
@@ -26,6 +29,7 @@ public class AddTaskActivity extends AppCompatActivity  implements AddTaskContra
     Button saveTaskButton;
     @BindView(R.id.timePicker)
     TimePicker timePicker;
+    private String habitName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +39,23 @@ public class AddTaskActivity extends AppCompatActivity  implements AddTaskContra
 
         presenter = new AddTaskPresenter(getApplicationContext(), this);
 
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra(NAME_HABIT)){
+
+            habitName = intent.getStringExtra(NAME_HABIT);
+        }
+
         saveTaskButton.setOnClickListener(this);
     }
 
     @Override
     public String getNewTaskName() {
         return taskNameEditText.getText().toString();
+    }
+
+    @Override
+    public String getHabitName() {
+        return habitName;
     }
 
     @Override

@@ -34,19 +34,20 @@ public class AppNotifications {
             notificationManager.createNotificationChannel(notificationChannel);
         }
 
-        Notification notification = getNotification(task.getName());
+        Notification notification = getNotification(task.getHabitName(), task.getName());
 
         notificationManager.notify(1000, notification);
     }
 
-    private Notification getNotification(String name) {
+    private Notification getNotification(String habitName, String name) {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, ID_NOTIFICATION_CHANNEL)
                 .setSmallIcon(android.support.v4.R.drawable.notify_panel_notification_icon_bg)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), android.support.v4.R.drawable.notification_action_background))
-                .setContentTitle("Title")
-                .setContentText("text")
-                .setStyle(new NotificationCompat.BigTextStyle().bigText("texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext"))
+                .setContentTitle("habit to program : " + habitName)
+                .setContentText("its time for : " + name)
+                .setStyle(new NotificationCompat.BigTextStyle().setBigContentTitle(" You are to program : " + habitName))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText("its time for : " + name))
                 .setContentIntent(PendingIntent.getActivity(context, 2121, new Intent(context, MainActivity.class), PendingIntent.FLAG_CANCEL_CURRENT))
                 .setAutoCancel(true);
 

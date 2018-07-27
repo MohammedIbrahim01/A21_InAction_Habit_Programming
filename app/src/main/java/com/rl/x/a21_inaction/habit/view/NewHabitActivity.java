@@ -65,7 +65,7 @@ public class NewHabitActivity extends AppCompatActivity implements HabitContract
         switch (view.getId()) {
 
             case R.id.add_task_button:
-                presenter.goAddTask();
+                presenter.goAddTask(getNewHabitName());
                 break;
 
             case R.id.add_expectation_button:

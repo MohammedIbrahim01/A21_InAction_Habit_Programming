@@ -27,6 +27,7 @@ import java.util.List;
 
 public class AppManager {
 
+    public static final String NAME_HABIT = "name-habit";
     Context applicationContext;
 
     private Activity activity;
@@ -82,9 +83,11 @@ public class AppManager {
     /**
      * navigate to AddTaskActivity
      */
-    public void goAddTask() {
+    public void goAddTask(String habitName) {
 
-        activity.startActivity(new Intent(activity, AddTaskActivity.class));
+        Intent intent = new Intent(activity, AddTaskActivity.class);
+        intent.putExtra(NAME_HABIT, habitName);
+        activity.startActivity(intent);
     }
 
 
@@ -129,7 +132,7 @@ public class AppManager {
 
         for (TempTask tempTask : tempTaskList) {
 
-            taskList.add(new Task(tempTask.getName(), tempTask.getCalendar()));
+            taskList.add(new Task(tempTask.getName(), tempTask.getCalendar(), tempTask.getHabitName()));
         }
 
         return taskList;

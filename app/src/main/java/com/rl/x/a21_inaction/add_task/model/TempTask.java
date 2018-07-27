@@ -20,18 +20,22 @@ public class TempTask {
     @TypeConverters(CalendarConverter.class)
     private Calendar calendar;
 
-    public TempTask(int id, String name, Calendar calendar) {
+    private String habitName;
+
+    public TempTask(int id, String name, Calendar calendar, String habitName) {
 
         this.id = id;
         this.name = name;
         this.calendar = calendar;
+        this.habitName = habitName;
     }
 
     @Ignore
-    public TempTask(String name, Calendar calendar) {
+    public TempTask(String name, Calendar calendar, String habitName) {
 
         this.name = name;
         this.calendar = calendar;
+        this.habitName = habitName;
     }
 
     public int getId() {
@@ -56,5 +60,13 @@ public class TempTask {
 
     public void setCalendar(Calendar calendar) {
         this.calendar = calendar;
+    }
+
+    public String getHabitName() {
+        return habitName;
+    }
+
+    public void setHabitName(String habitName) {
+        this.habitName = habitName;
     }
 }

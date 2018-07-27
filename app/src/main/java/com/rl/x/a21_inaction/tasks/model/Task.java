@@ -18,19 +18,23 @@ public class Task {
     @TypeConverters(CalendarConverter.class)
     private Calendar calendar;
 
+    private String habitName;
 
-    public Task(int id, String name, Calendar calendar) {
+
+    public Task(int id, String name, Calendar calendar, String habitName) {
 
         this.id = id;
         this.name = name;
         this.calendar = calendar;
+        this.habitName = habitName;
     }
 
     @Ignore
-    public Task(String name, Calendar calendar) {
+    public Task(String name, Calendar calendar, String habitName) {
 
         this.name = name;
         this.calendar = calendar;
+        this.habitName = habitName;
     }
 
     public int getId() {
@@ -55,5 +59,13 @@ public class Task {
 
     public void setCalendar(Calendar calendar) {
         this.calendar = calendar;
+    }
+
+    public String getHabitName() {
+        return habitName;
+    }
+
+    public void setHabitName(String habitName) {
+        this.habitName = habitName;
     }
 }

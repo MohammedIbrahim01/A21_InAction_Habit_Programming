@@ -26,7 +26,7 @@ public interface HabitContract {
 
     interface Presenter extends BasePresenter {
 
-        void goAddTask();
+        void goAddTask(String habitName);
 
         void goAddExpectation();
 

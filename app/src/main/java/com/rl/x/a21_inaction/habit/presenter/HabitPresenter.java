@@ -24,9 +24,9 @@ public class HabitPresenter implements HabitContract.Presenter {
      * navigate to AddTask Screen
      */
     @Override
-    public void goAddTask() {
+    public void goAddTask(String habitName) {
 
-        manager.goAddTask();
+        manager.goAddTask(habitName);
     }
 
     /**

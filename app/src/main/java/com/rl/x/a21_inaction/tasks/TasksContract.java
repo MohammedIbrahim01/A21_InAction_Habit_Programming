@@ -17,8 +17,6 @@ public interface TasksContract {
 
         void insertTaskList(List<Task> taskList);
 
-        void insertMockTasks();
-
         void deleteTask(Task task);
     }
 

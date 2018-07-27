@@ -15,14 +15,11 @@ public class TaskModel implements TasksContract.Model {
 
     private Executor diskIOExecutor;
     private TaskDao taskDao;
-    private TempTaskDao tempTaskDao;
-
 
     public TaskModel(Context applicationContext) {
 
         diskIOExecutor = AppExecutors.getInstance().getDiskIO();
         taskDao = AppDatabase.getInstance(applicationContext).taskDao();
-        tempTaskDao = AppDatabase.getInstance(applicationContext).tempTaskDao();
     }
 
 
@@ -45,21 +42,6 @@ public class TaskModel implements TasksContract.Model {
             public void run() {
 
                 taskDao.insertAllTask(taskList);
-            }
-        });
-    }
-
-
-    @Override
-    public void insertMockTasks() {
-
-        diskIOExecutor.execute(new Runnable() {
-            @Override
-            public void run() {
-
-                for (int i = 0; i < 4; i++) {
-                    taskDao.insertTask(new Task("task #" + i, Calendar.getInstance()));
-                }
             }
         });
     }

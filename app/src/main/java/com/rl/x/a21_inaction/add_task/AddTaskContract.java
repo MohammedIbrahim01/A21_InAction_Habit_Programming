@@ -18,6 +18,8 @@ public interface AddTaskContract {
 
         String getNewTaskName();
 
+        String getHabitName();
+
         void finishActivity();
 
         Calendar getNewTaskCalendar();
