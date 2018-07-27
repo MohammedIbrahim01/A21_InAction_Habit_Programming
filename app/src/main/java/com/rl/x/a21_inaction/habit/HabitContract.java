@@ -11,13 +11,17 @@ public interface HabitContract {
     interface Model {
 
         void saveNewHabit(String name, List<Task> taskListFromTemp, List<Expectation> expectationListFromTemp);
+
+        List<Task> getTasksFromHabit();
+
+        List<Expectation> getExpectationsFromHabit();
     }
 
     interface View {
 
         void finishActivity();
 
-        String getHabitName();
+        String getNewHabitName();
     }
 
     interface Presenter extends BasePresenter {

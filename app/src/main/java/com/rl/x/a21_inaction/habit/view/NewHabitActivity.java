@@ -53,7 +53,7 @@ public class NewHabitActivity extends AppCompatActivity implements HabitContract
 
 
     @Override
-    public String getHabitName() {
+    public String getNewHabitName() {
 
         return habitNameEditText.getText().toString();
     }
@@ -61,13 +61,17 @@ public class NewHabitActivity extends AppCompatActivity implements HabitContract
 
     @Override
     public void onClick(View view) {
+
         switch (view.getId()) {
+
             case R.id.add_task_button:
                 presenter.goAddTask();
                 break;
+
             case R.id.add_expectation_button:
                 presenter.goAddExpectation();
                 break;
+
             case R.id.save_habit_button:
                 presenter.saveNewHabit();
                 break;

@@ -45,9 +45,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 //            }
 //        });
 
-        presenter = new MainPresenter(getApplicationContext(), this);
+        presenter = new MainPresenter(this, this);
 
-        presenter.setupTabLayoutAndViewPager();
+        presenter.start();
 
     }
 
@@ -60,31 +60,31 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()) {
+
             case R.id.action_add_habit:
                 presenter.goAddHabit();
                 break;
+
             case R.id.action_new_day:
                 presenter.displayDayTasks();
                 break;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void setupTabLayoutAndViewPager(AppFragmentPagerAdapter adapter) {
+
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
     public FragmentManager getAppSupportFragmentManager() {
+
         return getSupportFragmentManager();
     }
-
-    @Override
-    public void goAddHabit() {
-        startActivity(new Intent(MainActivity.this, NewHabitActivity.class));
-    }
-
 }

@@ -24,6 +24,15 @@ public class HabitModel implements HabitContract.Model {
         habitDao = AppDatabase.getInstance(applicationContext).habitDao();
     }
 
+    /**
+     * > take parameters of habit fields
+     * > create new Habit with this info
+     * > then insert new Habit in database
+     *
+     * @param name
+     * @param taskListFromTemp
+     * @param expectationListFromTemp
+     */
     @Override
     public void saveNewHabit(String name, List<Task> taskListFromTemp, List<Expectation> expectationListFromTemp) {
 
@@ -45,7 +54,13 @@ public class HabitModel implements HabitContract.Model {
     private List<Task> dayTasks = new ArrayList<>();
     private Boolean haveDayTasks;
 
-    public List<Task> getDayTasks() {
+    /**
+     * get tasksList from the only habit that stored in habits table in the database
+     *
+     * @return
+     */
+    @Override
+    public List<Task> getTasksFromHabit() {
 
         haveDayTasks = false;
 
@@ -63,10 +78,17 @@ public class HabitModel implements HabitContract.Model {
         return dayTasks;
     }
 
+
     private List<Expectation> habitExpectations = new ArrayList<>();
     private Boolean haveHabitExpectations;
 
-    public List<Expectation> getHabitExpectations() {
+    /**
+     * get tasksList from the only habit that stored in habits table in the database
+     *
+     * @return
+     */
+    @Override
+    public List<Expectation> getExpectationsFromHabit() {
 
         haveHabitExpectations = false;
 

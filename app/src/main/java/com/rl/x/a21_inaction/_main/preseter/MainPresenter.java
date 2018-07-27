@@ -1,9 +1,6 @@
 package com.rl.x.a21_inaction._main.preseter;
 
-import android.content.Context;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
+import android.app.Activity;
 
 import com.rl.x.a21_inaction._main.MainContract;
 import com.rl.x.a21_inaction._main.view.AppFragmentPagerAdapter;
@@ -17,10 +14,10 @@ public class MainPresenter implements MainContract.Presenter {
     private MainContract.View view;
     private AppManager manager;
 
-    public MainPresenter(Context applicationContext, MainContract.View view) {
+    public MainPresenter(Activity activity, MainContract.View view) {
 
         this.view = view;
-        manager = new AppManager(applicationContext);
+        manager = new AppManager(activity.getApplicationContext(), activity);
     }
 
     @Override
@@ -37,12 +34,18 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void goAddHabit() {
 
-        view.goAddHabit();
+        manager.goAddHabit();
     }
 
     @Override
     public void displayDayTasks() {
 
-        manager.insertTaskList();
+        manager.showTaskList();
+    }
+
+    @Override
+    public void start() {
+
+        setupTabLayoutAndViewPager();
     }
 }

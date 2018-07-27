@@ -24,8 +24,7 @@ import java.util.List;
 
 public class AppManager {
 
-    private Context applicationContext;
-    private Activity newHabitActivity;
+    private Activity activity;
     private TaskModel taskModel;
     private AchievementModel achievementModel;
     private ExpectationModel expectationModel;
@@ -33,9 +32,36 @@ public class AppManager {
     private AddExpectationModel addExpectationModel;
     private HabitModel habitModel;
 
+    /**
+     * normal constructor to use when there is no navigation need
+     *
+     * @param applicationContext
+     */
     public AppManager(Context applicationContext) {
 
-        this.applicationContext = applicationContext;
+        initAllModels(applicationContext);
+    }
+
+
+    /**
+     * special constructor to use when there is navigation need
+     *
+     * @param applicationContext
+     * @param activity
+     */
+    public AppManager(Context applicationContext, Activity activity) {
+
+        this.activity = activity;
+        initAllModels(applicationContext);
+    }
+
+    
+    /**
+     * to use in constructors
+     *
+     * @param applicationContext
+     */
+    private void initAllModels(Context applicationContext) {
         taskModel = new TaskModel(applicationContext);
         achievementModel = new AchievementModel(applicationContext);
         expectationModel = new ExpectationModel(applicationContext);
@@ -45,35 +71,49 @@ public class AppManager {
     }
 
 
-    public AppManager(Context applicationContext, Activity newHabitActivity) {
+    /**
+     * navigate to AddTaskActivity
+     */
+    public void goAddTask() {
 
-        this.newHabitActivity = newHabitActivity;
-        this.applicationContext = applicationContext;
-        taskModel = new TaskModel(applicationContext);
-        achievementModel = new AchievementModel(applicationContext);
-        expectationModel = new ExpectationModel(applicationContext);
-        addTaskModel = new AddTaskModel(applicationContext);
-        addExpectationModel = new AddExpectationModel(applicationContext);
-        habitModel = new HabitModel(applicationContext);
+        activity.startActivity(new Intent(activity, AddTaskActivity.class));
     }
 
 
+    /**
+     * navigate to AddExpectationActivity
+     */
+    public void goAddExpectation() {
+
+        activity.startActivity(new Intent(activity, AddExpectationActivity.class));
+    }
+
+
+    /**
+     * navigate to NewHabitActivity
+     */
+    public void goAddHabit() {
+
+        activity.startActivity(new Intent(activity, NewHabitActivity.class));
+    }
+
+
+    /**
+     * insert achievement created from swiped task
+     *
+     * @param swipedTask
+     */
     public void addAchievement(Task swipedTask) {
 
         achievementModel.insertAchievement(new Achievement(swipedTask.getName()));
     }
 
 
-    public void goAddTask() {
-
-        newHabitActivity.startActivity(new Intent(newHabitActivity, AddTaskActivity.class));
-    }
-
-    public void goAddExpectation() {
-
-        newHabitActivity.startActivity(new Intent(newHabitActivity, AddExpectationActivity.class));
-    }
-
+    /**
+     * get taskList from tempTasks
+     *
+     * @return Task List
+     */
     public List<Task> getTaskListFromTemp() {
 
         List<Task> taskList = new ArrayList<>();
@@ -87,6 +127,12 @@ public class AppManager {
         return taskList;
     }
 
+
+    /**
+     * get ExpectationList from tempExpectations
+     *
+     * @return Expectation List
+     */
     public List<Expectation> getExpectationListFromTemp() {
 
         List<Expectation> expectationList = new ArrayList<>();
@@ -101,22 +147,42 @@ public class AppManager {
     }
 
 
+    /**
+     * get dayTasks that stores inside the habit
+     *
+     * @return Task List
+     */
     public List<Task> getTaskListFromHabit() {
 
-        return habitModel.getDayTasks();
+        return habitModel.getTasksFromHabit();
     }
 
-    public void insertTaskList() {
+
+    /**
+     * show tasks in tasks Tab
+     */
+    public void showTaskList() {
 
         taskModel.insertTaskList(getTaskListFromHabit());
     }
 
+
+    /**
+     * get habitExpectations that stores inside the habit
+     *
+     * @return Expectation List
+     */
     public List<Expectation> getExpectationListFromHabit() {
 
-        return habitModel.getHabitExpectations();
+        return habitModel.getExpectationsFromHabit();
     }
 
-    public void insertExpectationList() {
+
+    /**
+     * show expectations in DayZero Tab
+     *
+     */
+    public void showExpectationList() {
 
         expectationModel.insertExpectationList(getExpectationListFromHabit());
     }
