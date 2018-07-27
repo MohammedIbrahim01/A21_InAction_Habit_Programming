@@ -38,13 +38,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-//        AppExecutors.getInstance().getDiskIO().execute(new Runnable() {
-//            @Override
-//            public void run() {
-//                AppDatabase.getInstance(getApplicationContext()).clearAllTables();
-//            }
-//        });
-
         presenter = new MainPresenter(this, this);
 
         presenter.start();
@@ -64,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         switch (item.getItemId()) {
 
             case R.id.action_add_habit:
+                presenter.clearDatabase();
                 presenter.goAddHabit();
                 break;
 

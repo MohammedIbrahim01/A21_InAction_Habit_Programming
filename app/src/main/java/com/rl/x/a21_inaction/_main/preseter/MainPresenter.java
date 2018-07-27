@@ -50,6 +50,12 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
+    public void clearDatabase() {
+
+        manager.clearDatabase();
+    }
+
+    @Override
     public void start() {
 
         setupTabLayoutAndViewPager();

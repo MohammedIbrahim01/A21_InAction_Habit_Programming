@@ -25,5 +25,7 @@ public interface MainContract {
         void displayDayTasks();
 
         void scheduleDayTasks();
+
+        void clearDatabase();
     }
 }

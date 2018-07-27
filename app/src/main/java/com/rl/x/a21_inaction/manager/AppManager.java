@@ -8,6 +8,7 @@ import com.rl.x.a21_inaction.achievements.model.Achievement;
 import com.rl.x.a21_inaction.achievements.model.AchievementModel;
 import com.rl.x.a21_inaction.add_expectation.model.AddExpectationModel;
 import com.rl.x.a21_inaction.add_task.model.AddTaskModel;
+import com.rl.x.a21_inaction.database.AppDatabase;
 import com.rl.x.a21_inaction.day_zero.model.Expectation;
 import com.rl.x.a21_inaction.day_zero.model.ExpectationModel;
 import com.rl.x.a21_inaction.add_expectation.model.TempExpectation;
@@ -18,6 +19,7 @@ import com.rl.x.a21_inaction.tasks.model.Task;
 import com.rl.x.a21_inaction.tasks.model.TaskModel;
 import com.rl.x.a21_inaction.add_task.model.TempTask;
 import com.rl.x.a21_inaction.add_task.view.AddTaskActivity;
+import com.rl.x.a21_inaction.utils.AppExecutors;
 import com.rl.x.a21_inaction.utils.Scheduler;
 
 import java.util.ArrayList;
@@ -205,4 +207,19 @@ public class AppManager {
         }
     }
 
+
+    /**
+     * clear database
+     *
+     */
+    public void clearDatabase() {
+
+        AppExecutors.getInstance().getDiskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+
+                AppDatabase.getInstance(applicationContext).clearAllTables();
+            }
+        });
+    }
 }

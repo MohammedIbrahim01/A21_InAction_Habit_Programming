@@ -18,6 +18,9 @@ public class SchedulerReceiver extends BroadcastReceiver{
 
         Task task = new Gson().fromJson(intent.getStringExtra(KEY_TASK), Task.class);
 
+        AppNotifications appNotifications = new AppNotifications(context);
+        appNotifications.notifyWith(task);
+
         Toast.makeText(context, "onReceive: Task name : " + task.getName(), Toast.LENGTH_SHORT).show();
         Log.i("WWW", "onReceive: Task name");
     }
