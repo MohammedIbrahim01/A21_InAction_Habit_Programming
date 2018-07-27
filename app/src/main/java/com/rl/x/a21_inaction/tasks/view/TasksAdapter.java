@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.rl.x.a21_inaction.R;
 import com.rl.x.a21_inaction.tasks.model.Task;
 
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -40,6 +41,34 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
         Task currentTask = taskList.get(position);
 
         holder.nameTextView.setText(currentTask.getName());
+        holder.dayTextView.setText(formattedTaskTime(currentTask.getCalendar()));
+    }
+
+    /**
+     * format taskTime from calendar
+     *
+     * @param calendar
+     * @return
+     */
+    private String formattedTaskTime(Calendar calendar) {
+
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        String formattedTime = "";
+        String AM_PM = "";
+
+        if (hour < 12) {
+
+            AM_PM = "am";
+        } else {
+            hour -= 12;
+            AM_PM = "pm";
+        }
+
+        formattedTime = hour + " : " + minute + " " + AM_PM;
+
+        return formattedTime;
     }
 
     @Override

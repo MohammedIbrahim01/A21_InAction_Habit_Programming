@@ -2,6 +2,7 @@ package com.rl.x.a21_inaction.add_task;
 
 import com.rl.x.a21_inaction.add_task.model.TempTask;
 
+import java.util.Calendar;
 import java.util.List;
 
 public interface AddTaskContract {
@@ -18,6 +19,8 @@ public interface AddTaskContract {
         String getNewTaskName();
 
         void finishActivity();
+
+        Calendar getNewTaskCalendar();
     }
 
     interface Presenter {

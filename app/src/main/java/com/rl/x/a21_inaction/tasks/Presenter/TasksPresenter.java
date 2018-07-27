@@ -38,6 +38,7 @@ public class TasksPresenter implements TasksContract.Presenter {
 
     /**
      * setup recyclerView with adapter
+     *
      */
     @Override
     public void setupRecyclerViewWithAdapter() {
@@ -62,27 +63,27 @@ public class TasksPresenter implements TasksContract.Presenter {
     }
 
 
-    /**
-     * insert task into database
-     *
-     * @param name
-     */
-    @Override
-    public void insertTaskIntoDatabase(String name) {
+//    /**
+//     * insert task into database
+//     *
+//     * @param name
+//     */
+//    @Override
+//    public void insertTaskIntoDatabase(String name) {
+//
+//        model.insertTask(new Task(name));
+//    }
 
-        model.insertTask(new Task(name));
-    }
 
-
-    /**
-     * insert mock tasks into database for testing
-     *
-     */
-    @Override
-    public void insertMockTasksIntoDatabase() {
-
-        model.insertMockTasks();
-    }
+//    /**
+//     * insert mock tasks into database for testing
+//     *
+//     */
+//    @Override
+//    public void insertMockTasksIntoDatabase() {
+//
+//        model.insertMockTasks();
+//    }
 
 
     /**

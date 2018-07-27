@@ -55,7 +55,7 @@ public class AppManager {
         initAllModels(applicationContext);
     }
 
-    
+
     /**
      * to use in constructors
      *
@@ -121,7 +121,7 @@ public class AppManager {
 
         for (TempTask tempTask : tempTaskList) {
 
-            taskList.add(new Task(tempTask.getName()));
+            taskList.add(new Task(tempTask.getName(), tempTask.getCalendar()));
         }
 
         return taskList;
@@ -180,7 +180,6 @@ public class AppManager {
 
     /**
      * show expectations in DayZero Tab
-     *
      */
     public void showExpectationList() {
 

@@ -7,6 +7,7 @@ import com.rl.x.a21_inaction.database.AppDatabase;
 import com.rl.x.a21_inaction.tasks.TasksContract;
 import com.rl.x.a21_inaction.utils.AppExecutors;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.Executor;
 
@@ -57,7 +58,7 @@ public class TaskModel implements TasksContract.Model {
             public void run() {
 
                 for (int i = 0; i < 4; i++) {
-                    taskDao.insertTask(new Task("task #" + i));
+                    taskDao.insertTask(new Task("task #" + i, Calendar.getInstance()));
                 }
             }
         });

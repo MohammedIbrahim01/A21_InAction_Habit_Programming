@@ -45,9 +45,9 @@ public interface TasksContract {
 
         void setupSwipeTaskFun();
 
-        void insertTaskIntoDatabase(String name);
+//        void insertTaskIntoDatabase(String name);
 
-        void insertMockTasksIntoDatabase();
+//        void insertMockTasksIntoDatabase();
 
         void deleteTask(Task task);
 
