@@ -1,4 +1,4 @@
-package com.rl.x.a21_inaction.day_zero.view;
+package com.rl.x.a21_inaction.expectation.view;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,9 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rl.x.a21_inaction.R;
-import com.rl.x.a21_inaction.day_zero.ExpectationContract;
-import com.rl.x.a21_inaction.day_zero.model.Expectation;
-import com.rl.x.a21_inaction.day_zero.presenter.ExpectationPresenter;
+import com.rl.x.a21_inaction.expectation.ExpectationContract;
+import com.rl.x.a21_inaction.expectation.model.Expectation;
+import com.rl.x.a21_inaction.expectation.presenter.ExpectationPresenter;
 
 import java.util.List;
 
@@ -28,6 +28,7 @@ public class DayZeroFragment extends Fragment implements ExpectationContract.Vie
     @BindView(R.id.expectations_recyclerView)
     RecyclerView expectationsRecyclerView;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class DayZeroFragment extends Fragment implements ExpectationContract.Vie
         ButterKnife.bind(this, view);
 
         presenter = new ExpectationPresenter(this, this);
+
         presenter.start();
 
         return view;
@@ -49,21 +51,9 @@ public class DayZeroFragment extends Fragment implements ExpectationContract.Vie
 
 
     @Override
-    public void refreshExpectations(final List<Expectation> expectationList) {
+    public void setExpectations(final List<Expectation> expectationList) {
 
         adapter.setExpectationList(expectationList);
         adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public ExpectationAdapter getAdapter() {
-
-        return adapter;
-    }
-
-    @Override
-    public RecyclerView getRecyclerView() {
-
-        return expectationsRecyclerView;
     }
 }

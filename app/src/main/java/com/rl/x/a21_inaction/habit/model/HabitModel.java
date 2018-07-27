@@ -3,9 +3,8 @@ package com.rl.x.a21_inaction.habit.model;
 import android.content.Context;
 
 import com.rl.x.a21_inaction.database.AppDatabase;
-import com.rl.x.a21_inaction.day_zero.model.Expectation;
+import com.rl.x.a21_inaction.expectation.model.Expectation;
 import com.rl.x.a21_inaction.habit.HabitContract;
-import com.rl.x.a21_inaction.manager.AppManager;
 import com.rl.x.a21_inaction.tasks.model.Task;
 import com.rl.x.a21_inaction.utils.AppExecutors;
 

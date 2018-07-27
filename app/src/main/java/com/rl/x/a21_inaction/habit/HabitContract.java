@@ -1,7 +1,7 @@
 package com.rl.x.a21_inaction.habit;
 
 import com.rl.x.a21_inaction.BasePresenter;
-import com.rl.x.a21_inaction.day_zero.model.Expectation;
+import com.rl.x.a21_inaction.expectation.model.Expectation;
 import com.rl.x.a21_inaction.tasks.model.Task;
 
 import java.util.List;

@@ -1,43 +1,40 @@
-package com.rl.x.a21_inaction.day_zero.presenter;
+package com.rl.x.a21_inaction.expectation.presenter;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
-import com.rl.x.a21_inaction.database.AppDatabase;
-import com.rl.x.a21_inaction.day_zero.ExpectationContract;
-import com.rl.x.a21_inaction.day_zero.model.Expectation;
-import com.rl.x.a21_inaction.day_zero.model.ExpectationDao;
-import com.rl.x.a21_inaction.day_zero.model.ExpectationModel;
-import com.rl.x.a21_inaction.day_zero.view.ExpectationViewModel;
-import com.rl.x.a21_inaction.utils.AppExecutors;
+import com.rl.x.a21_inaction.expectation.ExpectationContract;
+import com.rl.x.a21_inaction.expectation.model.Expectation;
+import com.rl.x.a21_inaction.expectation.model.ExpectationModel;
+import com.rl.x.a21_inaction.expectation.view.ExpectationViewModel;
 
 import java.util.List;
-import java.util.concurrent.Executor;
 
 public class ExpectationPresenter implements ExpectationContract.Presenter {
 
-    private ExpectationContract.View view;
-    private ExpectationModel model;
-    private ExpectationViewModel viewModel;
     private Fragment fragment;
+    private ExpectationModel model;
+    private ExpectationContract.View view;
+    private ExpectationViewModel viewModel;
 
 
     public ExpectationPresenter(Fragment fragment, ExpectationContract.View view) {
 
-        this.view = view;
-        model = new ExpectationModel(fragment.getActivity().getApplicationContext());
-        viewModel = ViewModelProviders.of(fragment.getActivity()).get(ExpectationViewModel.class);
         this.fragment = fragment;
+        model = new ExpectationModel(fragment.getActivity().getApplicationContext());
+        this.view = view;
+        viewModel = ViewModelProviders.of(fragment.getActivity()).get(ExpectationViewModel.class);
     }
+
 
     /**
      * setup recyclerView with adapter
      */
     @Override
     public void setupRecyclerViewWithAdapter() {
+
         view.setupRecyclerViewWithAdapter();
     }
 
@@ -52,32 +49,10 @@ public class ExpectationPresenter implements ExpectationContract.Presenter {
         viewModel.getExpectations().observe(fragment.getActivity(), new Observer<List<Expectation>>() {
             @Override
             public void onChanged(@Nullable List<Expectation> expectationList) {
-                view.refreshExpectations(expectationList);
+
+                view.setExpectations(expectationList);
             }
         });
-    }
-
-
-    /**
-     * insert expectation to database
-     *
-     * @param name
-     */
-    @Override
-    public void insertExpectation(String name) {
-
-        model.insertExpectation(new Expectation(name));
-    }
-
-
-    /**
-     * insert mock Expectations
-     *
-     */
-    @Override
-    public void insertMockExpectations() {
-
-        model.insertMockExpectation();
     }
 
 

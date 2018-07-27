@@ -1,16 +1,12 @@
 package com.rl.x.a21_inaction._main.preseter;
 
-import android.app.Activity;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
 import com.rl.x.a21_inaction._main.MainContract;
 import com.rl.x.a21_inaction._main.model.MainModel;
 import com.rl.x.a21_inaction._main.view.AppFragmentPagerAdapter;
-import com.rl.x.a21_inaction.achievements.view.AchievementsFragment;
-import com.rl.x.a21_inaction.day_zero.view.DayZeroFragment;
 import com.rl.x.a21_inaction.manager.AppManager;
-import com.rl.x.a21_inaction.tasks.view.TasksFragment;
 
 public class MainPresenter implements MainContract.Presenter {
 

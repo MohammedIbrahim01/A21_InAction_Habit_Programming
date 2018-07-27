@@ -1,4 +1,4 @@
-package com.rl.x.a21_inaction.day_zero.model;
+package com.rl.x.a21_inaction.expectation.model;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
@@ -12,9 +12,6 @@ import java.util.List;
 public interface ExpectationDao {
 
     @Query("SELECT * FROM expectations")
-    List<Expectation> getAllExpectations();
-
-    @Query("SELECT * FROM expectations")
     LiveData<List<Expectation>> getAllExpectationsLive();
 
     @Insert
@@ -25,5 +22,4 @@ public interface ExpectationDao {
 
     @Delete
     void deleteExpectation(Expectation expectation);
-
 }

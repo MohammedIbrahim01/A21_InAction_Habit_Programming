@@ -1,4 +1,4 @@
-package com.rl.x.a21_inaction.day_zero.model;
+package com.rl.x.a21_inaction.expectation.model;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
@@ -12,15 +12,24 @@ public class Expectation {
 
     private String name;
 
-    public Expectation(int id, String name) {
+    private String habitName;
+
+
+    public Expectation(int id, String name, String habitName) {
+
         this.id = id;
         this.name = name;
+        this.habitName = habitName;
     }
 
+
     @Ignore
-    public Expectation(String name) {
+    public Expectation(String name, String habitName) {
+
         this.name = name;
+        this.habitName = habitName;
     }
+
 
     public int getId() {
         return id;

@@ -5,10 +5,9 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
 
-import com.rl.x.a21_inaction.day_zero.model.Expectation;
+import com.rl.x.a21_inaction.expectation.model.Expectation;
 import com.rl.x.a21_inaction.tasks.model.Task;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity(tableName = "habits")

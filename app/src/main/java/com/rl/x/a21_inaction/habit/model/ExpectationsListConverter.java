@@ -4,11 +4,9 @@ import android.arch.persistence.room.TypeConverter;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.rl.x.a21_inaction.day_zero.model.Expectation;
-import com.rl.x.a21_inaction.tasks.model.Task;
+import com.rl.x.a21_inaction.expectation.model.Expectation;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ExpectationsListConverter {

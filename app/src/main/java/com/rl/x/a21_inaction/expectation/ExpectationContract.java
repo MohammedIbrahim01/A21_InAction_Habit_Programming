@@ -1,11 +1,10 @@
-package com.rl.x.a21_inaction.day_zero;
+package com.rl.x.a21_inaction.expectation;
 
 import android.support.v7.widget.RecyclerView;
 
 import com.rl.x.a21_inaction.BasePresenter;
-import com.rl.x.a21_inaction.day_zero.model.Expectation;
-import com.rl.x.a21_inaction.add_expectation.model.TempExpectation;
-import com.rl.x.a21_inaction.day_zero.view.ExpectationAdapter;
+import com.rl.x.a21_inaction.expectation.model.Expectation;
+import com.rl.x.a21_inaction.expectation.view.ExpectationAdapter;
 
 import java.util.List;
 
@@ -14,8 +13,6 @@ public interface ExpectationContract {
     interface Model{
 
         void insertExpectation(Expectation expectation);
-
-        void insertMockExpectation();
 
         void deleteExpectation(Expectation expectation);
 
@@ -26,12 +23,7 @@ public interface ExpectationContract {
 
         void setupRecyclerViewWithAdapter();
 
-        void refreshExpectations(List<Expectation> expectationList);
-
-        ExpectationAdapter getAdapter();
-
-        RecyclerView getRecyclerView();
-
+        void setExpectations(List<Expectation> expectationList);
     }
 
     interface Presenter extends BasePresenter {
@@ -39,10 +31,6 @@ public interface ExpectationContract {
         void setupRecyclerViewWithAdapter();
 
         void setupExpectationLive();
-
-        void insertExpectation(String name);
-
-        void insertMockExpectations();
 
         void deleteExpectation(Expectation expectation);
     }

@@ -7,8 +7,8 @@ import android.content.Context;
 
 import com.rl.x.a21_inaction.achievements.model.Achievement;
 import com.rl.x.a21_inaction.achievements.model.AchievementDao;
-import com.rl.x.a21_inaction.day_zero.model.Expectation;
-import com.rl.x.a21_inaction.day_zero.model.ExpectationDao;
+import com.rl.x.a21_inaction.expectation.model.Expectation;
+import com.rl.x.a21_inaction.expectation.model.ExpectationDao;
 import com.rl.x.a21_inaction.habit.model.Habit;
 import com.rl.x.a21_inaction.habit.model.HabitDao;
 import com.rl.x.a21_inaction.add_expectation.model.TempExpectation;

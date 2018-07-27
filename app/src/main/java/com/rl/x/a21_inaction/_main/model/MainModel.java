@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import com.rl.x.a21_inaction._main.MainContract;
 import com.rl.x.a21_inaction._main.view.AppFragmentPagerAdapter;
 import com.rl.x.a21_inaction.achievements.view.AchievementsFragment;
-import com.rl.x.a21_inaction.day_zero.view.DayZeroFragment;
+import com.rl.x.a21_inaction.expectation.view.DayZeroFragment;
 import com.rl.x.a21_inaction.tasks.view.TasksFragment;
 
 public class MainModel implements MainContract.Model {
