@@ -17,14 +17,16 @@ public class HabitModel implements HabitContract.Model {
     private Executor diskIOExecutor;
     private HabitDao habitDao;
 
+
     public HabitModel(Context applicationContext) {
 
         diskIOExecutor = AppExecutors.getInstance().getDiskIO();
         habitDao = AppDatabase.getInstance(applicationContext).habitDao();
     }
 
+
     /**
-     * > take parameters of habit fields
+     * > take habit info as parameters
      * > create new Habit with this info
      * > then insert new Habit in database
      *
@@ -54,7 +56,7 @@ public class HabitModel implements HabitContract.Model {
     private Boolean haveDayTasks;
 
     /**
-     * get tasksList from the only habit that stored in habits table in the database
+     * get tasksList from habit
      *
      * @return
      */
@@ -67,7 +69,7 @@ public class HabitModel implements HabitContract.Model {
             @Override
             public void run() {
 
-                dayTasks = habitDao.getAllHabits().get(0).getTaskList();
+                dayTasks = habitDao.getHabit().getTaskList();
                 haveDayTasks = true;
             }
         });
@@ -82,7 +84,7 @@ public class HabitModel implements HabitContract.Model {
     private Boolean haveHabitExpectations;
 
     /**
-     * get tasksList from the only habit that stored in habits table in the database
+     * get tasksList from habit
      *
      * @return
      */

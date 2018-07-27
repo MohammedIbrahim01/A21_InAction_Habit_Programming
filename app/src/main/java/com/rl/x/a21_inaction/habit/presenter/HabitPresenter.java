@@ -8,20 +8,20 @@ import com.rl.x.a21_inaction.manager.AppManager;
 
 public class HabitPresenter implements HabitContract.Presenter {
 
-    private HabitContract.View view;
     private HabitModel model;
+    private HabitContract.View view;
     private AppManager manager;
 
     public HabitPresenter(Activity newHabitActivity, HabitContract.View view) {
 
-        this.view = view;
         model = new HabitModel(newHabitActivity.getApplicationContext());
+        this.view = view;
         manager = new AppManager(newHabitActivity.getApplicationContext(), newHabitActivity);
     }
 
 
     /**
-     * navigate to AddTask Screen
+     * manager responsibility
      */
     @Override
     public void goAddTask(String habitName) {
@@ -30,7 +30,7 @@ public class HabitPresenter implements HabitContract.Presenter {
     }
 
     /**
-     * navigate to AddExpectation Screen
+     * manager responsibility
      */
     @Override
     public void goAddExpectation() {
@@ -50,11 +50,9 @@ public class HabitPresenter implements HabitContract.Presenter {
     @Override
     public void saveNewHabit() {
 
-        model.saveNewHabit(view.getNewHabitName(), manager.getTaskListFromTemp(), manager.getExpectationListFromTemp());
+        model.saveNewHabit(view.getHabitName(), manager.getTaskListFromTemp(), manager.getExpectationListFromTemp());
 
-        manager.start21Day();
-
-        manager.showExpectationList();
+        manager.startHabitPrograming();
 
         view.finishActivity();
     }

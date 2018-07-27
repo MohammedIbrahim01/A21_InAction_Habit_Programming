@@ -1,8 +1,6 @@
 package com.rl.x.a21_inaction.habit.view;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,8 +16,6 @@ import butterknife.ButterKnife;
 
 public class NewHabitActivity extends AppCompatActivity implements HabitContract.View, View.OnClickListener {
 
-    public Activity CONTEXT = NewHabitActivity.this;
-
     private HabitPresenter presenter;
 
     @BindView(R.id.habit_name_editText)
@@ -30,6 +26,7 @@ public class NewHabitActivity extends AppCompatActivity implements HabitContract
     Button addExpectationButton;
     @BindView(R.id.save_habit_button)
     Button saveHabitButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +50,7 @@ public class NewHabitActivity extends AppCompatActivity implements HabitContract
 
 
     @Override
-    public String getNewHabitName() {
+    public String getHabitName() {
 
         return habitNameEditText.getText().toString();
     }
@@ -65,7 +62,7 @@ public class NewHabitActivity extends AppCompatActivity implements HabitContract
         switch (view.getId()) {
 
             case R.id.add_task_button:
-                presenter.goAddTask(getNewHabitName());
+                presenter.goAddTask(getHabitName());
                 break;
 
             case R.id.add_expectation_button:

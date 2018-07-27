@@ -21,7 +21,7 @@ public interface HabitContract {
 
         void finishActivity();
 
-        String getNewHabitName();
+        String getHabitName();
     }
 
     interface Presenter extends BasePresenter {

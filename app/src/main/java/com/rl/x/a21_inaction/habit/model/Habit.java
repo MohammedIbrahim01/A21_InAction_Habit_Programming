@@ -7,6 +7,8 @@ import android.arch.persistence.room.TypeConverters;
 
 import com.rl.x.a21_inaction.expectation.model.Expectation;
 import com.rl.x.a21_inaction.tasks.model.Task;
+import com.rl.x.a21_inaction.utils.converters.ExpectationsListConverter;
+import com.rl.x.a21_inaction.utils.converters.TasksListConverter;
 
 import java.util.List;
 
@@ -24,19 +26,24 @@ public class Habit {
     @TypeConverters({ExpectationsListConverter.class})
     private List<Expectation> expectationList;
 
+
     public Habit(int id, String name, List<Task> taskList, List<Expectation> expectationList) {
+
         this.id = id;
         this.name = name;
         this.taskList = taskList;
         this.expectationList = expectationList;
     }
 
+
     @Ignore
     public Habit(String name, List<Task> taskList, List<Expectation> expectationList) {
+
         this.name = name;
         this.taskList = taskList;
         this.expectationList = expectationList;
     }
+
 
     public int getId() {
         return id;
