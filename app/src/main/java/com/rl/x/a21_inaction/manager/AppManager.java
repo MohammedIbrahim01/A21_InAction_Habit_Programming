@@ -20,6 +20,7 @@ import com.rl.x.a21_inaction.tasks.model.TaskModel;
 import com.rl.x.a21_inaction.add_task.model.TempTask;
 import com.rl.x.a21_inaction.add_task.view.AddTaskActivity;
 import com.rl.x.a21_inaction.utils.AppExecutors;
+import com.rl.x.a21_inaction.utils.Counter;
 import com.rl.x.a21_inaction.utils.Scheduler;
 
 import java.util.ArrayList;
@@ -224,5 +225,17 @@ public class AppManager {
                 AppDatabase.getInstance(applicationContext).clearAllTables();
             }
         });
+    }
+
+    public void newDay(int count) {
+
+        showTaskList();
+        scheduleDayTasks();
+    }
+
+    public void start21Day() {
+
+        Counter counter = new Counter(applicationContext);
+        counter.beginDayCounter();
     }
 }

@@ -60,11 +60,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
                 presenter.clearDatabase();
                 presenter.goAddHabit();
                 break;
-
-            case R.id.action_new_day:
-                presenter.displayDayTasks();
-                presenter.scheduleDayTasks();
-                break;
         }
 
         return super.onOptionsItemSelected(item);

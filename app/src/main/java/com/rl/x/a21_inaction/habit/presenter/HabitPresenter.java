@@ -52,6 +52,8 @@ public class HabitPresenter implements HabitContract.Presenter {
 
         model.saveNewHabit(view.getNewHabitName(), manager.getTaskListFromTemp(), manager.getExpectationListFromTemp());
 
+        manager.start21Day();
+
         manager.showExpectationList();
 
         view.finishActivity();

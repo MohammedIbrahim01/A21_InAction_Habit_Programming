@@ -37,17 +37,6 @@ public class MainPresenter implements MainContract.Presenter {
         manager.goAddHabit();
     }
 
-    @Override
-    public void displayDayTasks() {
-
-        manager.showTaskList();
-    }
-
-    @Override
-    public void scheduleDayTasks() {
-
-        manager.scheduleDayTasks();
-    }
 
     @Override
     public void clearDatabase() {
