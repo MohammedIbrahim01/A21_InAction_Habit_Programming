@@ -12,15 +12,23 @@ public class TempExpectation {
 
     private String name;
 
-    public TempExpectation(int id, String name) {
+    private String habitName;
+
+
+    public TempExpectation(int id, String name, String habitName) {
+
         this.id = id;
         this.name = name;
+        this.habitName = habitName;
     }
 
     @Ignore
-    public TempExpectation(String name) {
+    public TempExpectation(String name, String habitName) {
+
         this.name = name;
+        this.habitName = habitName;
     }
+
 
     public int getId() {
         return id;

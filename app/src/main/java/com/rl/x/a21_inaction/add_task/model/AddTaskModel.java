@@ -15,6 +15,7 @@ public class AddTaskModel implements AddTaskContract.Model {
     private Executor diskIOExecutor;
     private TempTaskDao tempTaskDao;
 
+
     public AddTaskModel(Context applicationContext) {
 
         diskIOExecutor = AppExecutors.getInstance().getDiskIO();

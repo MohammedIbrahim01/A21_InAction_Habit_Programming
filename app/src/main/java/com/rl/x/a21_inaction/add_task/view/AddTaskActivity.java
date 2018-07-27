@@ -17,7 +17,7 @@ import java.util.Calendar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AddTaskActivity extends AppCompatActivity  implements AddTaskContract.View, View.OnClickListener {
+public class AddTaskActivity extends AppCompatActivity implements AddTaskContract.View, View.OnClickListener {
 
     public static final String NAME_HABIT = "name-habit";
 
@@ -40,7 +40,7 @@ public class AddTaskActivity extends AppCompatActivity  implements AddTaskContra
         presenter = new AddTaskPresenter(getApplicationContext(), this);
 
         Intent intent = getIntent();
-        if (intent != null && intent.hasExtra(NAME_HABIT)){
+        if (intent != null && intent.hasExtra(NAME_HABIT)) {
 
             habitName = intent.getStringExtra(NAME_HABIT);
         }
@@ -64,7 +64,7 @@ public class AddTaskActivity extends AppCompatActivity  implements AddTaskContra
     }
 
     @Override
-    public Calendar getNewTaskCalendar() {
+    public Calendar getTaskCalendar() {
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, timePicker.getCurrentHour());

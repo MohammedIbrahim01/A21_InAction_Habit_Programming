@@ -8,8 +8,9 @@ import com.rl.x.a21_inaction.add_task.model.TempTask;
 
 public class AddTaskPresenter implements AddTaskContract.Presenter {
 
-    private AddTaskContract.View view;
     private AddTaskModel model;
+    private AddTaskContract.View view;
+
 
     public AddTaskPresenter(Context applicationContext, AddTaskContract.View view) {
 
@@ -17,10 +18,14 @@ public class AddTaskPresenter implements AddTaskContract.Presenter {
         model = new AddTaskModel(applicationContext);
     }
 
+
+    /**
+     * get Task info from view then insert New TempTaskinto database
+     */
     @Override
     public void insertTempTask() {
 
-        model.insertTempTask(new TempTask(view.getNewTaskName(), view.getNewTaskCalendar(), view.getHabitName()));
+        model.insertTempTask(new TempTask(view.getNewTaskName(), view.getTaskCalendar(), view.getHabitName()));
         view.finishActivity();
     }
 }

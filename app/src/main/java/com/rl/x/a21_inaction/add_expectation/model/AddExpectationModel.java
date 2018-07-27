@@ -15,11 +15,13 @@ public class AddExpectationModel implements AddExpectationContract.Model {
     private Executor diskIOExecutor;
     private TempExpectationDao tempExpectationDao;
 
+
     public AddExpectationModel(Context applicationContext) {
 
         diskIOExecutor = AppExecutors.getInstance().getDiskIO();
         tempExpectationDao = AppDatabase.getInstance(applicationContext).tempExpectationDao();
     }
+
 
     @Override
     public void insertTempExpectation(final TempExpectation tempExpectation) {

@@ -8,19 +8,19 @@ import com.rl.x.a21_inaction.add_expectation.model.TempExpectation;
 
 public class AddExpectationPresenter implements AddExpectationContract.Presenter {
 
-    private AddExpectationContract.View view;
     private AddExpectationModel model;
+    private AddExpectationContract.View view;
 
     public AddExpectationPresenter(Context applicationContext, AddExpectationContract.View view) {
 
-        this.view = view;
         model = new AddExpectationModel(applicationContext);
+        this.view = view;
     }
 
     @Override
     public void insertTempExpectation() {
 
-        model.insertTempExpectation(new TempExpectation(view.getNewExpectationName()));
+        model.insertTempExpectation(new TempExpectation(view.getExpectationName(), view.getHabitName()));
         view.finishActivity();
     }
 }

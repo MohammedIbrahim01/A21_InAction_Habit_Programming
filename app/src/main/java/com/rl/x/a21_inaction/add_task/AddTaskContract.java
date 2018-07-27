@@ -22,7 +22,7 @@ public interface AddTaskContract {
 
         void finishActivity();
 
-        Calendar getNewTaskCalendar();
+        Calendar getTaskCalendar();
     }
 
     interface Presenter {

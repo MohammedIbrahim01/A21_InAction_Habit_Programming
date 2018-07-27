@@ -15,9 +15,11 @@ public interface AddExpectationContract {
 
     interface View {
 
-        String getNewExpectationName();
+        String getExpectationName();
 
         void finishActivity();
+
+        String getHabitName();
     }
 
     interface Presenter {

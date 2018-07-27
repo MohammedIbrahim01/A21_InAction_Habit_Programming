@@ -1,5 +1,6 @@
 package com.rl.x.a21_inaction.add_expectation.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,12 +18,16 @@ import butterknife.ButterKnife;
 
 public class AddExpectationActivity extends AppCompatActivity implements AddExpectationContract.View, View.OnClickListener {
 
+    public static final String NAME_HABIT = "name-habit";
+
     private AddExpectationPresenter presenter;
 
     @BindView(R.id.expectation_name_editText)
     EditText expectationNameEditText;
     @BindView(R.id.save_expectation_button)
     Button saveExpectationButton;
+    private String habitName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +37,18 @@ public class AddExpectationActivity extends AppCompatActivity implements AddExpe
 
         presenter = new AddExpectationPresenter(getApplicationContext(), this);
 
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra(NAME_HABIT)) {
+
+            habitName = intent.getStringExtra(NAME_HABIT);
+        }
+
         saveExpectationButton.setOnClickListener(this);
     }
 
+
     @Override
-    public String getNewExpectationName() {
+    public String getExpectationName() {
 
         return expectationNameEditText.getText().toString();
     }
@@ -45,6 +57,11 @@ public class AddExpectationActivity extends AppCompatActivity implements AddExpe
     public void finishActivity() {
 
         finish();
+    }
+
+    @Override
+    public String getHabitName() {
+        return habitName;
     }
 
     @Override

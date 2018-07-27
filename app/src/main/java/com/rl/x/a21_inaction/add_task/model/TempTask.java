@@ -22,6 +22,7 @@ public class TempTask {
 
     private String habitName;
 
+
     public TempTask(int id, String name, Calendar calendar, String habitName) {
 
         this.id = id;
@@ -30,6 +31,7 @@ public class TempTask {
         this.habitName = habitName;
     }
 
+
     @Ignore
     public TempTask(String name, Calendar calendar, String habitName) {
 
@@ -37,6 +39,7 @@ public class TempTask {
         this.calendar = calendar;
         this.habitName = habitName;
     }
+
 
     public int getId() {
         return id;
