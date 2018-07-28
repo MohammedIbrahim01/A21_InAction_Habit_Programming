@@ -12,11 +12,11 @@ public class HabitPresenter implements HabitContract.Presenter {
     private HabitContract.View view;
     private AppManager manager;
 
-    public HabitPresenter(Activity newHabitActivity, HabitContract.View view) {
+    public HabitPresenter(Activity activity, HabitContract.View view) {
 
-        model = new HabitModel(newHabitActivity.getApplicationContext());
+        model = new HabitModel(activity.getApplicationContext());
         this.view = view;
-        manager = new AppManager(newHabitActivity.getApplicationContext(), newHabitActivity);
+        manager = new AppManager(activity.getApplicationContext(), activity);
     }
 
 
@@ -33,9 +33,9 @@ public class HabitPresenter implements HabitContract.Presenter {
      * manager responsibility
      */
     @Override
-    public void goAddExpectation() {
+    public void goAddExpectation(String habitName) {
 
-        manager.goAddExpectation();
+        manager.goAddExpectation(habitName);
     }
 
     /**

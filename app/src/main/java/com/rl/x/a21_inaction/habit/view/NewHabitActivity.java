@@ -66,7 +66,7 @@ public class NewHabitActivity extends AppCompatActivity implements HabitContract
                 break;
 
             case R.id.add_expectation_button:
-                presenter.goAddExpectation();
+                presenter.goAddExpectation(getHabitName());
                 break;
 
             case R.id.save_habit_button:

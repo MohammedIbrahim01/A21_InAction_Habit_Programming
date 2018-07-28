@@ -39,6 +39,7 @@ public class AppManager {
     private AddExpectationModel addExpectationModel;
     private HabitModel habitModel;
 
+
     /**
      * normal constructor to use when there is no navigation need
      *
@@ -71,7 +72,6 @@ public class AppManager {
     private void initAllModels(Context applicationContext) {
 
         this.applicationContext = applicationContext;
-
         taskModel = new TaskModel(applicationContext);
         achievementModel = new AchievementModel(applicationContext);
         expectationModel = new ExpectationModel(applicationContext);
@@ -79,6 +79,9 @@ public class AppManager {
         addExpectationModel = new AddExpectationModel(applicationContext);
         habitModel = new HabitModel(applicationContext);
     }
+
+
+    /********************************************************* Navigation *************************************************/
 
 
     /**
@@ -95,8 +98,10 @@ public class AppManager {
     /**
      * navigate to AddExpectationActivity
      */
-    public void goAddExpectation() {
+    public void goAddExpectation(String habitName) {
 
+        Intent intent = new Intent(activity, AddTaskActivity.class);
+        intent.putExtra(NAME_HABIT, habitName);
         activity.startActivity(new Intent(activity, AddExpectationActivity.class));
     }
 
@@ -110,18 +115,25 @@ public class AppManager {
     }
 
 
+    /****************************************************** External Methods **************************************************/
+
+
     /**
+     * To Use In TaskPresenter
+     * <p>
      * insert achievement created from swiped task
      *
-     * @param swipedTask
+     * @param task
      */
-    public void addAchievementFromTask(Task swipedTask) {
+    public void addAchievementFromTask(Task task) {
 
-        achievementModel.insertAchievement(new Achievement(swipedTask.getName()));
+        achievementModel.insertAchievement(new Achievement(task.getName()));
     }
 
 
     /**
+     * To Use In HabitPresenter
+     * <p>
      * get taskList from tempTasks
      *
      * @return Task List
@@ -141,6 +153,8 @@ public class AppManager {
 
 
     /**
+     * To Use In HabitPresenter
+     * <p>
      * get ExpectationList from tempExpectations
      *
      * @return Expectation List
@@ -152,10 +166,79 @@ public class AppManager {
 
         for (TempExpectation tempExpectation : tempExpectationList) {
 
-            expectationList.add(new Expectation(tempExpectation.getName()));
+            expectationList.add(new Expectation(tempExpectation.getName(), tempExpectation.getHabitName()));
         }
 
         return expectationList;
+    }
+
+
+    /**
+     * To Use In HabitPresenter
+     * <p>
+     * show expectations
+     * show tasks
+     * schedule tasks
+     */
+    public void startHabitPrograming() {
+
+        showExpectationList();
+        showTaskList();
+        scheduleDayTasks(getTaskListFromHabit());
+    }
+
+
+    /**     To Use In MainPresenter
+     *
+     * stop day counting (cancel alarm with the same PendingIntent)
+     */
+    public void stopTime() {
+
+
+    }
+
+
+    public void newDay(int count) {
+
+        showTaskList();
+        scheduleDayTasks(getTaskListFromHabit());
+    }
+
+
+    /****************************************************** Inner Methods **************************************************/
+
+
+    /**
+     * show tasks in tasks Tab
+     */
+    public void showTaskList() {
+
+        taskModel.insertTaskList(getTaskListFromHabit());
+    }
+
+
+    /**
+     * show expectations in DayZero Tab
+     */
+    public void showExpectationList() {
+
+        expectationModel.insertExpectationList(getExpectationListFromHabit());
+    }
+
+
+    /**
+     * schedule day tasks each in its own time
+     *
+     * @param taskList
+     */
+    public void scheduleDayTasks(List<Task> taskList) {
+
+        Scheduler scheduler = new Scheduler(applicationContext);
+
+        for (Task task : taskList) {
+
+            scheduler.schedule(task);
+        }
     }
 
 
@@ -169,16 +252,6 @@ public class AppManager {
         return habitModel.getTasksFromHabit();
     }
 
-
-    /**
-     * show tasks in tasks Tab
-     */
-    public void showTaskList() {
-
-        taskModel.insertTaskList(getTaskListFromHabit());
-    }
-
-
     /**
      * get habitExpectations that stores inside the habit
      *
@@ -191,30 +264,7 @@ public class AppManager {
 
 
     /**
-     * show expectations in DayZero Tab
-     */
-    public void showExpectationList() {
-
-        expectationModel.insertExpectationList(getExpectationListFromHabit());
-    }
-
-
-    public void scheduleDayTasks() {
-
-        List<Task> taskList = getTaskListFromHabit();
-
-        Scheduler scheduler = new Scheduler(applicationContext);
-
-        for (Task task : taskList) {
-
-            scheduler.schedule(task);
-        }
-    }
-
-
-    /**
      * clear database
-     *
      */
     public void clearDatabase() {
 
@@ -225,17 +275,5 @@ public class AppManager {
                 AppDatabase.getInstance(applicationContext).clearAllTables();
             }
         });
-    }
-
-    public void newDay(int count) {
-
-        showTaskList();
-        scheduleDayTasks();
-    }
-
-    public void start21Day() {
-
-        Counter counter = new Counter(applicationContext);
-        counter.beginDayCounter();
     }
 }

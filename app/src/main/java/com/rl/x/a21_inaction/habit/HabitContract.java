@@ -28,7 +28,7 @@ public interface HabitContract {
 
         void goAddTask(String habitName);
 
-        void goAddExpectation();
+        void goAddExpectation(String habitName);
 
         void saveNewHabit();
     }
