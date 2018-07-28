@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
         presenter.setupTabLayoutAndViewPager();
 
+        presenter.setCounter();
     }
 
     @Override
@@ -114,10 +115,15 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         tabLayout.setupWithViewPager(viewPager);
     }
 
+    @Override
+    public void displayCounter(String count) {
+
+        counterTextView.setText(count);
+    }
+
 
     @Override
-    public FragmentManager getSupportFragmentManager() {
-
+    public FragmentManager getAppSupportFragmentManager() {
         return getSupportFragmentManager();
     }
 }

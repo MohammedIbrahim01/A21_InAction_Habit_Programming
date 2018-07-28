@@ -17,6 +17,10 @@ public interface MainContract {
     interface View {
 
         void setupTabLayoutAndViewPager(AppFragmentPagerAdapter fragmentPagerAdapter);
+
+        void displayCounter(String count);
+
+        FragmentManager getAppSupportFragmentManager();
     }
 
     interface Presenter {
@@ -28,5 +32,7 @@ public interface MainContract {
         void clearDatabase();
 
         void stopTime();
+
+        void setCounter();
     }
 }

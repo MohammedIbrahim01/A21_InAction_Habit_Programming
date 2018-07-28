@@ -65,4 +65,14 @@ public class MainPresenter implements MainContract.Presenter {
 
         manager.stopTime();
     }
+
+
+    /**
+     * get count from manager then display it
+     */
+    @Override
+    public void setCounter() {
+
+        view.displayCounter(manager.getCount());
+    }
 }

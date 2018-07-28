@@ -24,19 +24,6 @@ public class TaskModel implements TasksContract.Model {
 
 
     @Override
-    public void insertTask(final Task task) {
-
-        diskIOExecutor.execute(new Runnable() {
-            @Override
-            public void run() {
-
-                taskDao.insertTask(task);
-            }
-        });
-    }
-
-
-    @Override
     public void insertTaskList(final List<Task> taskList) {
 
         diskIOExecutor.execute(new Runnable() {

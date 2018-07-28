@@ -58,4 +58,40 @@ public class AppNotifications {
 
         return builder.build();
     }
+
+
+    public void notifyCountingStart(String habitName) {
+
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            NotificationChannel notificationChannel = new NotificationChannel(ID_NOTIFICATION_CHANNEL, NAME_NOTIFICATION_CHANNEL, NotificationManager.IMPORTANCE_HIGH);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+
+        Notification notification = getCountingStartNotification(habitName);
+
+        notificationManager.notify(2000, notification);
+    }
+
+    private Notification getCountingStartNotification(String habitName) {
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, ID_NOTIFICATION_CHANNEL)
+                .setSmallIcon(android.support.v4.R.drawable.notify_panel_notification_icon_bg)
+                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), android.support.v4.R.drawable.notification_action_background))
+                .setContentTitle("Start programming : " + habitName)
+                .setContentText("now you can start finishing tasks")
+                .setStyle(new NotificationCompat.BigTextStyle().setBigContentTitle("Start programming : " + habitName))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText("now you can start finishing tasks"))
+                .setContentIntent(PendingIntent.getActivity(context, 32323, new Intent(context, MainActivity.class), PendingIntent.FLAG_CANCEL_CURRENT))
+                .setAutoCancel(true);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            builder.setPriority(NotificationCompat.PRIORITY_HIGH);
+        }
+
+        return builder.build();
+    }
 }

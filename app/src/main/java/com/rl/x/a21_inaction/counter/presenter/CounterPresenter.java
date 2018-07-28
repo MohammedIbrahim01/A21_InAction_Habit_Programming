@@ -5,35 +5,83 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
-import com.rl.x.a21_inaction.counter.model.CounterModel;
 import com.rl.x.a21_inaction.counter.receiver.CounterReceiver;
+import com.rl.x.a21_inaction.counter.receiver.MidnightReceiver;
+import com.rl.x.a21_inaction.habit.model.HabitModel;
+import com.rl.x.a21_inaction.manager.AppManager;
+import com.rl.x.a21_inaction.utils.AppNotifications;
 
 import java.util.Calendar;
 
 public class CounterPresenter {
 
     private Context applicationContext;
-    private CounterModel model;
+    private HabitModel habitModel;
 
-//    private Calendar midnightHour;
+    private Calendar midnight;
+    private Calendar now;
+    private Calendar timeToStart;
 
 
     public CounterPresenter(Context applicationContext) {
 
         this.applicationContext = applicationContext;
-        model = new CounterModel(applicationContext);
-//        midnightHour = Calendar.getInstance();
-//        midnightHour.set(Calendar.HOUR_OF_DAY, 0);
-//        midnightHour.set(Calendar.MINUTE, 0);
-//        midnightHour.set(Calendar.SECOND, 0);
-//        midnightHour.set(Calendar.DAY_OF_YEAR, midnightHour.get(Calendar.DAY_OF_YEAR) + 1);
+        habitModel = new HabitModel(applicationContext);
+
+        midnight = Calendar.getInstance();
+        now = Calendar.getInstance();
+        timeToStart = Calendar.getInstance();
+        midnight.set(Calendar.HOUR_OF_DAY, 0);
+        midnight.set(Calendar.MINUTE, 0);
+        timeToStart.set(Calendar.MINUTE, 0);
     }
 
     public void startCountingIfMidnight() {
 
-        AlarmManager alarmManager = (AlarmManager) applicationContext.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(applicationContext, CounterReceiver.class);
-        PendingIntent operation = PendingIntent.getBroadcast(applicationContext, 44, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-        alarmManager.setRepeating(AlarmManager.RTC, System.currentTimeMillis(), 180*1000, operation);
+        if (now.get(Calendar.HOUR_OF_DAY) == midnight.get(Calendar.HOUR_OF_DAY)) {
+
+            AlarmManager alarmManager = (AlarmManager) applicationContext.getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent(applicationContext, CounterReceiver.class);
+            PendingIntent operation = PendingIntent.getBroadcast(applicationContext, 44, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+            alarmManager.setRepeating(AlarmManager.RTC, System.currentTimeMillis() + AlarmManager.INTERVAL_DAY, AlarmManager.INTERVAL_DAY, operation);
+        }
+        else {
+
+            midnight.set(Calendar.DAY_OF_YEAR, now.get(Calendar.DAY_OF_YEAR + 1));
+            AlarmManager alarmManager = (AlarmManager) applicationContext.getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent(applicationContext, MidnightReceiver.class);
+            PendingIntent operation = PendingIntent.getBroadcast(applicationContext, 33, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+            alarmManager.set(AlarmManager.RTC, midnight.getTimeInMillis(), operation);
+        }
+    }
+
+
+    /**
+     * for testing
+     */
+    public void startCountingIf(int hour) {
+
+        timeToStart.set(Calendar.HOUR_OF_DAY, hour);
+
+        if (now.get(Calendar.HOUR_OF_DAY) == timeToStart.get(Calendar.HOUR_OF_DAY)) {
+
+            AlarmManager alarmManager = (AlarmManager) applicationContext.getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent(applicationContext, CounterReceiver.class);
+            PendingIntent operation = PendingIntent.getBroadcast(applicationContext, 44, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+            alarmManager.setRepeating(AlarmManager.RTC, System.currentTimeMillis() + 10*1000, 10*1000, operation);
+        }
+        else {
+
+            AlarmManager alarmManager = (AlarmManager) applicationContext.getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent(applicationContext, MidnightReceiver.class);
+            PendingIntent operation = PendingIntent.getBroadcast(applicationContext, 33, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+            alarmManager.set(AlarmManager.RTC, timeToStart.getTimeInMillis(), operation);
+        }
+    }
+
+    public void notifyCountingStart() {
+
+        AppNotifications appNotifications = new AppNotifications(applicationContext);
+        appNotifications.notifyCountingStart(habitModel.getHabitName());
     }
 }

@@ -74,7 +74,7 @@ public class HabitModel implements HabitContract.Model {
             }
         });
 
-        while (!haveDayTasks);
+        while (!haveDayTasks) ;
 
         return dayTasks;
     }
@@ -102,8 +102,30 @@ public class HabitModel implements HabitContract.Model {
             }
         });
 
-        while (!haveHabitExpectations);
+        while (!haveHabitExpectations) ;
 
         return habitExpectations;
+    }
+
+
+    private String habitName;
+    private Boolean haveHabitName;
+
+    public String getHabitName() {
+
+        haveHabitName = false;
+
+        diskIOExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                habitName = habitDao.getHabit().getName();
+                haveHabitName = true;
+            }
+        });
+
+        while (!haveHabitName);
+
+        return habitName;
     }
 }

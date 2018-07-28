@@ -16,16 +16,17 @@ public class CounterModel {
 
         sharedPreferences = applicationContext.getSharedPreferences(NAME_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        count = sharedPreferences.getInt(KEY_COUNT, 0);
     }
 
     public int getCount(){
 
+        count = sharedPreferences.getInt(KEY_COUNT, 0);
         return count;
     }
 
     public void increaseCount(){
 
+        count = sharedPreferences.getInt(KEY_COUNT, 0);
         editor.putInt(KEY_COUNT, ++count).apply();
     }
 }

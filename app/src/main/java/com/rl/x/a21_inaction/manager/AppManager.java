@@ -1,6 +1,8 @@
 package com.rl.x.a21_inaction.manager;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
@@ -8,7 +10,9 @@ import com.rl.x.a21_inaction.achievements.model.Achievement;
 import com.rl.x.a21_inaction.achievements.model.AchievementModel;
 import com.rl.x.a21_inaction.add_expectation.model.AddExpectationModel;
 import com.rl.x.a21_inaction.add_task.model.AddTaskModel;
+import com.rl.x.a21_inaction.counter.model.CounterModel;
 import com.rl.x.a21_inaction.counter.presenter.CounterPresenter;
+import com.rl.x.a21_inaction.counter.receiver.CounterReceiver;
 import com.rl.x.a21_inaction.database.AppDatabase;
 import com.rl.x.a21_inaction.expectation.model.Expectation;
 import com.rl.x.a21_inaction.expectation.model.ExpectationModel;
@@ -38,6 +42,7 @@ public class AppManager {
     private AddTaskModel addTaskModel;
     private AddExpectationModel addExpectationModel;
     private HabitModel habitModel;
+    private CounterModel counterModel;
 
     private CounterPresenter counterPresenter;
 
@@ -80,6 +85,7 @@ public class AppManager {
         addTaskModel = new AddTaskModel(applicationContext);
         addExpectationModel = new AddExpectationModel(applicationContext);
         habitModel = new HabitModel(applicationContext);
+        counterModel = new CounterModel(applicationContext);
 
         counterPresenter = new CounterPresenter(applicationContext);
     }
@@ -182,7 +188,7 @@ public class AppManager {
      * <p>
      * show expectations
      * show tasks
-     * schedule tasks
+     * scheduleTask tasks
      */
     public void startHabitPrograming() {
 
@@ -193,14 +199,46 @@ public class AppManager {
     }
 
 
-    /**     To Use In MainPresenter
-     *
+    /**
+     * To Use In MainPresenter
+     * <p>
      * stop day counting (cancel alarm with the same PendingIntent)
      */
     public void stopTime() {
 
-
+        //cancel alarm that fires CounterReceiver
+        AlarmManager alarmManager = (AlarmManager) applicationContext.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(applicationContext, CounterReceiver.class);
+        PendingIntent operation = PendingIntent.getBroadcast(applicationContext, 44, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        alarmManager.cancel(operation);
     }
+
+
+    /**
+     * To Use In MainPresenter
+     * <p>
+     * get current count of days
+     *
+     * @return
+     */
+    public String getCount() {
+
+        return String.valueOf(counterModel.getCount());
+    }
+
+
+    /**
+     * To Use In CounterPresenter
+     *
+     * @return
+     */
+    public String getHabitName(){
+
+        return habitModel.getHabitName();
+    }
+
+
+    /****************************************************** Inner Methods **************************************************/
 
 
     public void newDay() {
@@ -208,9 +246,6 @@ public class AppManager {
         showTaskList(getTaskListFromHabit());
         scheduleDayTasks(getTaskListFromHabit());
     }
-
-
-    /****************************************************** Inner Methods **************************************************/
 
 
     private void startCounter() {
@@ -238,7 +273,7 @@ public class AppManager {
 
 
     /**
-     * schedule day tasks each in its own time
+     * scheduleTask day tasks each in its own time
      *
      * @param taskList
      */
@@ -248,7 +283,7 @@ public class AppManager {
 
         for (Task task : taskList) {
 
-            scheduler.schedule(task);
+            scheduler.scheduleTask(task);
         }
     }
 

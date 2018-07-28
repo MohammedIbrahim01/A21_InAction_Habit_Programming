@@ -46,4 +46,12 @@ public class Expectation {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getHabitName() {
+        return habitName;
+    }
+
+    public void setHabitName(String habitName) {
+        this.habitName = habitName;
+    }
 }
