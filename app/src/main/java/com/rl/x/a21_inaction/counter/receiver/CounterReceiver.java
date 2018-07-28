@@ -1,17 +1,17 @@
-package com.rl.x.a21_inaction.utils;
+package com.rl.x.a21_inaction.counter.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 
 import com.rl.x.a21_inaction.counter.model.CounterModel;
 import com.rl.x.a21_inaction.manager.AppManager;
 
 public class CounterReceiver extends BroadcastReceiver {
 
-    private AppManager manager;
     private CounterModel counterModel;
+    private AppManager manager;
+
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -19,7 +19,7 @@ public class CounterReceiver extends BroadcastReceiver {
         counterModel = new CounterModel(context);
         manager = new AppManager(context);
 
-        manager.newDay(counterModel.getCount());
+        manager.newDay();
 
         counterModel.increaseCount();
     }

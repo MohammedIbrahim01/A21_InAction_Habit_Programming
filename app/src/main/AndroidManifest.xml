@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <receiver android:name=".utils.SchedulerReceiver" />
-        <receiver android:name=".utils.CounterReceiver"/>
+        <receiver android:name=".counter.receiver.CounterReceiver"/>
 
         <activity android:name="._main.view.MainActivity">
             <intent-filter>

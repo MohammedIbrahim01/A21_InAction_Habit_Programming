@@ -8,6 +8,7 @@ import com.rl.x.a21_inaction.achievements.model.Achievement;
 import com.rl.x.a21_inaction.achievements.model.AchievementModel;
 import com.rl.x.a21_inaction.add_expectation.model.AddExpectationModel;
 import com.rl.x.a21_inaction.add_task.model.AddTaskModel;
+import com.rl.x.a21_inaction.counter.presenter.CounterPresenter;
 import com.rl.x.a21_inaction.database.AppDatabase;
 import com.rl.x.a21_inaction.expectation.model.Expectation;
 import com.rl.x.a21_inaction.expectation.model.ExpectationModel;
@@ -20,7 +21,6 @@ import com.rl.x.a21_inaction.tasks.model.TaskModel;
 import com.rl.x.a21_inaction.add_task.model.TempTask;
 import com.rl.x.a21_inaction.add_task.view.AddTaskActivity;
 import com.rl.x.a21_inaction.utils.AppExecutors;
-import com.rl.x.a21_inaction.utils.Counter;
 import com.rl.x.a21_inaction.utils.Scheduler;
 
 import java.util.ArrayList;
@@ -38,6 +38,8 @@ public class AppManager {
     private AddTaskModel addTaskModel;
     private AddExpectationModel addExpectationModel;
     private HabitModel habitModel;
+
+    private CounterPresenter counterPresenter;
 
 
     /**
@@ -78,6 +80,8 @@ public class AppManager {
         addTaskModel = new AddTaskModel(applicationContext);
         addExpectationModel = new AddExpectationModel(applicationContext);
         habitModel = new HabitModel(applicationContext);
+
+        counterPresenter = new CounterPresenter(applicationContext);
     }
 
 
@@ -182,9 +186,10 @@ public class AppManager {
      */
     public void startHabitPrograming() {
 
-        showExpectationList();
-        showTaskList();
+        showExpectationList(getExpectationListFromHabit());
+        showTaskList(getTaskListFromHabit());
         scheduleDayTasks(getTaskListFromHabit());
+        startCounter();
     }
 
 
@@ -198,9 +203,9 @@ public class AppManager {
     }
 
 
-    public void newDay(int count) {
+    public void newDay() {
 
-        showTaskList();
+        showTaskList(getTaskListFromHabit());
         scheduleDayTasks(getTaskListFromHabit());
     }
 
@@ -208,21 +213,27 @@ public class AppManager {
     /****************************************************** Inner Methods **************************************************/
 
 
+    private void startCounter() {
+
+        counterPresenter.startCountingIfMidnight();
+    }
+
+
     /**
      * show tasks in tasks Tab
      */
-    public void showTaskList() {
+    public void showTaskList(List<Task> taskList) {
 
-        taskModel.insertTaskList(getTaskListFromHabit());
+        taskModel.insertTaskList(taskList);
     }
 
 
     /**
      * show expectations in DayZero Tab
      */
-    public void showExpectationList() {
+    public void showExpectationList(List<Expectation> expectationList) {
 
-        expectationModel.insertExpectationList(getExpectationListFromHabit());
+        expectationModel.insertExpectationList(expectationList);
     }
 
 
