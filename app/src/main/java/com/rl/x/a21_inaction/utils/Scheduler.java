@@ -14,22 +14,32 @@ public class Scheduler {
 
     private int baseRequestCode = 100;
 
-    private Context context;
+    private Context applicationContext;
     private AlarmManager alarmManager;
 
-    public Scheduler(Context context) {
+    public Scheduler(Context applicationContext) {
 
-        this.context = context;
-        alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        this.applicationContext = applicationContext;
+        alarmManager = (AlarmManager) applicationContext.getSystemService(Context.ALARM_SERVICE);
     }
 
     public void scheduleTask(Task task) {
 
-        Intent intent = new Intent(context.getApplicationContext(), SchedulerReceiver.class);
+        Intent intent = new Intent(applicationContext.getApplicationContext(), SchedulerReceiver.class);
         intent.putExtra(KEY_TASK, new Gson().toJson(task));
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, baseRequestCode++, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        int requestCode = ++baseRequestCode;
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(applicationContext, requestCode, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+        task.setScheduleRequestCode(requestCode);
 
         alarmManager.set(AlarmManager.RTC, task.getCalendar().getTimeInMillis(), pendingIntent);
+    }
+
+    public void unScheduleTask(Task task) {
+
+        Intent intent = new Intent(applicationContext.getApplicationContext(), SchedulerReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(applicationContext, task.getScheduleRequestCode(), intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        alarmManager.cancel(pendingIntent);
     }
 }

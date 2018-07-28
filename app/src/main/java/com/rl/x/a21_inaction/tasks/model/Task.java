@@ -22,6 +22,8 @@ public class Task {
 
     private String habitName;
 
+    private int scheduleRequestCode;
+
 
     public Task(int id, String name, Calendar calendar, String habitName) {
 
@@ -71,5 +73,13 @@ public class Task {
 
     public void setHabitName(String habitName) {
         this.habitName = habitName;
+    }
+
+    public int getScheduleRequestCode() {
+        return scheduleRequestCode;
+    }
+
+    public void setScheduleRequestCode(int scheduleRequestCode) {
+        this.scheduleRequestCode = scheduleRequestCode;
     }
 }

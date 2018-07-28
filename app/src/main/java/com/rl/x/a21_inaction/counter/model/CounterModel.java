@@ -29,4 +29,9 @@ public class CounterModel {
         count = sharedPreferences.getInt(KEY_COUNT, 0);
         editor.putInt(KEY_COUNT, ++count).apply();
     }
+
+    public void resetCounter() {
+
+        editor.putInt(KEY_COUNT, 0).apply();
+    }
 }

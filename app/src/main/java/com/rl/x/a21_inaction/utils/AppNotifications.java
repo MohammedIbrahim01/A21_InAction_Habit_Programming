@@ -81,9 +81,9 @@ public class AppNotifications {
                 .setSmallIcon(android.support.v4.R.drawable.notify_panel_notification_icon_bg)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), android.support.v4.R.drawable.notification_action_background))
                 .setContentTitle("Start programming : " + habitName)
-                .setContentText("now you can start finishing tasks")
+                .setContentText("now you can start finishing tasks\nclick for to see what tasks you have")
                 .setStyle(new NotificationCompat.BigTextStyle().setBigContentTitle("Start programming : " + habitName))
-                .setStyle(new NotificationCompat.BigTextStyle().bigText("now you can start finishing tasks"))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText("now you can start finishing tasks\nclick for to see what tasks you have"))
                 .setContentIntent(PendingIntent.getActivity(context, 32323, new Intent(context, MainActivity.class), PendingIntent.FLAG_CANCEL_CURRENT))
                 .setAutoCancel(true);
 

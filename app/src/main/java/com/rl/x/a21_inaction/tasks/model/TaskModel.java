@@ -47,4 +47,16 @@ public class TaskModel implements TasksContract.Model {
             }
         });
     }
+
+    @Override
+    public void deleteAllTasks() {
+
+        diskIOExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                taskDao.deleteAllTasks();
+            }
+        });
+    }
 }

@@ -17,6 +17,7 @@ import com.rl.x.a21_inaction._main.MainContract;
 import com.rl.x.a21_inaction._main.preseter.MainPresenter;
 import com.rl.x.a21_inaction.database.AppDatabase;
 import com.rl.x.a21_inaction.habit.view.NewHabitActivity;
+import com.rl.x.a21_inaction.manager.AppManager;
 import com.rl.x.a21_inaction.utils.AppExecutors;
 
 import butterknife.BindView;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     private MainPresenter presenter;
     private SharedPreferences sharedPreferences;
+    private AppManager manager;
 
     @BindView(R.id.counter_textView)
     TextView counterTextView;
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         sharedPreferences = getSharedPreferences(NAME_SHARED_PREFERENCES, MODE_PRIVATE);
 
         presenter = new MainPresenter(this, this);
+        manager = new AppManager(getApplicationContext());
 
         presenter.setupTabLayoutAndViewPager();
 
@@ -81,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
             case R.id.action_add_habit:
                 presenter.clearDatabase();
+                manager.resetCounter();
                 presenter.goAddHabit();
                 break;
             case R.id.action_stop_Time:

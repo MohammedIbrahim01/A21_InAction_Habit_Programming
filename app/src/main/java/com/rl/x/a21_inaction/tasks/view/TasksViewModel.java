@@ -18,7 +18,6 @@ public class TasksViewModel extends AndroidViewModel {
     public TasksViewModel(@NonNull Application application) {
         super(application);
         tasks = AppDatabase.getInstance(application.getApplicationContext()).taskDao().getAllTasksLive();
-        Log.i("WWW", "TaskViewModel: fetch tasks");
     }
 
     public LiveData<List<Task>> getTasks() {

@@ -16,6 +16,9 @@ public interface TasksContract {
         void insertTaskList(List<Task> taskList);
 
         void deleteTask(Task task);
+
+
+        void deleteAllTasks();
     }
 
     interface View {

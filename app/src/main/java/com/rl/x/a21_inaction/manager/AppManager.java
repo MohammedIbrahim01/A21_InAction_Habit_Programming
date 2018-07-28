@@ -28,12 +28,13 @@ import com.rl.x.a21_inaction.utils.AppExecutors;
 import com.rl.x.a21_inaction.utils.Scheduler;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class AppManager {
 
     public static final String NAME_HABIT = "name-habit";
-    Context applicationContext;
+    private Context applicationContext;
 
     private Activity activity;
     private TaskModel taskModel;
@@ -68,6 +69,7 @@ public class AppManager {
 
         this.activity = activity;
         initAllModels(applicationContext);
+        counterPresenter = new CounterPresenter(applicationContext);
     }
 
 
@@ -86,8 +88,6 @@ public class AppManager {
         addExpectationModel = new AddExpectationModel(applicationContext);
         habitModel = new HabitModel(applicationContext);
         counterModel = new CounterModel(applicationContext);
-
-        counterPresenter = new CounterPresenter(applicationContext);
     }
 
 
@@ -192,9 +192,6 @@ public class AppManager {
      */
     public void startHabitPrograming() {
 
-        showExpectationList(getExpectationListFromHabit());
-        showTaskList(getTaskListFromHabit());
-        scheduleDayTasks(getTaskListFromHabit());
         startCounter();
     }
 
@@ -232,25 +229,75 @@ public class AppManager {
      *
      * @return
      */
-    public String getHabitName(){
+    public String getHabitName() {
 
         return habitModel.getHabitName();
+    }
+
+
+    /**
+     * To Use In CounterPresenter
+     */
+    public void startFirstDay() {
+
+        showExpectationList(getExpectationListFromHabit());
+        showTaskList(getTaskListFromHabit());
+        scheduleDayTasks(getTaskListFromHabit());
+    }
+
+
+    /**
+     * To Use In CounterReceiver
+     */
+    public void newDay() {
+
+        List<Task> taskList = getTaskListFromHabit();
+
+        unScheduleLateTasks(taskList);  // if there
+        clearLateTasks();               // if there
+
+        showTaskList(taskList);
+        scheduleDayTasks(taskList);
+    }
+
+
+    /**
+     * To Use In MainActivity
+     */
+    public void resetCounter() {
+
+        counterModel.resetCounter();
     }
 
 
     /****************************************************** Inner Methods **************************************************/
 
 
-    public void newDay() {
+    /**
+     * unScheduleTask late tasks
+     *
+     * @param taskList
+     */
+    private void unScheduleLateTasks(List<Task> taskList) {
 
-        showTaskList(getTaskListFromHabit());
-        scheduleDayTasks(getTaskListFromHabit());
+        Scheduler scheduler = new Scheduler(applicationContext);
+
+        for (Task task : taskList) {
+
+            scheduler.unScheduleTask(task);
+        }
+    }
+
+    private void clearLateTasks() {
+
+        taskModel.deleteAllTasks();
     }
 
 
     private void startCounter() {
 
-        counterPresenter.startCountingIfMidnight();
+//        counterPresenter.startCountingIfMidnight();
+        counterPresenter.startCountingIf(16);
     }
 
 
