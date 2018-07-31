@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="LineThickness">1dp</dimen>
+    <dimen name="IntroScreensButtonWidth">180dp</dimen>
+    <dimen name="ButtonsTextSize">24sp</dimen>
+    <dimen name="LargeTextSize">50sp</dimen>
+    <dimen name="MediumTextSize">40sp</dimen>
+    <dimen name="XLargeTextSize">70sp</dimen>
+    <dimen name="XSmallTextSize">24sp</dimen>
+    <dimen name="SmallTextSize">30sp</dimen>
+    <dimen name="LargePadding">48dp</dimen>
+</resources>

@@ -3,6 +3,7 @@ package com.rl.x.a21_inaction.add_expectation.view;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,6 +35,16 @@ public class AddExpectationActivity extends AppCompatActivity implements AddExpe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_expectation);
         ButterKnife.bind(this);
+
+        /**
+         * display as popUp
+         */
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int width = displayMetrics.widthPixels;
+        int height = displayMetrics.heightPixels;
+        getWindow().setLayout((int) (width * 0.8), (int) (height * 0.7));
+
 
         presenter = new AddExpectationPresenter(getApplicationContext(), this);
 

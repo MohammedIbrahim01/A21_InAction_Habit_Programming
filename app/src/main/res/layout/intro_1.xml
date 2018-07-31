@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/LargePadding">
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:textSize="@dimen/LargeTextSize"
+        android:text="Obviously !" />
+
+    <TextView
+
+        android:text="You are here to"
+        android:textSize="@dimen/SmallTextSize"
+        style="@style/IntroNormalText" />
+
+    <TextView
+        android:textSize="@dimen/SmallTextSize"
+        style="@style/IntroNormalText"
+        android:text="program " />
+
+    <TextView
+        style="@style/IntroSpotText"
+        android:text="a habit" />
+</LinearLayout>
+

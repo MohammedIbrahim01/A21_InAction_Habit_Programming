@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/LargePadding">
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:text="here"
+        android:textSize="@dimen/LargeTextSize" />
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:text="through scheduled"
+        android:textSize="@dimen/SmallTextSize" />
+
+    <TextView
+        style="@style/IntroSpotText"
+        android:text=" tasks"
+        android:textSize="70sp" />
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:text="you can program it"
+        android:textSize="@dimen/MediumTextSize" />
+
+</LinearLayout>

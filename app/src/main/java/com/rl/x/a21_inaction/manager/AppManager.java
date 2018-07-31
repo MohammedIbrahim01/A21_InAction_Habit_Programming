@@ -110,9 +110,9 @@ public class AppManager {
      */
     public void goAddExpectation(String habitName) {
 
-        Intent intent = new Intent(activity, AddTaskActivity.class);
+        Intent intent = new Intent(activity, AddExpectationActivity.class);
         intent.putExtra(NAME_HABIT, habitName);
-        activity.startActivity(new Intent(activity, AddExpectationActivity.class));
+        activity.startActivity(intent);
     }
 
 

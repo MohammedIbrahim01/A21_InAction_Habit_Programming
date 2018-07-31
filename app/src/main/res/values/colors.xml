@@ -10,4 +10,10 @@
     <color name="backgroundTabLayout">#26A69A</color>
     <color name="backgroundViewPager">@color/backgroundWindow</color>
     <color name="colorTabTextSelected">@color/backgroundViewPager</color>
+
+    <!--intro_screens-->
+    <color name="colorIntroBackground1">#57dca0</color>
+    <color name="colorIntroBackground2">#c4c3c3</color>
+    <color name="colorLineGray">#c4c3c3</color>
+    <color name="colorSpotText">#FF4081</color>
 </resources>

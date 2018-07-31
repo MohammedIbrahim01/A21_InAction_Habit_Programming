@@ -17,6 +17,7 @@ import com.rl.x.a21_inaction._main.MainContract;
 import com.rl.x.a21_inaction._main.preseter.MainPresenter;
 import com.rl.x.a21_inaction.database.AppDatabase;
 import com.rl.x.a21_inaction.habit.view.NewHabitActivity;
+import com.rl.x.a21_inaction.intro_screens.IntroActivity;
 import com.rl.x.a21_inaction.manager.AppManager;
 import com.rl.x.a21_inaction.utils.AppExecutors;
 
@@ -44,6 +45,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        //start intro screens
+        startActivity(new Intent(MainActivity.this, IntroActivity.class));
 
         sharedPreferences = getSharedPreferences(NAME_SHARED_PREFERENCES, MODE_PRIVATE);
 

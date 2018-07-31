@@ -21,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".intro_screens.IntroActivity"/>
         <activity android:name=".habit.view.NewHabitActivity" />
         <activity android:name=".add_task.view.AddTaskActivity" />
         <activity android:name=".add_expectation.view.AddExpectationActivity"></activity>

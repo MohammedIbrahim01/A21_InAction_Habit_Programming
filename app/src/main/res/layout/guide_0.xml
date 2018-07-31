@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/LargePadding">
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:text="Habit Name"
+        android:textSize="@dimen/MediumTextSize"/>
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:textSize="@dimen/XSmallTextSize"
+        android:text="a name that describe your habit" />
+
+    <TextView
+        style="@style/IntroRoboText"
+        android:text="ex:"
+        android:textSize="@dimen/SmallTextSize" />
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:textSize="@dimen/XSmallTextSize"
+        android:text="drinking water" />
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:textSize="@dimen/XSmallTextSize"
+        android:text="100 push ups" />
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:textSize="@dimen/XSmallTextSize"
+        android:text="zero fat" />
+
+    <TextView
+        style="@style/IntroRoboText"
+        android:layout_gravity="start"
+        android:text="Note : "
+        android:textSize="26sp" />
+
+    <TextView
+        style="@style/IntroRoboText"
+        android:text="don't use negative words"
+        android:textSize="22sp" />
+
+</LinearLayout>

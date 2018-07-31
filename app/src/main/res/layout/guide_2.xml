@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="16dp">
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:text="Day 21   Expectations"
+        android:textSize="@dimen/SmallTextSize" />
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:gravity="center"
+        android:text="Its so important to put the final result in your mind"
+        android:textSize="20sp" />
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:text="ex:"
+        android:textSize="@dimen/SmallTextSize" />
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:text="muscular body"
+        android:textSize="@dimen/XSmallTextSize" />
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:text="better sleep"
+        android:textSize="@dimen/XSmallTextSize" />
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:text="more social"
+        android:textSize="@dimen/XSmallTextSize" />
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:layout_gravity="start"
+        android:text="Note : "
+        android:textSize="@dimen/SmallTextSize" />
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:layout_marginStart="32dp"
+        android:text="try to think of many expectations"
+        android:textSize="20sp" />
+
+</LinearLayout>

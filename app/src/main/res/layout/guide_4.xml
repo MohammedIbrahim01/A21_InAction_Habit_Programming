@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="16dp">
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:text="Day Tasks"
+        android:textSize="@dimen/SmallTextSize" />
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="scheduled Tasks that was repeated everyday"
+        android:textSize="20sp" />
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:layout_marginTop="16dp"
+        android:text="ex:"
+        android:textSize="@dimen/SmallTextSize" />
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:text="do 30 push ups"
+        android:textSize="20sp" />
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:text="drink a cup of water"
+        android:textSize="20sp" />
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:layout_gravity="start"
+        android:layout_marginTop="16dp"
+        android:text="Note : "
+        android:textSize="@dimen/XSmallTextSize" />
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:gravity="center"
+        android:text="decide tasks settings carefully ; it cant be changed during 21 day journy"
+        android:textSize="18sp" />
+
+</LinearLayout>

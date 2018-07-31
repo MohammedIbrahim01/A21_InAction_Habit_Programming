@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/LargePadding">
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:text="welcome"
+        android:textSize="@dimen/LargeTextSize" />
+
+    <TextView
+        style="@style/IntroNormalText"
+        android:text="to"
+        android:textSize="@dimen/MediumTextSize" />
+
+    <TextView
+        style="@style/IntroSpotText"
+        android:text="21 In Action"
+        android:textSize="65sp" />
+
+</LinearLayout>

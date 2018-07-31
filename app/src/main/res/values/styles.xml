@@ -8,4 +8,25 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="IntroSpotText" parent="@style/IntroNormalText">
+        <item name="android:textSize">@dimen/XLargeTextSize</item>
+        <item name="android:textColor">@color/colorSpotText</item>
+    </style>
+
+
+    <style name="IntroNormalText" parent="@style/IntroBaseText">
+        <item name="android:fontFamily">casual</item>
+    </style>
+
+    <style name="IntroRoboText" parent="@style/IntroBaseText">
+        <item name="android:textSize">@dimen/XSmallTextSize</item>
+        <item name="fontFamily">monospace</item>
+    </style>
+
+    <style name="IntroBaseText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
 </resources>
