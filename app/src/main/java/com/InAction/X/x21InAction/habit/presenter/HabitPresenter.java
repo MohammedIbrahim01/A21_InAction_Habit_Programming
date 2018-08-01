@@ -1,6 +1,7 @@
 package com.InAction.X.x21InAction.habit.presenter;
 
 import android.app.Activity;
+import android.content.Context;
 
 import com.InAction.X.x21InAction.habit.HabitContract;
 import com.InAction.X.x21InAction.habit.model.Habit;
@@ -12,9 +13,9 @@ public class HabitPresenter implements HabitContract.Presenter {
     private HabitModel model;
 
 
-    public HabitPresenter(Activity activity) {
+    public HabitPresenter(Context applicationContext) {
 
-        model = new HabitModel(activity.getApplicationContext());
+        model = new HabitModel(applicationContext);
     }
 
 

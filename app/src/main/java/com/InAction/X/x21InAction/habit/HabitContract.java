@@ -15,4 +15,9 @@ public interface HabitContract {
 
         void insertHabit(Habit habit);
     }
+
+    interface Communication {
+
+        void insertHabit(Habit habit);
+    }
 }
