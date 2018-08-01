@@ -22,7 +22,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".intro_screens.view.IntroScreensActivity" />
-        <activity android:name=".habit.view.NewHabitActivity" />
         <activity
             android:name=".temp_task.view.AddTaskActivity"
             android:theme="@style/PoUpTheme" />

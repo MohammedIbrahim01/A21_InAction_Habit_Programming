@@ -94,7 +94,7 @@ public class IntroScreensActivity extends AppCompatActivity implements View.OnCl
 
             case R.id.start:
                 if (page == 10) {
-                    habitModel.saveNewHabit(habitName, manager.getTaskListFromTemp(), manager.getExpectationListFromTemp());
+                    habitModel.insertHabit(habitName, manager.getTaskListFromTemp(), manager.getExpectationListFromTemp());
                     manager.startHabitPrograming();
                     getSharedPreferences(NAME_SHARED_PREFERENCES, MODE_PRIVATE).edit().putBoolean(KEY_FIRST_LAUNCH, false).apply();
                     finish();

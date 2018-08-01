@@ -1,35 +1,18 @@
 package com.InAction.X.x21InAction.habit;
 
-import com.InAction.X.x21InAction.BasePresenter;
-import com.InAction.X.x21InAction.expectation.model.Expectation;
-import com.InAction.X.x21InAction.tasks.model.Task;
-
-import java.util.List;
+import com.InAction.X.x21InAction.habit.model.Habit;
 
 public interface HabitContract {
 
     interface Model {
 
-        void saveNewHabit(String name, List<Task> taskListFromTemp, List<Expectation> expectationListFromTemp);
+        void insertHabit(Habit habit);
 
-        List<Task> getTasksFromHabit();
-
-        List<Expectation> getExpectationsFromHabit();
+        Habit getHabit();
     }
 
-    interface View {
+    interface Presenter {
 
-        void finishActivity();
-
-        String getHabitName();
-    }
-
-    interface Presenter extends BasePresenter {
-
-        void goAddTask(String habitName);
-
-        void goAddExpectation(String habitName);
-
-        void saveNewHabit();
+        void insertHabit(Habit habit);
     }
 }

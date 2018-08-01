@@ -19,7 +19,6 @@ import com.InAction.X.x21InAction.expectation.model.ExpectationModel;
 import com.InAction.X.x21InAction.temp_expectation.model.TempExpectation;
 import com.InAction.X.x21InAction.temp_expectation.view.AddExpectationActivity;
 import com.InAction.X.x21InAction.habit.model.HabitModel;
-import com.InAction.X.x21InAction.habit.view.NewHabitActivity;
 import com.InAction.X.x21InAction.tasks.model.Task;
 import com.InAction.X.x21InAction.tasks.model.TaskModel;
 import com.InAction.X.x21InAction.temp_task.model.TempTask;
@@ -230,7 +229,7 @@ public class AppManager {
      */
     public String getHabitName() {
 
-        return habitModel.getHabitName();
+        return habitModel.getHabit().getName();
     }
 
 
@@ -341,7 +340,7 @@ public class AppManager {
      */
     public List<Task> getTaskListFromHabit() {
 
-        return habitModel.getTasksFromHabit();
+        return habitModel.getHabit().getTaskList();
     }
 
     /**
@@ -351,7 +350,7 @@ public class AppManager {
      */
     public List<Expectation> getExpectationListFromHabit() {
 
-        return habitModel.getExpectationsFromHabit();
+        return habitModel.getHabit().getExpectationList();
     }
 
 
