@@ -10,6 +10,7 @@ import java.util.List;
 @Dao
 public interface TempExpectationDao {
 
+
     @Query("SELECT * FROM tempExpectations")
     List<TempExpectation> getAllTempExpectations();
 

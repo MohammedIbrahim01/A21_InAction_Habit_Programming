@@ -1,4 +1,4 @@
-package com.InAction.X.x21InAction.add_task.model;
+package com.InAction.X.x21InAction.temp_task.model;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
@@ -9,6 +9,7 @@ import java.util.List;
 
 @Dao
 public interface TempTaskDao {
+
 
     @Query("SELECT * FROM tempTasks")
     List<TempTask> getAllTempTasks();

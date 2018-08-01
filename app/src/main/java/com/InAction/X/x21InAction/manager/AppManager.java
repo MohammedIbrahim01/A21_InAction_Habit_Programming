@@ -9,7 +9,7 @@ import android.content.Intent;
 import com.InAction.X.x21InAction.achievements.model.Achievement;
 import com.InAction.X.x21InAction.achievements.model.AchievementModel;
 import com.InAction.X.x21InAction.temp_expectation.model.TempExpectationModel;
-import com.InAction.X.x21InAction.add_task.model.AddTaskModel;
+import com.InAction.X.x21InAction.temp_task.model.TempTaskModel;
 import com.InAction.X.x21InAction.counter.model.CounterModel;
 import com.InAction.X.x21InAction.counter.presenter.CounterPresenter;
 import com.InAction.X.x21InAction.counter.receiver.CounterReceiver;
@@ -22,8 +22,8 @@ import com.InAction.X.x21InAction.habit.model.HabitModel;
 import com.InAction.X.x21InAction.habit.view.NewHabitActivity;
 import com.InAction.X.x21InAction.tasks.model.Task;
 import com.InAction.X.x21InAction.tasks.model.TaskModel;
-import com.InAction.X.x21InAction.add_task.model.TempTask;
-import com.InAction.X.x21InAction.add_task.view.AddTaskActivity;
+import com.InAction.X.x21InAction.temp_task.model.TempTask;
+import com.InAction.X.x21InAction.temp_task.view.AddTaskActivity;
 import com.InAction.X.x21InAction.utils.AppExecutors;
 import com.InAction.X.x21InAction.utils.Scheduler;
 
@@ -39,7 +39,7 @@ public class AppManager {
     private TaskModel taskModel;
     private AchievementModel achievementModel;
     private ExpectationModel expectationModel;
-    private AddTaskModel addTaskModel;
+    private TempTaskModel tempTaskModel;
     private TempExpectationModel tempExpectationModel;
     private HabitModel habitModel;
     private CounterModel counterModel;
@@ -83,7 +83,7 @@ public class AppManager {
         taskModel = new TaskModel(applicationContext);
         achievementModel = new AchievementModel(applicationContext);
         expectationModel = new ExpectationModel(applicationContext);
-        addTaskModel = new AddTaskModel(applicationContext);
+        tempTaskModel = new TempTaskModel(applicationContext);
         tempExpectationModel = new TempExpectationModel(applicationContext);
         habitModel = new HabitModel(applicationContext);
         counterModel = new CounterModel(applicationContext);
@@ -150,7 +150,7 @@ public class AppManager {
     public List<Task> getTaskListFromTemp() {
 
         List<Task> taskList = new ArrayList<>();
-        List<TempTask> tempTaskList = addTaskModel.getTempTaskList();
+        List<TempTask> tempTaskList = tempTaskModel.getTempTaskList();
 
         for (TempTask tempTask : tempTaskList) {
 

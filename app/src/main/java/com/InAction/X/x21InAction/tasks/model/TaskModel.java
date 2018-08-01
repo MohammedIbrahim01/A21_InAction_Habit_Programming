@@ -2,12 +2,10 @@ package com.InAction.X.x21InAction.tasks.model;
 
 import android.content.Context;
 
-import com.InAction.X.x21InAction.add_task.model.TempTaskDao;
 import com.InAction.X.x21InAction.database.AppDatabase;
 import com.InAction.X.x21InAction.tasks.TasksContract;
 import com.InAction.X.x21InAction.utils.AppExecutors;
 
-import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.Executor;
 

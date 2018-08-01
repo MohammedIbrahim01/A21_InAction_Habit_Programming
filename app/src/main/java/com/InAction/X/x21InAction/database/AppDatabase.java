@@ -13,8 +13,8 @@ import com.InAction.X.x21InAction.habit.model.Habit;
 import com.InAction.X.x21InAction.habit.model.HabitDao;
 import com.InAction.X.x21InAction.temp_expectation.model.TempExpectation;
 import com.InAction.X.x21InAction.temp_expectation.model.TempExpectationDao;
-import com.InAction.X.x21InAction.add_task.model.TempTask;
-import com.InAction.X.x21InAction.add_task.model.TempTaskDao;
+import com.InAction.X.x21InAction.temp_task.model.TempTask;
+import com.InAction.X.x21InAction.temp_task.model.TempTaskDao;
 import com.InAction.X.x21InAction.tasks.model.Task;
 import com.InAction.X.x21InAction.tasks.model.TaskDao;
 

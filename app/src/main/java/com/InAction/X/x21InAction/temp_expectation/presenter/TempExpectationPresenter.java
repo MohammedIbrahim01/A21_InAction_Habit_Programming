@@ -25,7 +25,18 @@ public class TempExpectationPresenter implements TempExpectationContract.Present
 
 
     /**
-     * first constructor to use in AddExpectationActivity
+     * first constructor to use in TempExpectationCommunication
+     *
+     * @param applicationContext
+     */
+    public TempExpectationPresenter(Context applicationContext) {
+
+        this.applicationContext = applicationContext;
+    }
+
+
+    /**
+     * second constructor to use in AddExpectationActivity
      *
      * @param applicationContext
      * @param addExpectationView
@@ -39,7 +50,7 @@ public class TempExpectationPresenter implements TempExpectationContract.Present
 
 
     /**
-     * second constructor to use in TempExpectationsFragment
+     * third constructor to use in TempExpectationsFragment
      *
      * @param applicationContext
      * @param tempExpectationsView
@@ -55,7 +66,7 @@ public class TempExpectationPresenter implements TempExpectationContract.Present
 
     /**
      * insert TempExpectation (Model)
-     *
+     * <p>
      * then finish the pop up AddExpectationActivity
      */
     @Override
@@ -117,7 +128,7 @@ public class TempExpectationPresenter implements TempExpectationContract.Present
 
     /**
      * get TempExpectations List Live from tempExpectationsViewModel
-     *
+     * <p>
      * and set adapter's tempExpectationList to its value
      */
     @Override

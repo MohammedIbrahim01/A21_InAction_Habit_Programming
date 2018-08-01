@@ -17,9 +17,9 @@ import com.InAction.X.x21InAction.R;
 import com.InAction.X.x21InAction.temp_expectation.model.TempExpectation;
 import com.InAction.X.x21InAction.temp_expectation.view.TempExpectationsAdapter;
 import com.InAction.X.x21InAction.temp_expectation.view.TempExpectationsViewModel;
-import com.InAction.X.x21InAction.add_task.model.TempTask;
-import com.InAction.X.x21InAction.add_task.view.TempTasksAdapter;
-import com.InAction.X.x21InAction.add_task.view.TempTasksViewModel;
+import com.InAction.X.x21InAction.temp_task.model.TempTask;
+import com.InAction.X.x21InAction.temp_task.view.TempTasksAdapter;
+import com.InAction.X.x21InAction.temp_task.view.TempTasksViewModel;
 import com.InAction.X.x21InAction.manager.AppManager;
 
 import java.util.List;

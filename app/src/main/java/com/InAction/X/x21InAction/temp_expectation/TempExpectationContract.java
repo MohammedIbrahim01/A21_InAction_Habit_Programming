@@ -63,4 +63,13 @@ public interface TempExpectationContract {
 
         void setupDisplayTempExpectationsLive();
     }
+
+    interface Communication {
+
+        List<TempExpectation> getTempExpectationList();
+
+        LiveData<List<TempExpectation>> getTempExpectationListLive();
+
+        void deleteAllTempExpectations();
+    }
 }

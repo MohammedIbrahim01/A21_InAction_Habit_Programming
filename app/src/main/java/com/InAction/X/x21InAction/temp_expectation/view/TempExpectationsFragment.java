@@ -27,11 +27,11 @@ public class TempExpectationsFragment extends Fragment implements TempExpectatio
     private TempExpectationPresenter presenter;
     private AppManager manager;
     private TempExpectationsAdapter adapter;
+    private TempExpectationsViewModel viewModel;
 
 
     @BindView(R.id.temp_expectations_recyclerView)
     RecyclerView tempExpectationsRecyclerView;
-    private TempExpectationsViewModel viewModel;
 
 
     @OnClick(R.id.guidance_add_expectation_button)
@@ -50,7 +50,7 @@ public class TempExpectationsFragment extends Fragment implements TempExpectatio
 
 
         presenter = new TempExpectationPresenter(getContext().getApplicationContext(), this);
-        manager = new AppManager(getActivity().getApplicationContext(), getActivity());
+        manager = new AppManager(getContext().getApplicationContext(), getActivity());
         adapter = new TempExpectationsAdapter();
         viewModel = ViewModelProviders.of(getActivity()).get(TempExpectationsViewModel.class);
 

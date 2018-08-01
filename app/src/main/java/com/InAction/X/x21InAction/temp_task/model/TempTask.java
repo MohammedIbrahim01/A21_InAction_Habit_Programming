@@ -1,4 +1,4 @@
-package com.InAction.X.x21InAction.add_task.model;
+package com.InAction.X.x21InAction.temp_task.model;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
@@ -12,15 +12,16 @@ import java.util.Calendar;
 @Entity(tableName = "tempTasks")
 public class TempTask {
 
+
     @PrimaryKey(autoGenerate = true)
     private int id;
 
     private String name;
 
+    private String habitName;
+
     @TypeConverters(CalendarConverter.class)
     private Calendar calendar;
-
-    private String habitName;
 
 
     public TempTask(int id, String name, Calendar calendar, String habitName) {
@@ -57,19 +58,19 @@ public class TempTask {
         this.name = name;
     }
 
-    public Calendar getCalendar() {
-        return calendar;
-    }
-
-    public void setCalendar(Calendar calendar) {
-        this.calendar = calendar;
-    }
-
     public String getHabitName() {
         return habitName;
     }
 
     public void setHabitName(String habitName) {
         this.habitName = habitName;
+    }
+
+    public Calendar getCalendar() {
+        return calendar;
+    }
+
+    public void setCalendar(Calendar calendar) {
+        this.calendar = calendar;
     }
 }

@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 
 import com.InAction.X.x21InAction.temp_expectation.view.TempExpectationsFragment;
 import com.InAction.X.x21InAction.intro_screens.IntroHabitOverviewScreen;
-import com.InAction.X.x21InAction.intro_screens.IntroTasksScreen;
+import com.InAction.X.x21InAction.temp_task.view.TempTasksFragment;
 
 public class IntroScreensModel {
 
@@ -15,7 +15,7 @@ public class IntroScreensModel {
             case 7:
                 return new TempExpectationsFragment();
             case 9:
-                return new IntroTasksScreen();
+                return new TempTasksFragment();
             case 10:
                 return new IntroHabitOverviewScreen();
             default:

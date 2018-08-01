@@ -46,7 +46,7 @@ public class TempExpectationModel implements TempExpectationContract.Model {
     /**
      * get TempExpectation List
      */
-    private List<TempExpectation> tempExpectationList = new ArrayList<>();
+    private List<TempExpectation> tempExpectationList;
     private Boolean haveTempExpectationList;
 
     @Override

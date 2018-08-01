@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".add_task.addExpectationView.AddTaskActivity">
+    tools:context=".temp_task.view.AddTaskActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:layout_height="wrap_content">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/task_name_editText"
+                android:id="@+id/add_task_name_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="task name" />
@@ -25,12 +25,12 @@
         </android.support.design.widget.TextInputLayout>
 
         <TimePicker
-            android:id="@+id/timePicker"
+            android:id="@+id/add_task_timePicker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/save_task_button"
+            android:id="@+id/add_task_save_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
