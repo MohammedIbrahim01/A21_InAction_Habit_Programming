@@ -1,7 +1,5 @@
 package com.InAction.X.x21InAction.intro_screens.model;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,20 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.InAction.X.x21InAction.R;
-import com.InAction.X.x21InAction.add_expectation.model.TempExpectation;
-import com.InAction.X.x21InAction.add_expectation.presenter.AddExpectationPresenter;
-import com.InAction.X.x21InAction.intro_screens.view.IntroActivity;
 import com.InAction.X.x21InAction.manager.AppManager;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Optional;
 
 public class IntroFragments extends Fragment {
 

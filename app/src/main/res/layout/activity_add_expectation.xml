@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".add_expectation.view.AddExpectationActivity">
+    tools:context=".temp_expectation.addExpectationView.AddExpectationActivity">
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/expectation_name_editText"
+            android:id="@+id/add_expectation_name_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="expectation name" />
@@ -20,7 +20,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/save_expectation_button"
+        android:id="@+id/add_expectation_save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

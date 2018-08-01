@@ -1,11 +1,9 @@
-package com.InAction.X.x21InAction.add_expectation.model;
+package com.InAction.X.x21InAction.temp_expectation.model;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
-
-import com.InAction.X.x21InAction.add_expectation.model.TempExpectation;
 
 import java.util.List;
 

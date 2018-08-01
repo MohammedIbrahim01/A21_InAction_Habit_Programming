@@ -14,9 +14,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.InAction.X.x21InAction.R;
-import com.InAction.X.x21InAction.add_expectation.model.TempExpectation;
-import com.InAction.X.x21InAction.add_expectation.view.TempExpectationViewModel;
-import com.InAction.X.x21InAction.add_expectation.view.TempExpectationsAdapter;
+import com.InAction.X.x21InAction.temp_expectation.model.TempExpectation;
+import com.InAction.X.x21InAction.temp_expectation.view.TempExpectationsAdapter;
+import com.InAction.X.x21InAction.temp_expectation.view.TempExpectationsViewModel;
 import com.InAction.X.x21InAction.add_task.model.TempTask;
 import com.InAction.X.x21InAction.add_task.view.TempTasksAdapter;
 import com.InAction.X.x21InAction.add_task.view.TempTasksViewModel;
@@ -32,7 +32,7 @@ public class IntroHabitOverviewScreen extends Fragment {
     private TempTasksAdapter tempTaskAdapter;
     private TempExpectationsAdapter tempExpectationsAdapter;
     private TempTasksViewModel tempTasksViewModel;
-    private TempExpectationViewModel tempExpectationViewModel;
+    private TempExpectationsViewModel tempExpectationsViewModel;
     private AppManager manager;
 
     @BindView(R.id.habit_overview_habit_name_textView)
@@ -53,7 +53,7 @@ public class IntroHabitOverviewScreen extends Fragment {
         manager = new AppManager(getActivity().getApplicationContext());
 
         tempTasksViewModel = ViewModelProviders.of(getActivity()).get(TempTasksViewModel.class);
-        tempExpectationViewModel = ViewModelProviders.of(getActivity()).get(TempExpectationViewModel.class);
+        tempExpectationsViewModel = ViewModelProviders.of(getActivity()).get(TempExpectationsViewModel.class);
 
         tasksRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         tasksRecyclerView.setAdapter(tempTaskAdapter);
@@ -70,7 +70,7 @@ public class IntroHabitOverviewScreen extends Fragment {
             }
         });
 
-        tempExpectationViewModel.getTempExpectationsLive().observe(getActivity(), new Observer<List<TempExpectation>>() {
+        tempExpectationsViewModel.getTempExpectationsLive().observe(getActivity(), new Observer<List<TempExpectation>>() {
             @Override
             public void onChanged(@Nullable List<TempExpectation> tempExpectations) {
 

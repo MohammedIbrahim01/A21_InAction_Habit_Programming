@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="._main.view.MainActivity">
+    tools:context="._main.addExpectationView.MainActivity">
 
     <TextView
         android:id="@+id/counter_textView"
@@ -23,7 +23,7 @@
         android:background="@color/backgroundTabLayout"
         app:tabSelectedTextColor="@color/colorTabTextSelected"/>
 
-    <android.support.v4.view.ViewPager
+    <android.support.v4.addExpectationView.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

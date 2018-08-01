@@ -14,20 +14,20 @@
         <receiver android:name=".counter.receiver.CounterReceiver" />
         <receiver android:name=".counter.receiver.MidnightReceiver" />
 
-        <activity android:name="._main.view.MainActivity">
+        <activity android:name="._main.addExpectationView.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".intro_screens.view.IntroActivity" />
-        <activity android:name=".habit.view.NewHabitActivity" />
+        <activity android:name=".intro_screens.addExpectationView.IntroActivity" />
+        <activity android:name=".habit.addExpectationView.NewHabitActivity" />
         <activity
-            android:name=".add_task.view.AddTaskActivity"
+            android:name=".add_task.addExpectationView.AddTaskActivity"
             android:theme="@style/PoUpTheme" />
         <activity
-            android:name=".add_expectation.view.AddExpectationActivity"
+            android:name=".temp_expectation.addExpectationView.AddExpectationActivity"
             android:theme="@style/PoUpTheme"></activity>
 
     </application>

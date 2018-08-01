@@ -8,7 +8,7 @@ import android.content.Intent;
 
 import com.InAction.X.x21InAction.achievements.model.Achievement;
 import com.InAction.X.x21InAction.achievements.model.AchievementModel;
-import com.InAction.X.x21InAction.add_expectation.model.AddExpectationModel;
+import com.InAction.X.x21InAction.temp_expectation.model.TempExpectationModel;
 import com.InAction.X.x21InAction.add_task.model.AddTaskModel;
 import com.InAction.X.x21InAction.counter.model.CounterModel;
 import com.InAction.X.x21InAction.counter.presenter.CounterPresenter;
@@ -16,8 +16,8 @@ import com.InAction.X.x21InAction.counter.receiver.CounterReceiver;
 import com.InAction.X.x21InAction.database.AppDatabase;
 import com.InAction.X.x21InAction.expectation.model.Expectation;
 import com.InAction.X.x21InAction.expectation.model.ExpectationModel;
-import com.InAction.X.x21InAction.add_expectation.model.TempExpectation;
-import com.InAction.X.x21InAction.add_expectation.view.AddExpectationActivity;
+import com.InAction.X.x21InAction.temp_expectation.model.TempExpectation;
+import com.InAction.X.x21InAction.temp_expectation.view.AddExpectationActivity;
 import com.InAction.X.x21InAction.habit.model.HabitModel;
 import com.InAction.X.x21InAction.habit.view.NewHabitActivity;
 import com.InAction.X.x21InAction.tasks.model.Task;
@@ -28,12 +28,11 @@ import com.InAction.X.x21InAction.utils.AppExecutors;
 import com.InAction.X.x21InAction.utils.Scheduler;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class AppManager {
 
-    public static final String NAME_HABIT = "name-habit";
+    public static final String KEY_NAME_HABIT = "key-name-habit";
     private Context applicationContext;
 
     private Activity activity;
@@ -41,7 +40,7 @@ public class AppManager {
     private AchievementModel achievementModel;
     private ExpectationModel expectationModel;
     private AddTaskModel addTaskModel;
-    private AddExpectationModel addExpectationModel;
+    private TempExpectationModel tempExpectationModel;
     private HabitModel habitModel;
     private CounterModel counterModel;
 
@@ -85,7 +84,7 @@ public class AppManager {
         achievementModel = new AchievementModel(applicationContext);
         expectationModel = new ExpectationModel(applicationContext);
         addTaskModel = new AddTaskModel(applicationContext);
-        addExpectationModel = new AddExpectationModel(applicationContext);
+        tempExpectationModel = new TempExpectationModel(applicationContext);
         habitModel = new HabitModel(applicationContext);
         counterModel = new CounterModel(applicationContext);
     }
@@ -100,7 +99,7 @@ public class AppManager {
     public void goAddTask(String habitName) {
 
         Intent intent = new Intent(activity, AddTaskActivity.class);
-        intent.putExtra(NAME_HABIT, habitName);
+        intent.putExtra(KEY_NAME_HABIT, habitName);
         activity.startActivity(intent);
     }
 
@@ -111,7 +110,7 @@ public class AppManager {
     public void goAddExpectation(String habitName) {
 
         Intent intent = new Intent(activity, AddExpectationActivity.class);
-        intent.putExtra(NAME_HABIT, habitName);
+        intent.putExtra(KEY_NAME_HABIT, habitName);
         activity.startActivity(intent);
     }
 
@@ -172,7 +171,7 @@ public class AppManager {
     public List<Expectation> getExpectationListFromTemp() {
 
         List<Expectation> expectationList = new ArrayList<>();
-        List<TempExpectation> tempExpectationList = addExpectationModel.getTempExpectationList();
+        List<TempExpectation> tempExpectationList = tempExpectationModel.getTempExpectationList();
 
         for (TempExpectation tempExpectation : tempExpectationList) {
 

@@ -17,7 +17,7 @@ import com.InAction.X.x21InAction.intro_screens.model.IntroFragments;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class IntroActivity extends AppCompatActivity implements View.OnClickListener {
+public class IntroScreensActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     public static final int PAGE_CONTAINS_HABIT_NAME = 5;
@@ -83,13 +83,13 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
                 checkAndGetHabitName(page);
                 viewPager.setCurrentItem(++page);
                 setBackgroundAndButtonsVisibilities(page);
-                Toast.makeText(IntroActivity.this, "next", Toast.LENGTH_SHORT).show();
+                Toast.makeText(IntroScreensActivity.this, "next", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.back:
                 viewPager.setCurrentItem((--page), true);
                 setBackgroundAndButtonsVisibilities(page);
-                Toast.makeText(IntroActivity.this, "back", Toast.LENGTH_SHORT).show();
+                Toast.makeText(IntroScreensActivity.this, "back", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.start:
@@ -102,7 +102,7 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
                 }
                 viewPager.setCurrentItem(++page);
                 setBackgroundAndButtonsVisibilities(page);
-                Toast.makeText(IntroActivity.this, "start", Toast.LENGTH_SHORT).show();
+                Toast.makeText(IntroScreensActivity.this, "start", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

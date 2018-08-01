@@ -14,10 +14,8 @@ import android.widget.TextView;
 import com.InAction.X.x21InAction.R;
 import com.InAction.X.x21InAction._main.MainContract;
 import com.InAction.X.x21InAction._main.preseter.MainPresenter;
-import com.InAction.X.x21InAction.database.AppDatabase;
-import com.InAction.X.x21InAction.intro_screens.view.IntroActivity;
+import com.InAction.X.x21InAction.intro_screens.view.IntroScreensActivity;
 import com.InAction.X.x21InAction.manager.AppManager;
-import com.InAction.X.x21InAction.utils.AppExecutors;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -71,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         if (sharedPreferences.getBoolean(KEY_FIRST_LAUNCH, true)) {
 
             //start intro screens
-            startActivity(new Intent(MainActivity.this, IntroActivity.class));
+            startActivity(new Intent(MainActivity.this, IntroScreensActivity.class));
         }
 
         presenter = new MainPresenter(this, this);

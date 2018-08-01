@@ -2,7 +2,6 @@ package com.InAction.X.x21InAction.expectation.model;
 
 import android.content.Context;
 
-import com.InAction.X.x21InAction.add_expectation.model.TempExpectationDao;
 import com.InAction.X.x21InAction.database.AppDatabase;
 import com.InAction.X.x21InAction.expectation.ExpectationContract;
 import com.InAction.X.x21InAction.utils.AppExecutors;

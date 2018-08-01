@@ -1,4 +1,4 @@
-package com.InAction.X.x21InAction.add_expectation.model;
+package com.InAction.X.x21InAction.temp_expectation.model;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;

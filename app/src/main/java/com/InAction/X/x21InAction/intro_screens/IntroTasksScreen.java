@@ -17,7 +17,7 @@ import com.InAction.X.x21InAction.R;
 import com.InAction.X.x21InAction.add_task.model.TempTask;
 import com.InAction.X.x21InAction.add_task.view.TempTasksAdapter;
 import com.InAction.X.x21InAction.add_task.view.TempTasksViewModel;
-import com.InAction.X.x21InAction.intro_screens.view.IntroActivity;
+import com.InAction.X.x21InAction.intro_screens.view.IntroScreensActivity;
 import com.InAction.X.x21InAction.manager.AppManager;
 
 import java.util.List;
@@ -39,7 +39,7 @@ public class IntroTasksScreen extends Fragment {
     @OnClick(R.id.guidance_add_task_button)
     void addTask() {
 
-        manager.goAddTask(((IntroActivity) getActivity()).habitName);
+        manager.goAddTask(((IntroScreensActivity) getActivity()).habitName);
         Toast.makeText(getContext(), "add task", Toast.LENGTH_SHORT).show();
     }
 

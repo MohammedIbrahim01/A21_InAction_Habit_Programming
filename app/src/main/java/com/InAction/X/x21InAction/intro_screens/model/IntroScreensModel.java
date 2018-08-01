@@ -2,7 +2,7 @@ package com.InAction.X.x21InAction.intro_screens.model;
 
 import android.support.v4.app.Fragment;
 
-import com.InAction.X.x21InAction.intro_screens.IntroExpectationsScreen;
+import com.InAction.X.x21InAction.temp_expectation.view.TempExpectationsFragment;
 import com.InAction.X.x21InAction.intro_screens.IntroHabitOverviewScreen;
 import com.InAction.X.x21InAction.intro_screens.IntroTasksScreen;
 
@@ -13,7 +13,7 @@ public class IntroScreensModel {
         switch (page) {
 
             case 7:
-                return new IntroExpectationsScreen();
+                return new TempExpectationsFragment();
             case 9:
                 return new IntroTasksScreen();
             case 10:
