@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".intro_screens.IntroActivity">
+    tools:context=".intro_screens.view.IntroActivity">
 
-    <com.rl.x.a21_inaction.intro_screens.CustomViewPager
-        android:id="@+id/fragment_container"
+    <com.InAction.X.x21InAction.utils.CustomViewPager
+        android:id="@+id/intro_screens_viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="7" />

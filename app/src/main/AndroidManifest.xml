@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.rl.x.a21_inaction">
+    package="com.InAction.X.x21InAction">
 
     <uses-permission android:name="android.permission.SET_ALARM" />
     <application
@@ -21,10 +21,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".intro_screens.IntroActivity"/>
+        <activity android:name=".intro_screens.view.IntroActivity" />
         <activity android:name=".habit.view.NewHabitActivity" />
-        <activity android:name=".add_task.view.AddTaskActivity" />
-        <activity android:name=".add_expectation.view.AddExpectationActivity"></activity>
+        <activity
+            android:name=".add_task.view.AddTaskActivity"
+            android:theme="@style/PoUpTheme" />
+        <activity
+            android:name=".add_expectation.view.AddExpectationActivity"
+            android:theme="@style/PoUpTheme"></activity>
 
     </application>
 

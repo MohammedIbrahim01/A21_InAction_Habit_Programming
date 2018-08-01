@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "275819796517",
+    "firebase_url": "https://inaction-a5541.firebaseio.com",
+    "project_id": "inaction-a5541",
+    "storage_bucket": "inaction-a5541.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:275819796517:android:327ef6f9e477eb14",
+        "android_client_info": {
+          "package_name": "com.InAction.X.x21InAction"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "275819796517-46difcqa5r4t0i7kq3si2u60hug1hjds.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.InAction.X.x21InAction",
+            "certificate_hash": "29bcbcbc52bc9af3ab0697c2356aaa1d970180a9"
+          }
+        },
+        {
+          "client_id": "275819796517-u0o5r0n8f4nsliuru6snrtl84p4s2pkk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6EvVhkGH4Z89d3oB57Zsp_dxSMSbGK_I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "275819796517-u0o5r0n8f4nsliuru6snrtl84p4s2pkk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      },
+      "admob_app_id": "ca-app-pub-6179224755708033~6791952879"
+    }
+  ],
+  "configuration_version": "1"
+}

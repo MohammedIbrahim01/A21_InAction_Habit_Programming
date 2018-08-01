@@ -8,6 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="PoUpTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
+
     <style name="IntroSpotText" parent="@style/IntroNormalText">
         <item name="android:textSize">@dimen/XLargeTextSize</item>
         <item name="android:textColor">@color/colorSpotText</item>

@@ -9,12 +9,11 @@
         android:text="expectations"
         android:textSize="@dimen/MediumTextSize" />
 
-    <LinearLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/temp_expectations_recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="200dp" />
 
-
-    </LinearLayout>
 
     <Button
         android:id="@+id/guidance_add_expectation_button"

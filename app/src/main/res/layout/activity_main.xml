@@ -1,32 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="._main.view.MainActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/counter_textView"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="@color/backgroundCounter"
-        android:gravity="center"
-        android:textSize="100sp"
-        tools:text="0" />
+    <include layout="@layout/content_main" />
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/backgroundTabLayout"
-        app:tabSelectedTextColor="@color/colorTabTextSelected"/>
+        android:layout_gravity="center_horizontal|bottom"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"></com.google.android.gms.ads.AdView>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/backgroundViewPager" />
-
-</android.support.v7.widget.LinearLayoutCompat>
+</android.support.design.widget.CoordinatorLayout>

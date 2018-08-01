@@ -13,7 +13,7 @@
         tools:text="task name" />
 
     <TextView
-        android:id="@+id/task_row_day_textView"
+        android:id="@+id/task_row_time_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
