@@ -6,7 +6,7 @@ import android.content.Intent;
 
 import com.InAction.X.x21InAction.counter.presenter.CounterPresenter;
 
-public class MidnightReceiver extends BroadcastReceiver{
+public class NextMidnightReceiver extends BroadcastReceiver {
 
     private CounterPresenter counterPresenter;
 
@@ -16,7 +16,5 @@ public class MidnightReceiver extends BroadcastReceiver{
         counterPresenter = new CounterPresenter(context);
 
         counterPresenter.startCountingIfMidnight();
-
-        counterPresenter.notifyCountingStart();
     }
 }

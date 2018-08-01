@@ -13,13 +13,13 @@ import android.support.v4.app.NotificationCompat;
 import com.InAction.X.x21InAction._main.view.MainActivity;
 import com.InAction.X.x21InAction.tasks.model.Task;
 
-public class AppNotifications {
+public class NotificationsUtils {
 
     public static final String ID_NOTIFICATION_CHANNEL = "id-notification-channel";
     public static final String NAME_NOTIFICATION_CHANNEL = "name-notification-channel";
     private Context context;
 
-    public AppNotifications(Context context) {
+    public NotificationsUtils(Context context) {
 
         this.context = context;
     }

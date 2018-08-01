@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme">
         <receiver android:name=".utils.SchedulerReceiver" />
         <receiver android:name=".counter.receiver.CounterReceiver" />
-        <receiver android:name=".counter.receiver.MidnightReceiver" />
+        <receiver android:name=".counter.receiver.NextMidnightReceiver" />
 
         <activity android:name="._main.view.MainActivity">
             <intent-filter>

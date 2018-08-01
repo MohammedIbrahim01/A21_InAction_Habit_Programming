@@ -4,23 +4,23 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.InAction.X.x21InAction.counter.model.CounterModel;
+import com.InAction.X.x21InAction.counter.presenter.CounterPresenter;
 import com.InAction.X.x21InAction.manager.AppManager;
 
 public class CounterReceiver extends BroadcastReceiver {
 
-    private CounterModel counterModel;
     private AppManager manager;
+    private CounterPresenter presenter;
 
 
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        counterModel = new CounterModel(context);
         manager = new AppManager(context);
+        presenter = new CounterPresenter(context);
+
 
         manager.newDay();
-
-        counterModel.increaseCount();
+        presenter.increaseCount();
     }
 }

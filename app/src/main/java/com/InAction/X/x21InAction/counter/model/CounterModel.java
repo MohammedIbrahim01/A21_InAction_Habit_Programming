@@ -3,14 +3,19 @@ package com.InAction.X.x21InAction.counter.model;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class CounterModel {
+import com.InAction.X.x21InAction.counter.CounterContract;
+
+public class CounterModel implements CounterContract.Model{
+
 
     public static final String NAME_SHARED_PREFERENCES = "name-sharedPreferences";
     public static final String KEY_COUNT = "key-count";
 
+
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private int count;
+
 
     public CounterModel(Context applicationContext) {
 
@@ -18,18 +23,24 @@ public class CounterModel {
         editor = sharedPreferences.edit();
     }
 
-    public int getCount(){
+
+    @Override
+    public int getCount() {
 
         count = sharedPreferences.getInt(KEY_COUNT, 0);
         return count;
     }
 
-    public void increaseCount(){
+
+    @Override
+    public void increaseCount() {
 
         count = sharedPreferences.getInt(KEY_COUNT, 0);
         editor.putInt(KEY_COUNT, ++count).apply();
     }
 
+
+    @Override
     public void resetCounter() {
 
         editor.putInt(KEY_COUNT, 0).apply();
