@@ -39,4 +39,11 @@ public class TaskCommunication implements TasksContract.Communication {
 
         presenter.insertTaskList(taskList);
     }
+
+
+    @Override
+    public List<Task> getAllTasks() {
+
+        return presenter.getAllTasks();
+    }
 }

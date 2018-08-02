@@ -23,4 +23,11 @@ public class HabitCommunication implements HabitContract.Communication {
 
         presenter.insertHabit(habit);
     }
+
+
+    @Override
+    public Habit getHabit() {
+
+        return presenter.getHabit();
+    }
 }

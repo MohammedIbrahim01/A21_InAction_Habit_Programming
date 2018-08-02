@@ -73,4 +73,31 @@ public class TaskModel implements TasksContract.Model {
             }
         });
     }
+
+
+    /**
+     * get all Tasks
+     */
+    private List<Task> taskList;
+    private Boolean haveTaskList;
+
+    @Override
+    public List<Task> getAllTasks() {
+
+        haveTaskList = false;
+
+        diskIOExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                taskList = taskDao.getAllTasks();
+                haveTaskList = true;
+            }
+        });
+
+
+        while (!haveTaskList);
+
+        return taskList;
+    }
 }

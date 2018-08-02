@@ -1,5 +1,7 @@
 package com.InAction.X.x21InAction.counter;
 
+import com.InAction.X.x21InAction.manager.AppManager;
+
 public interface CounterContract {
 
     interface Model {
@@ -13,9 +15,9 @@ public interface CounterContract {
 
     interface Presenter {
 
-        void startCountingIfMidnight();
+        void startCountingIfMidnight(AppManager manager);
 
-        void notifyCountingStart();
+        void notifyCountingStart(AppManager manager);
 
         void increaseCount();
 
@@ -29,5 +31,7 @@ public interface CounterContract {
         int getCount();
 
         void resetCounter();
+
+        void startCountingIfMidnight(AppManager manager);
     }
 }

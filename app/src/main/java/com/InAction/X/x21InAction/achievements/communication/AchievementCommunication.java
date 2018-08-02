@@ -7,13 +7,13 @@ import com.InAction.X.x21InAction.achievements.model.Achievement;
 import com.InAction.X.x21InAction.achievements.presenter.AchievementPresenter;
 
 
-public class Communication implements AchievementContract.Communication {
+public class AchievementCommunication implements AchievementContract.Communication {
 
 
     private AchievementPresenter presenter;
 
 
-    public Communication(Context applicationContext) {
+    public AchievementCommunication(Context applicationContext) {
 
         presenter = new AchievementPresenter(applicationContext);
     }

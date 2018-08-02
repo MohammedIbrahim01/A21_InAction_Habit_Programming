@@ -35,7 +35,6 @@ public class TasksPresenter implements TasksContract.Presenter {
     public TasksPresenter(Context applicationContext, TasksContract.View view) {
 
         this.view = view;
-        viewModel = view.getViewModel();
         model = new TaskModel(applicationContext);
         manager = new AppManager(applicationContext);
         this.applicationContext = applicationContext;
@@ -62,6 +61,8 @@ public class TasksPresenter implements TasksContract.Presenter {
      */
     @Override
     public void setupTasksLive() {
+
+        viewModel = view.getViewModel();
 
         viewModel.getTaskList().observe(view.getLifeCycleOwner(), new Observer<List<Task>>() {
             @Override
@@ -104,6 +105,15 @@ public class TasksPresenter implements TasksContract.Presenter {
     public void insertTaskList(List<Task> taskList) {
 
         model.insertTaskList(taskList);
+    }
+
+    /**
+     * get all Tasks (Model)
+     */
+    @Override
+    public List<Task> getAllTasks() {
+
+        return model.getAllTasks();
     }
 
 

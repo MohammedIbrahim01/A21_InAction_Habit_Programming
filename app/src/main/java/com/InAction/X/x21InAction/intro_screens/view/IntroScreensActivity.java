@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.InAction.X.x21InAction.R;
+import com.InAction.X.x21InAction.habit.model.Habit;
 import com.InAction.X.x21InAction.habit.model.HabitModel;
 import com.InAction.X.x21InAction.intro_screens.presenter.IntroScreensPresenter;
 import com.InAction.X.x21InAction.manager.AppManager;
@@ -94,7 +95,8 @@ public class IntroScreensActivity extends AppCompatActivity implements View.OnCl
 
             case R.id.start:
                 if (page == 10) {
-                    habitModel.insertHabit(habitName, manager.getTaskListFromTemp(), manager.getExpectationListFromTemp());
+                    Habit habit = new Habit(habitName, manager.getTaskListFromTemp(), manager.getExpectationListFromTemp());
+                    habitModel.insertHabit(habit);
                     manager.startHabitPrograming();
                     getSharedPreferences(NAME_SHARED_PREFERENCES, MODE_PRIVATE).edit().putBoolean(KEY_FIRST_LAUNCH, false).apply();
                     finish();

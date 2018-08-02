@@ -56,15 +56,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
         adView.loadAd(adRequest);
 
-//        AppExecutors.getInstance().getDiskIO().execute(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                AppDatabase.getInstance(getApplicationContext()).clearAllTables();
-//            }
-//        });
 
         sharedPreferences = getSharedPreferences(NAME_SHARED_PREFERENCES, MODE_PRIVATE);
+
+        sharedPreferences.edit().putBoolean(KEY_FIRST_LAUNCH, true).apply();
 
         if (sharedPreferences.getBoolean(KEY_FIRST_LAUNCH, true)) {
 
@@ -110,10 +105,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
             case R.id.action_add_habit:
                 presenter.clearDatabase();
                 manager.resetCounter();
-                presenter.goAddHabit();
                 break;
             case R.id.action_stop_Time:
-                presenter.stopTime();
                 break;
         }
 

@@ -41,29 +41,9 @@ public class MainPresenter implements MainContract.Presenter {
      * manager responsibility
      */
     @Override
-    public void goAddHabit() {
-
-        manager.goAddHabit();
-    }
-
-
-    /**
-     * manager responsibility
-     */
-    @Override
     public void clearDatabase() {
 
         manager.clearDatabase();
-    }
-
-
-    /**
-     * manager responsibility
-     */
-    @Override
-    public void stopTime() {
-
-        manager.stopTime();
     }
 
 

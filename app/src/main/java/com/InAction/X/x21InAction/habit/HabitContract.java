@@ -14,10 +14,14 @@ public interface HabitContract {
     interface Presenter {
 
         void insertHabit(Habit habit);
+
+        Habit getHabit();
     }
 
     interface Communication {
 
         void insertHabit(Habit habit);
+
+        Habit getHabit();
     }
 }

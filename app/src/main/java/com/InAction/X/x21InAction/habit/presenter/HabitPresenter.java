@@ -27,4 +27,16 @@ public class HabitPresenter implements HabitContract.Presenter {
 
         model.insertHabit(habit);
     }
+
+
+    /**
+     * get Habit (Model)
+     *
+     * @return
+     */
+    @Override
+    public Habit getHabit() {
+
+        return model.getHabit();
+    }
 }

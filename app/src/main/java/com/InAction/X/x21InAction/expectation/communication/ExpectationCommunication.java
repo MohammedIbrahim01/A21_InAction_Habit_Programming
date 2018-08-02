@@ -8,13 +8,13 @@ import com.InAction.X.x21InAction.expectation.presenter.ExpectationPresenter;
 
 import java.util.List;
 
-public class Communication implements ExpectationContract.Communication {
+public class ExpectationCommunication implements ExpectationContract.Communication {
 
 
     private ExpectationPresenter presenter;
 
 
-    public Communication(Context applicationContext) {
+    public ExpectationCommunication(Context applicationContext) {
 
         presenter = new ExpectationPresenter(applicationContext);
     }

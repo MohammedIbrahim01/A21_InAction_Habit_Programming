@@ -18,7 +18,8 @@ import com.InAction.X.x21InAction.temp_task.model.TempTaskDao;
 import com.InAction.X.x21InAction.tasks.model.Task;
 import com.InAction.X.x21InAction.tasks.model.TaskDao;
 
-@Database(entities = {Task.class, Achievement.class, Expectation.class, TempTask.class, TempExpectation.class, Habit.class}, version = 14, exportSchema = false)
+@Database(entities = {Task.class, Achievement.class, Expectation.class, TempTask.class, TempExpectation.class, Habit.class}
+        , version = 15, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final Object LOCK = new Object();
@@ -33,6 +34,7 @@ public abstract class AppDatabase extends RoomDatabase {
             synchronized (LOCK) {
 
                 sInstance = Room.databaseBuilder(applicationContext, AppDatabase.class, NAME_DATABASE)
+                        .fallbackToDestructiveMigration()
                         .build();
             }
         }

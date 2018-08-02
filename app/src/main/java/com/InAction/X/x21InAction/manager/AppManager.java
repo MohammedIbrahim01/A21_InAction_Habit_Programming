@@ -1,26 +1,22 @@
 package com.InAction.X.x21InAction.manager;
 
 import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
+import com.InAction.X.x21InAction.achievements.communication.AchievementCommunication;
 import com.InAction.X.x21InAction.achievements.model.Achievement;
-import com.InAction.X.x21InAction.achievements.model.AchievementModel;
-import com.InAction.X.x21InAction.temp_expectation.model.TempExpectationModel;
-import com.InAction.X.x21InAction.temp_task.model.TempTaskModel;
-import com.InAction.X.x21InAction.counter.model.CounterModel;
-import com.InAction.X.x21InAction.counter.presenter.CounterPresenter;
-import com.InAction.X.x21InAction.counter.receiver.CounterReceiver;
+import com.InAction.X.x21InAction.counter.Communication.CounterCommunication;
+import com.InAction.X.x21InAction.expectation.communication.ExpectationCommunication;
+import com.InAction.X.x21InAction.habit.communication.HabitCommunication;
+import com.InAction.X.x21InAction.tasks.communication.TaskCommunication;
+import com.InAction.X.x21InAction.temp_expectation.communication.TempExpectationCommunication;
+import com.InAction.X.x21InAction.temp_task.communication.TempTaskCommunication;
 import com.InAction.X.x21InAction.database.AppDatabase;
 import com.InAction.X.x21InAction.expectation.model.Expectation;
-import com.InAction.X.x21InAction.expectation.model.ExpectationModel;
 import com.InAction.X.x21InAction.temp_expectation.model.TempExpectation;
 import com.InAction.X.x21InAction.temp_expectation.view.AddExpectationActivity;
-import com.InAction.X.x21InAction.habit.model.HabitModel;
 import com.InAction.X.x21InAction.tasks.model.Task;
-import com.InAction.X.x21InAction.tasks.model.TaskModel;
 import com.InAction.X.x21InAction.temp_task.model.TempTask;
 import com.InAction.X.x21InAction.temp_task.view.AddTaskActivity;
 import com.InAction.X.x21InAction.utils.AppExecutors;
@@ -31,19 +27,20 @@ import java.util.List;
 
 public class AppManager {
 
+
     public static final String KEY_NAME_HABIT = "key-name-habit";
+
+
     private Context applicationContext;
-
     private Activity activity;
-    private TaskModel taskModel;
-    private AchievementModel achievementModel;
-    private ExpectationModel expectationModel;
-    private TempTaskModel tempTaskModel;
-    private TempExpectationModel tempExpectationModel;
-    private HabitModel habitModel;
-    private CounterModel counterModel;
 
-    private CounterPresenter counterPresenter;
+    private TaskCommunication taskCommunication;
+    private AchievementCommunication achievementCommunication;
+    private ExpectationCommunication expectationCommunication;
+    private TempTaskCommunication tempTaskCommunication;
+    private TempExpectationCommunication tempExpectationCommunication;
+    private HabitCommunication habitCommunication;
+    private CounterCommunication counterCommunication;
 
 
     /**
@@ -53,7 +50,7 @@ public class AppManager {
      */
     public AppManager(Context applicationContext) {
 
-        initAllModels(applicationContext);
+        initAllCommunications(applicationContext);
     }
 
 
@@ -66,8 +63,7 @@ public class AppManager {
     public AppManager(Context applicationContext, Activity activity) {
 
         this.activity = activity;
-        initAllModels(applicationContext);
-        counterPresenter = new CounterPresenter(applicationContext);
+        initAllCommunications(applicationContext);
     }
 
 
@@ -76,16 +72,16 @@ public class AppManager {
      *
      * @param applicationContext
      */
-    private void initAllModels(Context applicationContext) {
+    private void initAllCommunications(Context applicationContext) {
 
         this.applicationContext = applicationContext;
-        taskModel = new TaskModel(applicationContext);
-        achievementModel = new AchievementModel(applicationContext);
-        expectationModel = new ExpectationModel(applicationContext);
-        tempTaskModel = new TempTaskModel(applicationContext);
-        tempExpectationModel = new TempExpectationModel(applicationContext);
-        habitModel = new HabitModel(applicationContext);
-        counterModel = new CounterModel(applicationContext);
+        taskCommunication = new TaskCommunication(applicationContext);
+        achievementCommunication = new AchievementCommunication(applicationContext);
+        expectationCommunication = new ExpectationCommunication(applicationContext);
+        tempTaskCommunication = new TempTaskCommunication(applicationContext);
+        tempExpectationCommunication = new TempExpectationCommunication(applicationContext);
+        habitCommunication = new HabitCommunication(applicationContext);
+        counterCommunication = new CounterCommunication(applicationContext);
     }
 
 
@@ -114,15 +110,6 @@ public class AppManager {
     }
 
 
-    /**
-     * navigate to NewHabitActivity
-     */
-    public void goAddHabit() {
-
-        activity.startActivity(new Intent(activity, NewHabitActivity.class));
-    }
-
-
     /****************************************************** External Methods **************************************************/
 
 
@@ -135,7 +122,8 @@ public class AppManager {
      */
     public void addAchievementFromTask(Task task) {
 
-        achievementModel.insertAchievement(new Achievement(task.getName()));
+        int day = counterCommunication.getCount();
+        achievementCommunication.insertAchievement(new Achievement(task.getName(), day));
     }
 
 
@@ -149,7 +137,7 @@ public class AppManager {
     public List<Task> getTaskListFromTemp() {
 
         List<Task> taskList = new ArrayList<>();
-        List<TempTask> tempTaskList = tempTaskModel.getTempTaskList();
+        List<TempTask> tempTaskList = tempTaskCommunication.getTempTaskList();
 
         for (TempTask tempTask : tempTaskList) {
 
@@ -170,7 +158,7 @@ public class AppManager {
     public List<Expectation> getExpectationListFromTemp() {
 
         List<Expectation> expectationList = new ArrayList<>();
-        List<TempExpectation> tempExpectationList = tempExpectationModel.getTempExpectationList();
+        List<TempExpectation> tempExpectationList = tempExpectationCommunication.getTempExpectationList();
 
         for (TempExpectation tempExpectation : tempExpectationList) {
 
@@ -183,29 +171,11 @@ public class AppManager {
 
     /**
      * To Use In HabitPresenter
-     * <p>
-     * show expectations
-     * show tasks
-     * scheduleTask tasks
      */
     public void startHabitPrograming() {
 
-        startCounter();
-    }
-
-
-    /**
-     * To Use In MainPresenter
-     * <p>
-     * stop day counting (cancel alarm with the same PendingIntent)
-     */
-    public void stopTime() {
-
-        //cancel alarm that fires CounterReceiver
-        AlarmManager alarmManager = (AlarmManager) applicationContext.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(applicationContext, CounterReceiver.class);
-        PendingIntent operation = PendingIntent.getBroadcast(applicationContext, 44, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-        alarmManager.cancel(operation);
+        showExpectationList(getExpectationListFromHabit());
+        counterCommunication.startCountingIfMidnight(this);
     }
 
 
@@ -218,7 +188,7 @@ public class AppManager {
      */
     public String getCount() {
 
-        return String.valueOf(counterModel.getCount());
+        return String.valueOf(counterCommunication.getCount());
     }
 
 
@@ -229,7 +199,7 @@ public class AppManager {
      */
     public String getHabitName() {
 
-        return habitModel.getHabit().getName();
+        return habitCommunication.getHabit().getName();
     }
 
 
@@ -238,9 +208,10 @@ public class AppManager {
      */
     public void startFirstDay() {
 
-        showExpectationList(getExpectationListFromHabit());
-        showTaskList(getTaskListFromHabit());
-        scheduleDayTasks(getTaskListFromHabit());
+        List<Task> taskList = getTaskListFromHabit();
+
+        showTaskList(taskList);
+        scheduleDayTasks(taskList);
     }
 
 
@@ -249,10 +220,11 @@ public class AppManager {
      */
     public void newDay() {
 
-        List<Task> taskList = getTaskListFromHabit();
-
-        unScheduleLateTasks(taskList);  // if there
+        unScheduleLateTasks(getTaskListFromTasks());  // if there
         clearLateTasks();               // if there
+
+
+        List<Task> taskList = getTaskListFromHabit();
 
         showTaskList(taskList);
         scheduleDayTasks(taskList);
@@ -264,7 +236,7 @@ public class AppManager {
      */
     public void resetCounter() {
 
-        counterModel.resetCounter();
+        counterCommunication.resetCounter();
     }
 
 
@@ -288,14 +260,7 @@ public class AppManager {
 
     private void clearLateTasks() {
 
-        taskModel.deleteAllTasks();
-    }
-
-
-    private void startCounter() {
-
-//        counterPresenter.startCountingIfMidnight();
-        counterPresenter.startCountingIf(18);
+        taskCommunication.deleteAllTasks();
     }
 
 
@@ -304,7 +269,7 @@ public class AppManager {
      */
     public void showTaskList(List<Task> taskList) {
 
-        taskModel.insertTaskList(taskList);
+        taskCommunication.insertTaskList(taskList);
     }
 
 
@@ -313,7 +278,7 @@ public class AppManager {
      */
     public void showExpectationList(List<Expectation> expectationList) {
 
-        expectationModel.insertExpectationList(expectationList);
+        expectationCommunication.insertExpectationList(expectationList);
     }
 
 
@@ -340,7 +305,7 @@ public class AppManager {
      */
     public List<Task> getTaskListFromHabit() {
 
-        return habitModel.getHabit().getTaskList();
+        return habitCommunication.getHabit().getTaskList();
     }
 
     /**
@@ -350,7 +315,20 @@ public class AppManager {
      */
     public List<Expectation> getExpectationListFromHabit() {
 
-        return habitModel.getHabit().getExpectationList();
+        return habitCommunication.getHabit().getExpectationList();
+    }
+
+
+    /**
+     * get dayTasks from Task database
+     *
+     * to unSchedule it when new day is come
+     *
+     * @return Task List
+     */
+    public List<Task> getTaskListFromTasks() {
+
+        return taskCommunication.getAllTasks();
     }
 
 

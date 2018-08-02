@@ -20,6 +20,8 @@ public interface TasksContract {
         void deleteTask(Task task);
 
         void deleteAllTasks();
+
+        List<Task> getAllTasks();
     }
 
     interface View {
@@ -52,6 +54,8 @@ public interface TasksContract {
         void deleteAllTasks();
 
         void insertTaskList(List<Task> taskList);
+
+        List<Task> getAllTasks();
     }
 
     interface Communication {
@@ -61,5 +65,7 @@ public interface TasksContract {
         void deleteAllTasks();
 
         void insertTaskList(List<Task> taskList);
+
+        List<Task> getAllTasks();
     }
 }

@@ -23,7 +23,6 @@ public class CounterPresenter implements CounterContract.Presenter {
 
 
     private Context applicationContext;
-    private AppManager manager;
     private AlarmManager alarmManager;
     private CounterModel model;
 
@@ -33,7 +32,6 @@ public class CounterPresenter implements CounterContract.Presenter {
     public CounterPresenter(Context applicationContext) {
 
         this.applicationContext = applicationContext;
-        manager = new AppManager(applicationContext);
         model = new CounterModel(applicationContext);
         alarmManager = (AlarmManager) applicationContext.getSystemService(Context.ALARM_SERVICE);
 
@@ -47,7 +45,7 @@ public class CounterPresenter implements CounterContract.Presenter {
 
 
     @Override
-    public void startCountingIfMidnight() {
+    public void startCountingIfMidnight(AppManager manager) {
 
         Calendar now = Calendar.getInstance();
 
@@ -57,7 +55,7 @@ public class CounterPresenter implements CounterContract.Presenter {
             Intent intent = new Intent(applicationContext, CounterReceiver.class);
             PendingIntent operation = PendingIntent.getBroadcast(applicationContext, REQUEST_CODE_COUNTER_ALARM, intent, PendingIntent.FLAG_CANCEL_CURRENT);
             alarmManager.setRepeating(AlarmManager.RTC, System.currentTimeMillis() + AlarmManager.INTERVAL_DAY, AlarmManager.INTERVAL_DAY, operation);
-            notifyCountingStart();
+            notifyCountingStart(manager);
             manager.startFirstDay();
         } else {
 
@@ -72,7 +70,7 @@ public class CounterPresenter implements CounterContract.Presenter {
 
 
     @Override
-    public void notifyCountingStart() {
+    public void notifyCountingStart(AppManager manager) {
 
         NotificationsUtils notificationsUtils = new NotificationsUtils(applicationContext);
         notificationsUtils.notifyCountingStart(manager.getHabitName());

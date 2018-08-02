@@ -34,7 +34,6 @@ public class AchievementPresenter implements AchievementContract.Presenter {
         this.context = context;
         model = new AchievementModel(context.getApplicationContext());
         this.view = view;
-        viewModel = view.getViewModel();
     }
 
 
@@ -58,6 +57,10 @@ public class AchievementPresenter implements AchievementContract.Presenter {
      */
     @Override
     public void setupAchievementsLive() {
+
+
+        viewModel = view.getViewModel();
+
 
         viewModel.getAchievementList().observe(view.getLifeCycleOwner(), new Observer<List<Achievement>>() {
             @Override
