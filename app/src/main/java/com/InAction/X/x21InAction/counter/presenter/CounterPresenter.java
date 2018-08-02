@@ -17,7 +17,10 @@ import java.util.Calendar;
 
 public class CounterPresenter implements CounterContract.Presenter {
 
-    public static final String KEY_HOUR_TO_START_COUNTING = "key_hour_to_start_counting";
+
+    public static final int REQUEST_CODE_COUNTER_ALARM = 44;
+    public static final int REQUEST_CODE_MIDNIGHT_ALARM = 33;
+
 
     private Context applicationContext;
     private AppManager manager;
@@ -52,7 +55,7 @@ public class CounterPresenter implements CounterContract.Presenter {
         if (now.get(Calendar.HOUR_OF_DAY) == midnight.get(Calendar.HOUR_OF_DAY)) {
 
             Intent intent = new Intent(applicationContext, CounterReceiver.class);
-            PendingIntent operation = PendingIntent.getBroadcast(applicationContext, 44, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+            PendingIntent operation = PendingIntent.getBroadcast(applicationContext, REQUEST_CODE_COUNTER_ALARM, intent, PendingIntent.FLAG_CANCEL_CURRENT);
             alarmManager.setRepeating(AlarmManager.RTC, System.currentTimeMillis() + AlarmManager.INTERVAL_DAY, AlarmManager.INTERVAL_DAY, operation);
             notifyCountingStart();
             manager.startFirstDay();
@@ -62,7 +65,7 @@ public class CounterPresenter implements CounterContract.Presenter {
             midnight.set(Calendar.DAY_OF_YEAR, now.get(Calendar.DAY_OF_YEAR) + 1);
 
             Intent intent = new Intent(applicationContext, NextMidnightReceiver.class);
-            PendingIntent operation = PendingIntent.getBroadcast(applicationContext, 33, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+            PendingIntent operation = PendingIntent.getBroadcast(applicationContext, REQUEST_CODE_MIDNIGHT_ALARM, intent, PendingIntent.FLAG_CANCEL_CURRENT);
             alarmManager.set(AlarmManager.RTC, midnight.getTimeInMillis(), operation);
         }
     }
