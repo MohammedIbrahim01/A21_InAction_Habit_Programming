@@ -12,6 +12,7 @@ import java.util.Calendar;
 @Entity(tableName = "tasks")
 public class Task {
 
+
     @PrimaryKey(autoGenerate = true)
     private int id;
 

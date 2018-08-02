@@ -1,9 +1,8 @@
 package com.InAction.X.x21InAction.tasks.Presenter;
 
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
@@ -17,20 +16,25 @@ import java.util.List;
 
 public class TasksPresenter implements TasksContract.Presenter {
 
-    private Fragment fragment;
+
     private TaskModel model;
+    private AppManager manager;
     private TasksContract.View view;
     private TasksViewModel viewModel;
-    private AppManager manager;
 
 
-    public TasksPresenter(Fragment fragment,TasksContract.View view) {
+    public TasksPresenter(Context applicationContext) {
 
-        this.fragment = fragment;
-        model = new TaskModel(fragment.getContext().getApplicationContext());
+        model = new TaskModel(applicationContext);
+    }
+
+
+    public TasksPresenter(Context applicationContext, TasksContract.View view) {
+
         this.view = view;
-        viewModel = ViewModelProviders.of(fragment.getActivity()).get(TasksViewModel.class);
-        manager = new AppManager(fragment.getContext().getApplicationContext());
+        viewModel = view.getViewModel();
+        model = new TaskModel(applicationContext);
+        manager = new AppManager(applicationContext);
     }
 
 
@@ -50,7 +54,7 @@ public class TasksPresenter implements TasksContract.Presenter {
     @Override
     public void setupTasksLive() {
 
-        viewModel.getTasks().observe(fragment.getActivity(), new Observer<List<Task>>() {
+        viewModel.getTaskList().observe(view.getLifeCycleOwner(), new Observer<List<Task>>() {
             @Override
             public void onChanged(@Nullable List<Task> tasks) {
 
@@ -61,7 +65,7 @@ public class TasksPresenter implements TasksContract.Presenter {
 
 
     /**
-     * delete task from application database then refresh tasks
+     * delete task (Model)
      *
      * @param task
      */
@@ -69,6 +73,16 @@ public class TasksPresenter implements TasksContract.Presenter {
     public void deleteTask(Task task) {
 
         model.deleteTask(task);
+    }
+
+
+    /**
+     * delete all Tasks (Model)
+     */
+    @Override
+    public void deleteAllTasks() {
+
+        model.deleteAllTasks();
     }
 
 
@@ -107,14 +121,5 @@ public class TasksPresenter implements TasksContract.Presenter {
         });
 
         return itemTouchHelper;
-    }
-
-
-    @Override
-    public void start() {
-
-        attachRecyclerViewWithAdapter();
-        setupTasksLive();
-        setupSwipeTaskFunctionality();
     }
 }

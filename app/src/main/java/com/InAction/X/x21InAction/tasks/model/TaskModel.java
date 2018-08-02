@@ -11,8 +11,10 @@ import java.util.concurrent.Executor;
 
 public class TaskModel implements TasksContract.Model {
 
+
     private Executor diskIOExecutor;
     private TaskDao taskDao;
+
 
     public TaskModel(Context applicationContext) {
 
@@ -21,6 +23,11 @@ public class TaskModel implements TasksContract.Model {
     }
 
 
+    /**
+     * insert task List
+     *
+     * @param taskList
+     */
     @Override
     public void insertTaskList(final List<Task> taskList) {
 
@@ -34,6 +41,11 @@ public class TaskModel implements TasksContract.Model {
     }
 
 
+    /**
+     * delete task
+     *
+     * @param task
+     */
     @Override
     public void deleteTask(final Task task) {
 
@@ -46,6 +58,10 @@ public class TaskModel implements TasksContract.Model {
         });
     }
 
+
+    /**
+     * delete all tasks
+     */
     @Override
     public void deleteAllTasks() {
 
