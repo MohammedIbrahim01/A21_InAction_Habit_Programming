@@ -1,5 +1,7 @@
 package com.InAction.X.x21InAction.achievements.view;
 
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +17,7 @@ import com.InAction.X.x21InAction.R;
 import com.InAction.X.x21InAction.achievements.AchievementContract;
 import com.InAction.X.x21InAction.achievements.model.Achievement;
 import com.InAction.X.x21InAction.achievements.presenter.AchievementPresenter;
+import com.InAction.X.x21InAction.expectation.view.ExpectationViewModel;
 
 import java.util.List;
 
@@ -23,11 +26,15 @@ import butterknife.ButterKnife;
 
 public class AchievementsFragment extends Fragment implements AchievementContract.View {
 
+
     private AchievementsAdapter adapter = new AchievementsAdapter();
     private AchievementPresenter presenter;
+    private AchievementViewModel viewModel;
+
 
     @BindView(R.id.achievements_recyclerView)
     RecyclerView achievementsRecyclerView;
+
 
     @Nullable
     @Override
@@ -35,25 +42,50 @@ public class AchievementsFragment extends Fragment implements AchievementContrac
         View view = inflater.inflate(R.layout.fragment_achievements, container, false);
         ButterKnife.bind(this, view);
 
-        presenter = new AchievementPresenter(this, this);
+        presenter = new AchievementPresenter(getContext(), this);
+        viewModel = ViewModelProviders.of(getActivity()).get(AchievementViewModel.class);
 
-        presenter.start();
+
+        presenter.setupRecyclerViewWithAdapter();
+        presenter.setupAchievementsLive();
+
 
         return view;
     }
 
 
     @Override
-    public void setAchievements(List<Achievement> achievementList) {
+    public AchievementsAdapter getAdapter() {
+
+        return adapter;
+    }
+
+
+    @Override
+    public RecyclerView getRecyclerView() {
+
+        return achievementsRecyclerView;
+    }
+
+
+    @Override
+    public LifecycleOwner getLifeCycleOwner() {
+
+        return getActivity();
+    }
+
+
+    @Override
+    public AchievementViewModel getViewModel() {
+
+        return viewModel;
+    }
+
+
+    @Override
+    public void setAchievementsLive(List<Achievement> achievementList) {
 
         adapter.setAchievementList(achievementList);
         adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void attachRecyclerViewWithAdapter() {
-
-        achievementsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        achievementsRecyclerView.setAdapter(adapter);
     }
 }

@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 
 public class AchievementsAdapter extends RecyclerView.Adapter<AchievementsAdapter.ViewHolder> {
 
+
     private List<Achievement> achievementList = new ArrayList<>();
 
 

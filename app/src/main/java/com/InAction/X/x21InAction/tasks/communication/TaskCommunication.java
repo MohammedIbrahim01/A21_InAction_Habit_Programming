@@ -6,6 +6,8 @@ import com.InAction.X.x21InAction.tasks.Presenter.TasksPresenter;
 import com.InAction.X.x21InAction.tasks.TasksContract;
 import com.InAction.X.x21InAction.tasks.model.Task;
 
+import java.util.List;
+
 public class TaskCommunication implements TasksContract.Communication {
 
 
@@ -29,5 +31,12 @@ public class TaskCommunication implements TasksContract.Communication {
     public void deleteAllTasks() {
 
         presenter.deleteAllTasks();
+    }
+
+
+    @Override
+    public void insertTaskList(List<Task> taskList) {
+
+        presenter.insertTaskList(taskList);
     }
 }

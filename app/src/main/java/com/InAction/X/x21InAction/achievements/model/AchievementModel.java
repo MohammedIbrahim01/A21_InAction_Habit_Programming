@@ -12,8 +12,10 @@ import java.util.concurrent.Executor;
 
 public class AchievementModel implements AchievementContract.Model {
 
+
     private Executor diskIOExecutor;
     private AchievementDao achievementDao;
+
 
     public AchievementModel(Context applicationContext) {
 

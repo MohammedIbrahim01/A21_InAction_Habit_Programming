@@ -2,30 +2,39 @@ package com.InAction.X.x21InAction.expectation.presenter;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.InAction.X.x21InAction.expectation.ExpectationContract;
 import com.InAction.X.x21InAction.expectation.model.Expectation;
 import com.InAction.X.x21InAction.expectation.model.ExpectationModel;
+import com.InAction.X.x21InAction.expectation.view.ExpectationAdapter;
 import com.InAction.X.x21InAction.expectation.view.ExpectationViewModel;
 
 import java.util.List;
 
 public class ExpectationPresenter implements ExpectationContract.Presenter {
 
-    private Fragment fragment;
     private ExpectationModel model;
     private ExpectationContract.View view;
     private ExpectationViewModel viewModel;
+    private Context context;
 
 
-    public ExpectationPresenter(Fragment fragment, ExpectationContract.View view) {
+    public ExpectationPresenter(Context applicationContext){
 
-        this.fragment = fragment;
-        model = new ExpectationModel(fragment.getActivity().getApplicationContext());
+        this.context = applicationContext;
+    }
+
+    public ExpectationPresenter(Context context, ExpectationContract.View view) {
+
+        this.context = context;
+        model = new ExpectationModel(context.getApplicationContext());
         this.view = view;
-        viewModel = ViewModelProviders.of(fragment.getActivity()).get(ExpectationViewModel.class);
+        viewModel = view.getViewModel();
     }
 
 
@@ -35,18 +44,22 @@ public class ExpectationPresenter implements ExpectationContract.Presenter {
     @Override
     public void setupRecyclerViewWithAdapter() {
 
-        view.setupRecyclerViewWithAdapter();
+        ExpectationAdapter adapter = view.getAdapter();
+        RecyclerView recyclerView = view.getRecyclerView();
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapter);
     }
 
 
     /**
      * setup Expectation ViewModel
-     *
      */
     @Override
     public void setupExpectationLive() {
 
-        viewModel.getExpectations().observe(fragment.getActivity(), new Observer<List<Expectation>>() {
+        viewModel.getExpectations().observe(view.getLifeCycleOwner(), new Observer<List<Expectation>>() {
             @Override
             public void onChanged(@Nullable List<Expectation> expectationList) {
 
@@ -57,25 +70,13 @@ public class ExpectationPresenter implements ExpectationContract.Presenter {
 
 
     /**
-     * delete expectation from database
+     * insert Expectation List (Model)
      *
-     * @param expectation
+     * @param expectationList
      */
     @Override
-    public void deleteExpectation(Expectation expectation) {
+    public void insertExpectationList(List<Expectation> expectationList) {
 
-        model.deleteExpectation(expectation);
-    }
-
-
-    /**
-     * start ExpectationPresentation
-     *
-     */
-    @Override
-    public void start() {
-
-        setupRecyclerViewWithAdapter();
-        setupExpectationLive();
+        model.insertExpectationList(expectationList);
     }
 }

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
@@ -43,7 +42,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         viewModel = ViewModelProviders.of(getActivity()).get(TasksViewModel.class);
 
 
-        presenter.attachRecyclerViewWithAdapter();
+        presenter.setUpRecyclerViewWithAdapter();
         presenter.setupTasksLive();
         presenter.setupSwipeTaskFunctionality();
 
@@ -65,6 +64,12 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         return adapter;
     }
 
+    @Override
+    public RecyclerView getRecyclerView() {
+
+        return tasksRecyclerView;
+    }
+
 
     @Override
     public void setTasks(final List<Task> taskList) {
@@ -73,13 +78,6 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         adapter.notifyDataSetChanged();
     }
 
-
-    @Override
-    public void attachRecyclerViewWithAdapter() {
-
-        tasksRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        tasksRecyclerView.setAdapter(adapter);
-    }
 
     @Override
     public TasksViewModel getViewModel() {

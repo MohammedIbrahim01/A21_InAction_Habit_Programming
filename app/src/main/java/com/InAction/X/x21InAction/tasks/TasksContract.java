@@ -28,9 +28,9 @@ public interface TasksContract {
 
         TasksAdapter getAdapter();
 
-        void setTasks(List<Task> taskList);
+        RecyclerView getRecyclerView();
 
-        void attachRecyclerViewWithAdapter();
+        void setTasks(List<Task> taskList);
 
         TasksViewModel getViewModel();
 
@@ -39,7 +39,7 @@ public interface TasksContract {
 
     interface Presenter {
 
-        void attachRecyclerViewWithAdapter();
+        void setUpRecyclerViewWithAdapter();
 
         void setupTasksLive();
 
@@ -50,12 +50,16 @@ public interface TasksContract {
         void deleteTask(Task task);
 
         void deleteAllTasks();
+
+        void insertTaskList(List<Task> taskList);
     }
 
-    interface Communication{
+    interface Communication {
 
         void deleteTask(Task task);
 
         void deleteAllTasks();
+
+        void insertTaskList(List<Task> taskList);
     }
 }

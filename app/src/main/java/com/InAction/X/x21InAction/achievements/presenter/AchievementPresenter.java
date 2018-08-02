@@ -1,31 +1,40 @@
 package com.InAction.X.x21InAction.achievements.presenter;
 
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.InAction.X.x21InAction.achievements.AchievementContract;
 import com.InAction.X.x21InAction.achievements.model.Achievement;
 import com.InAction.X.x21InAction.achievements.model.AchievementModel;
 import com.InAction.X.x21InAction.achievements.view.AchievementViewModel;
+import com.InAction.X.x21InAction.achievements.view.AchievementsAdapter;
 
 import java.util.List;
 
 public class AchievementPresenter implements AchievementContract.Presenter {
 
-    private Fragment fragment;
+
     private AchievementModel model;
     private AchievementContract.View view;
     private AchievementViewModel viewModel;
+    private Context context;
 
 
-    public AchievementPresenter(Fragment fragment, AchievementContract.View view) {
+    public AchievementPresenter(Context applicationContext) {
 
-        this.fragment = fragment;
-        model = new AchievementModel(fragment.getContext().getApplicationContext());
+        model = new AchievementModel(applicationContext);
+    }
+
+
+    public AchievementPresenter(Context context, AchievementContract.View view) {
+
+        this.context = context;
+        model = new AchievementModel(context.getApplicationContext());
         this.view = view;
-        viewModel = ViewModelProviders.of(fragment.getActivity()).get(AchievementViewModel.class);
+        viewModel = view.getViewModel();
     }
 
 
@@ -33,9 +42,14 @@ public class AchievementPresenter implements AchievementContract.Presenter {
      * attach recyclerView with adapter
      */
     @Override
-    public void attachRecyclerViewWithAdapter() {
+    public void setupRecyclerViewWithAdapter() {
 
-        view.attachRecyclerViewWithAdapter();
+        AchievementsAdapter adapter = view.getAdapter();
+        RecyclerView recyclerView = view.getRecyclerView();
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapter);
     }
 
 
@@ -45,11 +59,11 @@ public class AchievementPresenter implements AchievementContract.Presenter {
     @Override
     public void setupAchievementsLive() {
 
-        viewModel.getAchievementList().observe(fragment.getActivity(), new Observer<List<Achievement>>() {
+        viewModel.getAchievementList().observe(view.getLifeCycleOwner(), new Observer<List<Achievement>>() {
             @Override
             public void onChanged(@Nullable List<Achievement> achievementList) {
 
-                view.setAchievements(achievementList);
+                view.setAchievementsLive(achievementList);
             }
         });
     }
@@ -67,10 +81,14 @@ public class AchievementPresenter implements AchievementContract.Presenter {
     }
 
 
+    /**
+     * insert Achievement (Model)
+     *
+     * @param achievement
+     */
     @Override
-    public void start() {
+    public void insertAchievement(Achievement achievement) {
 
-        attachRecyclerViewWithAdapter();
-        setupAchievementsLive();
+        model.insertAchievement(achievement);
     }
 }

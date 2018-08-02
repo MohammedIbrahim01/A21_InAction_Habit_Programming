@@ -1,5 +1,7 @@
 package com.InAction.X.x21InAction.expectation.view;
 
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,13 +22,16 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DayZeroFragment extends Fragment implements ExpectationContract.View {
+public class ExpectationFragment extends Fragment implements ExpectationContract.View {
+
 
     private ExpectationAdapter adapter = new ExpectationAdapter();
     private ExpectationContract.Presenter presenter;
 
+
     @BindView(R.id.expectations_recyclerView)
     RecyclerView expectationsRecyclerView;
+    private ExpectationViewModel viewModel;
 
 
     @Nullable
@@ -35,18 +40,41 @@ public class DayZeroFragment extends Fragment implements ExpectationContract.Vie
         View view = inflater.inflate(R.layout.fragment_day_zero, container, false);
         ButterKnife.bind(this, view);
 
-        presenter = new ExpectationPresenter(this, this);
+        presenter = new ExpectationPresenter(getContext(), this);
+        viewModel = ViewModelProviders.of(getActivity()).get(ExpectationViewModel.class);
 
-        presenter.start();
+
+        presenter.setupRecyclerViewWithAdapter();
+        presenter.setupExpectationLive();
+
 
         return view;
     }
 
-    @Override
-    public void setupRecyclerViewWithAdapter() {
 
-        expectationsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        expectationsRecyclerView.setAdapter(adapter);
+    @Override
+    public ExpectationAdapter getAdapter() {
+
+        return adapter;
+    }
+
+
+    @Override
+    public RecyclerView getRecyclerView() {
+
+        return expectationsRecyclerView;
+    }
+
+    @Override
+    public LifecycleOwner getLifeCycleOwner() {
+
+        return getActivity();
+    }
+
+    @Override
+    public ExpectationViewModel getViewModel() {
+
+        return viewModel;
     }
 
 

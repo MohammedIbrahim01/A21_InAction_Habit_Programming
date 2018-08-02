@@ -3,6 +3,7 @@ package com.InAction.X.x21InAction.tasks.Presenter;
 import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
@@ -10,6 +11,7 @@ import com.InAction.X.x21InAction.manager.AppManager;
 import com.InAction.X.x21InAction.tasks.TasksContract;
 import com.InAction.X.x21InAction.tasks.model.Task;
 import com.InAction.X.x21InAction.tasks.model.TaskModel;
+import com.InAction.X.x21InAction.tasks.view.TasksAdapter;
 import com.InAction.X.x21InAction.tasks.view.TasksViewModel;
 
 import java.util.List;
@@ -21,6 +23,7 @@ public class TasksPresenter implements TasksContract.Presenter {
     private AppManager manager;
     private TasksContract.View view;
     private TasksViewModel viewModel;
+    private Context applicationContext;
 
 
     public TasksPresenter(Context applicationContext) {
@@ -35,6 +38,7 @@ public class TasksPresenter implements TasksContract.Presenter {
         viewModel = view.getViewModel();
         model = new TaskModel(applicationContext);
         manager = new AppManager(applicationContext);
+        this.applicationContext = applicationContext;
     }
 
 
@@ -42,9 +46,14 @@ public class TasksPresenter implements TasksContract.Presenter {
      * setup recyclerView with adapter
      */
     @Override
-    public void attachRecyclerViewWithAdapter() {
+    public void setUpRecyclerViewWithAdapter() {
 
-        view.attachRecyclerViewWithAdapter();
+        TasksAdapter adapter = view.getAdapter();
+        RecyclerView recyclerView = view.getRecyclerView();
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(applicationContext));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapter);
     }
 
 
@@ -83,6 +92,18 @@ public class TasksPresenter implements TasksContract.Presenter {
     public void deleteAllTasks() {
 
         model.deleteAllTasks();
+    }
+
+
+    /**
+     * insert Task List(Model)
+     *
+     * @param taskList
+     */
+    @Override
+    public void insertTaskList(List<Task> taskList) {
+
+        model.insertTaskList(taskList);
     }
 
 
