@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
+import com.InAction.X.x21InAction.AppCP;
 import com.InAction.X.x21InAction.counter.CounterContract;
 import com.InAction.X.x21InAction.counter.model.CounterModel;
 import com.InAction.X.x21InAction.counter.receiver.CounterReceiver;
@@ -18,9 +19,12 @@ import java.util.Calendar;
 public class CounterPresenter implements CounterContract.Presenter {
 
 
-    public static final int REQUEST_CODE_COUNTER_ALARM = 44;
-    public static final int REQUEST_CODE_MIDNIGHT_ALARM = 33;
-
+    public static final int REQUEST_CODE_COUNTER_ALARM = AppCP.REQUEST_CODE_COUNTER_ALARM;
+    public static final int REQUEST_CODE_MIDNIGHT_ALARM = AppCP.REQUEST_CODE_MIDNIGHT_ALARM;
+    public static final int HOUR_MIDNIGHT = AppCP.HOUR_MIDNIGHT;
+    public static final int MINUTE_MIDNIGHT = AppCP.MINUTE_MIDNIGHT;
+    public static final int SECOND_MIDNIGHT = AppCP.SECOND_MIDNIGHT;
+    private static final long INTERVAL_COUNTER = AppCP.INTERVAL_COUNTER;
 
     private Context applicationContext;
     private AlarmManager alarmManager;
@@ -38,9 +42,9 @@ public class CounterPresenter implements CounterContract.Presenter {
 
         //set midnight fields
         midnight = Calendar.getInstance();
-        midnight.set(Calendar.HOUR_OF_DAY, 0);
-        midnight.set(Calendar.MINUTE, 0);
-        midnight.set(Calendar.SECOND, 0);
+        midnight.set(Calendar.HOUR_OF_DAY, HOUR_MIDNIGHT);
+        midnight.set(Calendar.MINUTE, MINUTE_MIDNIGHT);
+        midnight.set(Calendar.SECOND, SECOND_MIDNIGHT);
     }
 
 
@@ -49,18 +53,21 @@ public class CounterPresenter implements CounterContract.Presenter {
 
         Calendar now = Calendar.getInstance();
 
+
         //check if now is in midnight hour
         if (now.get(Calendar.HOUR_OF_DAY) == midnight.get(Calendar.HOUR_OF_DAY)) {
 
             Intent intent = new Intent(applicationContext, CounterReceiver.class);
             PendingIntent operation = PendingIntent.getBroadcast(applicationContext, REQUEST_CODE_COUNTER_ALARM, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-            alarmManager.setRepeating(AlarmManager.RTC, System.currentTimeMillis() + AlarmManager.INTERVAL_DAY, AlarmManager.INTERVAL_DAY, operation);
-            notifyCountingStart(manager);
+            alarmManager.setRepeating(AlarmManager.RTC, System.currentTimeMillis() + INTERVAL_COUNTER, INTERVAL_COUNTER, operation);
+
+            notifyCountingStart(manager.getHabitName());
             manager.startFirstDay();
+
         } else {
 
-            //next midnight is in the next day
-            midnight.set(Calendar.DAY_OF_YEAR, now.get(Calendar.DAY_OF_YEAR) + 1);
+            //next midnight is in the next day (paused)
+            midnight.set(Calendar.DAY_OF_YEAR, now.get(Calendar.DAY_OF_YEAR));
 
             Intent intent = new Intent(applicationContext, NextMidnightReceiver.class);
             PendingIntent operation = PendingIntent.getBroadcast(applicationContext, REQUEST_CODE_MIDNIGHT_ALARM, intent, PendingIntent.FLAG_CANCEL_CURRENT);
@@ -70,10 +77,10 @@ public class CounterPresenter implements CounterContract.Presenter {
 
 
     @Override
-    public void notifyCountingStart(AppManager manager) {
+    public void notifyCountingStart(String habitName) {
 
         NotificationsUtils notificationsUtils = new NotificationsUtils(applicationContext);
-        notificationsUtils.notifyCountingStart(manager.getHabitName());
+        notificationsUtils.notifyCountingStart(habitName);
     }
 
 

@@ -3,13 +3,14 @@ package com.InAction.X.x21InAction.counter.model;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.InAction.X.x21InAction.AppCP;
 import com.InAction.X.x21InAction.counter.CounterContract;
 
 public class CounterModel implements CounterContract.Model{
 
 
-    public static final String NAME_SHARED_PREFERENCES = "name-sharedPreferences";
-    public static final String KEY_COUNT = "key-count";
+    public static final String NAME_SHARED_PREFERENCES = AppCP.NAME_SHARED_PREFERENCES;
+    public static final String KEY_COUNT = AppCP.KEY_COUNT;
 
 
     private SharedPreferences sharedPreferences;

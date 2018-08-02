@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     private MainPresenter presenter;
     private SharedPreferences sharedPreferences;
-    private AppManager manager;
 
     @BindView(R.id.counter_textView)
     TextView counterTextView;
@@ -66,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         }
 
         presenter = new MainPresenter(this, this);
-        manager = new AppManager(getApplicationContext());
 
 
         presenter.setupTabLayoutAndViewPager();
@@ -98,16 +96,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-
-            case R.id.action_add_habit:
-                presenter.clearDatabase();
-                manager.resetCounter();
-                break;
-            case R.id.action_stop_Time:
-                break;
-        }
 
         return super.onOptionsItemSelected(item);
     }

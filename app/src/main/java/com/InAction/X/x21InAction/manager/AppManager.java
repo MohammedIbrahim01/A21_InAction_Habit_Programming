@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import com.InAction.X.x21InAction.AppCP;
 import com.InAction.X.x21InAction.achievements.communication.AchievementCommunication;
 import com.InAction.X.x21InAction.achievements.model.Achievement;
 import com.InAction.X.x21InAction.counter.Communication.CounterCommunication;
@@ -30,9 +31,9 @@ import java.util.List;
 public class AppManager {
 
 
-    public static final String NAME_SHARED_PREFERENCES = "name-sharedPreferences";
-    public static final String KEY_FIRST_LAUNCH = "key-first_launch";
-    public static final String KEY_NAME_HABIT = "key-name-habit";
+    public static final String NAME_SHARED_PREFERENCES = AppCP.NAME_SHARED_PREFERENCES;
+    public static final String KEY_FIRST_LAUNCH = AppCP.KEY_FIRST_LAUNCH;
+    public static final String KEY_HABIT_NAME = AppCP.KEY_HABIT_NAME;
 
 
     private Context applicationContext;
@@ -98,7 +99,7 @@ public class AppManager {
     public void goAddTask(String habitName) {
 
         Intent intent = new Intent(activity, AddTaskActivity.class);
-        intent.putExtra(KEY_NAME_HABIT, habitName);
+        intent.putExtra(KEY_HABIT_NAME, habitName);
         activity.startActivity(intent);
     }
 
@@ -109,7 +110,7 @@ public class AppManager {
     public void goAddExpectation(String habitName) {
 
         Intent intent = new Intent(activity, AddExpectationActivity.class);
-        intent.putExtra(KEY_NAME_HABIT, habitName);
+        intent.putExtra(KEY_HABIT_NAME, habitName);
         activity.startActivity(intent);
     }
 

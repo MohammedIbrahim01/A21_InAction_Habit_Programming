@@ -3,7 +3,6 @@ package com.InAction.X.x21InAction.expectation;
 import android.arch.lifecycle.LifecycleOwner;
 import android.support.v7.widget.RecyclerView;
 
-import com.InAction.X.x21InAction.BasePresenter;
 import com.InAction.X.x21InAction.expectation.model.Expectation;
 import com.InAction.X.x21InAction.expectation.view.ExpectationAdapter;
 import com.InAction.X.x21InAction.expectation.view.ExpectationViewModel;

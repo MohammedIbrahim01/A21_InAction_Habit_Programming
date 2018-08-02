@@ -17,7 +17,7 @@ public interface CounterContract {
 
         void startCountingIfMidnight(AppManager manager);
 
-        void notifyCountingStart(AppManager manager);
+        void notifyCountingStart(String habitName);
 
         void increaseCount();
 

@@ -4,7 +4,6 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
-import com.InAction.X.x21InAction.BasePresenter;
 import com.InAction.X.x21InAction.tasks.model.Task;
 import com.InAction.X.x21InAction.tasks.view.TasksAdapter;
 import com.InAction.X.x21InAction.tasks.view.TasksViewModel;
