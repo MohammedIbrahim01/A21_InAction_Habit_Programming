@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.InAction.X.x21InAction.R;
 import com.InAction.X.x21InAction.habit.HabitContract;
@@ -33,6 +34,8 @@ public class CreateHabitActivity extends AppCompatActivity implements View.OnCli
     TextView next;
     @BindView(R.id.create_habit_start)
     TextView start;
+    @BindView(R.id.create_habit_finish)
+    TextView finish;
     @BindView(R.id.create_habit_viewPager)
     CustomViewPager viewPager;
 
@@ -60,6 +63,7 @@ public class CreateHabitActivity extends AppCompatActivity implements View.OnCli
         back.setOnClickListener(this);
         next.setOnClickListener(this);
         start.setOnClickListener(this);
+        finish.setOnClickListener(this);
 
         setButtonsVisibilities(viewPager.getCurrentItem());
     }
@@ -84,7 +88,12 @@ public class CreateHabitActivity extends AppCompatActivity implements View.OnCli
 
             case R.id.create_habit_start:
                 manager.startHabitPrograming(habitName);
+                presenter.nextPage();
+                break;
+
+            case R.id.create_habit_finish:
                 finish();
+                Toast.makeText(CreateHabitActivity.this, "Tasks Will Start in next midnight", Toast.LENGTH_LONG).show();
                 break;
         }
     }
@@ -100,18 +109,29 @@ public class CreateHabitActivity extends AppCompatActivity implements View.OnCli
                 back.setVisibility(View.GONE);
                 next.setVisibility(View.VISIBLE);
                 start.setVisibility(View.GONE);
+                finish.setVisibility(View.GONE);
                 break;
 
             case 5:
                 back.setVisibility(View.VISIBLE);
                 next.setVisibility(View.GONE);
                 start.setVisibility(View.VISIBLE);
+                finish.setVisibility(View.GONE);
+                break;
+
+            case 6:
+                back.setVisibility(View.VISIBLE);
+                next.setVisibility(View.GONE);
+                start.setVisibility(View.GONE);
+                finish.setVisibility(View.VISIBLE);
                 break;
 
             default:
                 back.setVisibility(View.VISIBLE);
                 next.setVisibility(View.VISIBLE);
                 start.setVisibility(View.GONE);
+                finish.setVisibility(View.GONE);
+
         }
     }
 

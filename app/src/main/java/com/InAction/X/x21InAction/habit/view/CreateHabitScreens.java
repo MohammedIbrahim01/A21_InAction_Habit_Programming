@@ -20,6 +20,9 @@ public class CreateHabitScreens {
             case 5:
                 return new TempTasksFragment();
 
+            case 6:
+                return new HabitOverviewScreen();
+
             default:
                 return CreateHabitDisplayScreens.getScreen(page);
         }

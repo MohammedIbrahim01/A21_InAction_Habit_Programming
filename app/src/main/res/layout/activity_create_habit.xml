@@ -42,6 +42,15 @@
             android:text="start"
             android:textSize="@dimen/ButtonsTextSize" />
 
+        <TextView
+            android:id="@+id/create_habit_finish"
+            android:layout_width="@dimen/IntroScreensButtonWidth"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:text="Finish"
+            android:textSize="@dimen/ButtonsTextSize" />
+
         <View
             android:layout_width="@dimen/LineThickness"
             android:layout_height="match_parent"

@@ -25,6 +25,7 @@ public class AchievementPresenter implements AchievementContract.Presenter {
 
     public AchievementPresenter(Context applicationContext) {
 
+        context = applicationContext;
         model = new AchievementModel(applicationContext);
     }
 

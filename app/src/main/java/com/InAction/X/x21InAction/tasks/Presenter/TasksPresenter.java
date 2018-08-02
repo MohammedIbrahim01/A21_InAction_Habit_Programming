@@ -28,6 +28,7 @@ public class TasksPresenter implements TasksContract.Presenter {
 
     public TasksPresenter(Context applicationContext) {
 
+        this.applicationContext = applicationContext;
         model = new TaskModel(applicationContext);
     }
 

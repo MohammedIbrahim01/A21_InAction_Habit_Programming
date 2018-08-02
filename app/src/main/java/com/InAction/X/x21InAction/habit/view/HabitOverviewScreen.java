@@ -1,4 +1,4 @@
-package com.InAction.X.x21InAction.intro_screens;
+package com.InAction.X.x21InAction.habit.view;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -27,13 +27,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class IntroHabitOverviewScreen extends Fragment {
+public class HabitOverviewScreen extends Fragment {
 
     private TempTasksAdapter tempTaskAdapter;
     private TempExpectationsAdapter tempExpectationsAdapter;
     private TempTasksViewModel tempTasksViewModel;
     private TempExpectationsViewModel tempExpectationsViewModel;
-    private AppManager manager;
 
     @BindView(R.id.habit_overview_habit_name_textView)
     TextView habitNameTextView;
@@ -50,7 +49,6 @@ public class IntroHabitOverviewScreen extends Fragment {
 
         tempTaskAdapter = new TempTasksAdapter();
         tempExpectationsAdapter = new TempExpectationsAdapter();
-        manager = new AppManager(getActivity().getApplicationContext());
 
         tempTasksViewModel = ViewModelProviders.of(getActivity()).get(TempTasksViewModel.class);
         tempExpectationsViewModel = ViewModelProviders.of(getActivity()).get(TempExpectationsViewModel.class);
@@ -78,6 +76,8 @@ public class IntroHabitOverviewScreen extends Fragment {
                 tempExpectationsAdapter.notifyDataSetChanged();
             }
         });
+
+        habitNameTextView.setText(((CreateHabitActivity)getActivity()).habitName);
 
         return view;
     }

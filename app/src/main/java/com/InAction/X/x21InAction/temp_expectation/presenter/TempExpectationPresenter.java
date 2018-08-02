@@ -32,6 +32,7 @@ public class TempExpectationPresenter implements TempExpectationContract.Present
     public TempExpectationPresenter(Context applicationContext) {
 
         this.applicationContext = applicationContext;
+        model = new TempExpectationModel(applicationContext);
     }
 
 

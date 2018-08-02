@@ -31,7 +31,6 @@ public class ExpectationFragment extends Fragment implements ExpectationContract
 
     @BindView(R.id.expectations_recyclerView)
     RecyclerView expectationsRecyclerView;
-    private ExpectationViewModel viewModel;
 
 
     @Nullable
@@ -41,7 +40,6 @@ public class ExpectationFragment extends Fragment implements ExpectationContract
         ButterKnife.bind(this, view);
 
         presenter = new ExpectationPresenter(getContext(), this);
-        viewModel = ViewModelProviders.of(getActivity()).get(ExpectationViewModel.class);
 
 
         presenter.setupRecyclerViewWithAdapter();
@@ -74,7 +72,7 @@ public class ExpectationFragment extends Fragment implements ExpectationContract
     @Override
     public ExpectationViewModel getViewModel() {
 
-        return viewModel;
+        return ViewModelProviders.of(getActivity()).get(ExpectationViewModel.class);
     }
 
 
