@@ -9,6 +9,8 @@ import com.InAction.X.x21InAction.achievements.model.Achievement;
 import com.InAction.X.x21InAction.counter.Communication.CounterCommunication;
 import com.InAction.X.x21InAction.expectation.communication.ExpectationCommunication;
 import com.InAction.X.x21InAction.habit.communication.HabitCommunication;
+import com.InAction.X.x21InAction.habit.model.Habit;
+import com.InAction.X.x21InAction.habit.view.CreateHabitActivity;
 import com.InAction.X.x21InAction.tasks.communication.TaskCommunication;
 import com.InAction.X.x21InAction.temp_expectation.communication.TempExpectationCommunication;
 import com.InAction.X.x21InAction.temp_task.communication.TempTaskCommunication;
@@ -28,6 +30,8 @@ import java.util.List;
 public class AppManager {
 
 
+    public static final String NAME_SHARED_PREFERENCES = "name-sharedPreferences";
+    public static final String KEY_FIRST_LAUNCH = "key-first_launch";
     public static final String KEY_NAME_HABIT = "key-name-habit";
 
 
@@ -130,7 +134,7 @@ public class AppManager {
     /**
      * To Use In HabitPresenter
      * <p>
-     * get taskList from tempTasks
+     * getScreen taskList from tempTasks
      *
      * @return Task List
      */
@@ -151,7 +155,7 @@ public class AppManager {
     /**
      * To Use In HabitPresenter
      * <p>
-     * get ExpectationList from tempExpectations
+     * getScreen ExpectationList from tempExpectations
      *
      * @return Expectation List
      */
@@ -171,9 +175,13 @@ public class AppManager {
 
     /**
      * To Use In HabitPresenter
+     *
+     * @param habitName
      */
-    public void startHabitPrograming() {
+    public void startHabitPrograming(String habitName) {
 
+        Habit habit = new Habit(habitName, getTaskListFromTemp(), getExpectationListFromTemp());
+        saveHabit(habit);
         showExpectationList(getExpectationListFromHabit());
         counterCommunication.startCountingIfMidnight(this);
     }
@@ -182,7 +190,7 @@ public class AppManager {
     /**
      * To Use In MainPresenter
      * <p>
-     * get current count of days
+     * getScreen current count of days
      *
      * @return
      */
@@ -228,6 +236,12 @@ public class AppManager {
 
         showTaskList(taskList);
         scheduleDayTasks(taskList);
+    }
+
+
+    public void saveHabit(Habit habit){
+
+        habitCommunication.insertHabit(habit);
     }
 
 
@@ -299,7 +313,7 @@ public class AppManager {
 
 
     /**
-     * get dayTasks that stores inside the habit
+     * getScreen dayTasks that stores inside the habit
      *
      * @return Task List
      */
@@ -309,7 +323,7 @@ public class AppManager {
     }
 
     /**
-     * get habitExpectations that stores inside the habit
+     * getScreen habitExpectations that stores inside the habit
      *
      * @return Expectation List
      */
@@ -320,7 +334,7 @@ public class AppManager {
 
 
     /**
-     * get dayTasks from Task database
+     * getScreen dayTasks from Task database
      *
      * to unSchedule it when new day is come
      *
@@ -344,5 +358,18 @@ public class AppManager {
                 AppDatabase.getInstance(applicationContext).clearAllTables();
             }
         });
+    }
+
+
+    public void setFirstLaunch(boolean firstLaunch) {
+
+        applicationContext.getSharedPreferences(NAME_SHARED_PREFERENCES, Context.MODE_PRIVATE).edit().putBoolean(KEY_FIRST_LAUNCH, false).apply();
+
+    }
+
+
+    public void goCreateHabit() {
+
+        activity.startActivity(new Intent(activity, CreateHabitActivity.class));
     }
 }

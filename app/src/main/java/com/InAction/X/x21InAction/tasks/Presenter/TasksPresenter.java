@@ -108,7 +108,7 @@ public class TasksPresenter implements TasksContract.Presenter {
     }
 
     /**
-     * get all Tasks (Model)
+     * getScreen all Tasks (Model)
      */
     @Override
     public List<Task> getAllTasks() {
@@ -128,7 +128,7 @@ public class TasksPresenter implements TasksContract.Presenter {
 
 
     /**
-     * get an instance of ItemTouchHelper
+     * getScreen an instance of ItemTouchHelper
      *
      * @return ItemTouchHelper
      */
@@ -144,7 +144,7 @@ public class TasksPresenter implements TasksContract.Presenter {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
 
-                //when task was swiped : get that Task then delete it
+                //when task was swiped : getScreen that Task then delete it
                 Task swipedTask = view.getAdapter().getTaskList().get(viewHolder.getAdapterPosition());
                 deleteTask(swipedTask);
                 manager.addAchievementFromTask(swipedTask);

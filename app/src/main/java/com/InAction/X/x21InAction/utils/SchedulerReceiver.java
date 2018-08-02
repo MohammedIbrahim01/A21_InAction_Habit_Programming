@@ -17,6 +17,6 @@ public class SchedulerReceiver extends BroadcastReceiver{
         Task task = new Gson().fromJson(intent.getStringExtra(KEY_TASK), Task.class);
 
         NotificationsUtils notificationsUtils = new NotificationsUtils(context);
-        notificationsUtils.notifyWith(task);
+        notificationsUtils.notifyTimeFor(task);
     }
 }

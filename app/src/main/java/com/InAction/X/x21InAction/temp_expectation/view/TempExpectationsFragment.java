@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.InAction.X.x21InAction.R;
+import com.InAction.X.x21InAction.habit.view.CreateHabitActivity;
 import com.InAction.X.x21InAction.temp_expectation.TempExpectationContract;
 import com.InAction.X.x21InAction.intro_screens.view.IntroScreensActivity;
 import com.InAction.X.x21InAction.manager.AppManager;
@@ -37,7 +38,7 @@ public class TempExpectationsFragment extends Fragment implements TempExpectatio
     @OnClick(R.id.guidance_add_expectation_button)
     void addExpectation() {
 
-        manager.goAddExpectation(((IntroScreensActivity) getActivity()).habitName);
+        manager.goAddExpectation(((CreateHabitActivity) getActivity()).habitName);
     }
 
 

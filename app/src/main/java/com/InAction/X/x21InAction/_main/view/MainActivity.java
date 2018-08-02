@@ -56,10 +56,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
         adView.loadAd(adRequest);
 
-
         sharedPreferences = getSharedPreferences(NAME_SHARED_PREFERENCES, MODE_PRIVATE);
 
-        sharedPreferences.edit().putBoolean(KEY_FIRST_LAUNCH, true).apply();
 
         if (sharedPreferences.getBoolean(KEY_FIRST_LAUNCH, true)) {
 
@@ -69,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
         presenter = new MainPresenter(this, this);
         manager = new AppManager(getApplicationContext());
+
 
         presenter.setupTabLayoutAndViewPager();
 

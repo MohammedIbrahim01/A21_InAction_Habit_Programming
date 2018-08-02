@@ -24,7 +24,7 @@ public class NotificationsUtils {
         this.context = context;
     }
 
-    public void notifyWith(Task task) {
+    public void notifyTimeFor(Task task) {
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 

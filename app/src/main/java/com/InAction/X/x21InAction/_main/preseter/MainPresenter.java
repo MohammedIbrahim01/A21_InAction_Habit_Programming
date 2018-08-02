@@ -26,7 +26,7 @@ public class MainPresenter implements MainContract.Presenter {
 
 
     /**
-     * get fragmentPagerAdapter from model then pass it to view to setupTabLayoutAndViewPager
+     * getScreen fragmentPagerAdapter from model then pass it to view to setupTabLayoutAndViewPager
      */
     @Override
     public void setupTabLayoutAndViewPager() {
@@ -48,7 +48,7 @@ public class MainPresenter implements MainContract.Presenter {
 
 
     /**
-     * get count from manager then display it
+     * getScreen count from manager then display it
      */
     @Override
     public void setCounter() {

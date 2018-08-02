@@ -31,6 +31,7 @@ public class TempTaskPresenter implements TempTaskContract.Presenter {
     public TempTaskPresenter(Context applicationContext) {
 
         this.applicationContext = applicationContext;
+        model = new TempTaskModel(applicationContext);
     }
 
 

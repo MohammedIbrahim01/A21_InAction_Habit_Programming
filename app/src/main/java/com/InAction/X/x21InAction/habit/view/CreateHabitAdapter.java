@@ -1,4 +1,4 @@
-package com.InAction.X.x21InAction.intro_screens.view;
+package com.InAction.X.x21InAction.habit.view;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,25 +7,27 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IntoScreensAdapter extends FragmentPagerAdapter {
+public class CreateHabitAdapter extends FragmentPagerAdapter {
 
 
-    List<Fragment> fragmentList = new ArrayList<>();
+    private List<Fragment> fragmentList = new ArrayList<>();
 
 
-    public IntoScreensAdapter(FragmentManager fm) {
+    public CreateHabitAdapter(FragmentManager fm) {
         super(fm);
     }
 
 
     @Override
     public Fragment getItem(int position) {
+
         return fragmentList.get(position);
     }
 
 
     @Override
     public int getCount() {
+
         return fragmentList.size();
     }
 
@@ -33,5 +35,11 @@ public class IntoScreensAdapter extends FragmentPagerAdapter {
     public void addFragment(Fragment fragment) {
 
         fragmentList.add(fragment);
+    }
+
+
+    public Fragment getFragment(int page) {
+
+        return fragmentList.get(page);
     }
 }

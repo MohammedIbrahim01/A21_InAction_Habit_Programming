@@ -27,13 +27,15 @@ public class ExpectationPresenter implements ExpectationContract.Presenter {
     public ExpectationPresenter(Context applicationContext){
 
         this.context = applicationContext;
+        model = new ExpectationModel(context.getApplicationContext());
+        viewModel = view.getViewModel();
     }
 
     public ExpectationPresenter(Context context, ExpectationContract.View view) {
 
         this.context = context;
-        model = new ExpectationModel(context.getApplicationContext());
         this.view = view;
+        model = new ExpectationModel(context.getApplicationContext());
         viewModel = view.getViewModel();
     }
 

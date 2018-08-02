@@ -1,25 +1,27 @@
-package com.InAction.X.x21InAction.intro_screens.model;
+package com.InAction.X.x21InAction.habit.view;
 
 import android.support.v4.app.Fragment;
 
 import com.InAction.X.x21InAction.temp_expectation.view.TempExpectationsFragment;
-import com.InAction.X.x21InAction.intro_screens.IntroHabitOverviewScreen;
 import com.InAction.X.x21InAction.temp_task.view.TempTasksFragment;
 
-public class IntroScreensModel {
+public class CreateHabitScreens {
 
     public static Fragment getScreen(int page) {
 
         switch (page) {
 
-            case 7:
+            case 1:
+                return new HabitNameFragment();
+
+            case 3:
                 return new TempExpectationsFragment();
-            case 9:
+
+            case 5:
                 return new TempTasksFragment();
-            case 10:
-                return new IntroHabitOverviewScreen();
+
             default:
-                return IntroFragments.getIntro(page);
+                return CreateHabitDisplayScreens.getScreen(page);
         }
     }
 }

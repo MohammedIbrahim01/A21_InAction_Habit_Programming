@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.InAction.X.x21InAction.R;
+import com.InAction.X.x21InAction.habit.view.CreateHabitActivity;
 import com.InAction.X.x21InAction.temp_task.TempTaskContract;
 import com.InAction.X.x21InAction.intro_screens.view.IntroScreensActivity;
 import com.InAction.X.x21InAction.manager.AppManager;
@@ -39,7 +40,7 @@ public class TempTasksFragment extends Fragment implements TempTaskContract.View
     @OnClick(R.id.guidance_add_task_button)
     void addTask() {
 
-        manager.goAddTask(((IntroScreensActivity) getActivity()).habitName);
+        manager.goAddTask(((CreateHabitActivity) getActivity()).habitName);
     }
 
 
