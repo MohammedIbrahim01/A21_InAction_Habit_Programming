@@ -3,6 +3,7 @@
     package="com.InAction.X.x21InAction">
 
     <uses-permission android:name="android.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -14,8 +15,17 @@
         <receiver android:name=".utils.SchedulerReceiver" />
         <receiver android:name=".counter.receiver.CounterReceiver" />
         <receiver android:name=".counter.receiver.NextMidnightReceiver" />
+        <receiver
+            android:name=".utils.BootReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
-        <activity android:name="._main.view.MainActivity">
+        <activity
+            android:name="._main.view.MainActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

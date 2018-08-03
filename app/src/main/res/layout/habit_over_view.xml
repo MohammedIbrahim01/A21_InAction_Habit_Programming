@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <TextView
+        android:layout_marginTop="24dp"
         android:id="@+id/habit_overview_habit_name_textView"
         style="@style/IntroSpotText"
         android:gravity="center"
@@ -16,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal">
 
         <TextView
@@ -34,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Tasks"
+            android:text="Expectations"
             android:textSize="25sp" />
 
     </LinearLayout>

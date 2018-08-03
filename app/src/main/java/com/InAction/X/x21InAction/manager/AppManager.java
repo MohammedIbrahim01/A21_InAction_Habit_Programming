@@ -3,11 +3,13 @@ package com.InAction.X.x21InAction.manager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import com.InAction.X.x21InAction.AppCP;
 import com.InAction.X.x21InAction.achievements.communication.AchievementCommunication;
 import com.InAction.X.x21InAction.achievements.model.Achievement;
-import com.InAction.X.x21InAction.counter.Communication.CounterCommunication;
+import com.InAction.X.x21InAction.counter.model.CounterModel;
+import com.InAction.X.x21InAction.counter.presenter.CounterPresenter;
 import com.InAction.X.x21InAction.expectation.communication.ExpectationCommunication;
 import com.InAction.X.x21InAction.habit.communication.HabitCommunication;
 import com.InAction.X.x21InAction.habit.model.Habit;
@@ -45,7 +47,6 @@ public class AppManager {
     private TempTaskCommunication tempTaskCommunication;
     private TempExpectationCommunication tempExpectationCommunication;
     private HabitCommunication habitCommunication;
-    private CounterCommunication counterCommunication;
 
 
     /**
@@ -86,7 +87,6 @@ public class AppManager {
         tempTaskCommunication = new TempTaskCommunication(applicationContext);
         tempExpectationCommunication = new TempExpectationCommunication(applicationContext);
         habitCommunication = new HabitCommunication(applicationContext);
-        counterCommunication = new CounterCommunication(applicationContext);
     }
 
 
@@ -127,7 +127,7 @@ public class AppManager {
      */
     public void addAchievementFromTask(Task task) {
 
-        int day = counterCommunication.getCount();
+        int day = new CounterModel(applicationContext).getCount();
         achievementCommunication.insertAchievement(new Achievement(task.getName(), day));
     }
 
@@ -147,6 +147,7 @@ public class AppManager {
         for (TempTask tempTask : tempTaskList) {
 
             taskList.add(new Task(tempTask.getName(), tempTask.getCalendar(), tempTask.getHabitName()));
+            Log.i("WWW", "getTaskListFromTemp: " + tempTask.getHabitName());
         }
 
         return taskList;
@@ -184,7 +185,7 @@ public class AppManager {
         Habit habit = new Habit(habitName, getTaskListFromTemp(), getExpectationListFromTemp());
         saveHabit(habit);
         showExpectationList(getExpectationListFromHabit());
-        counterCommunication.startCountingIfMidnight(this);
+        new CounterPresenter(applicationContext).startCountingIfMidnight();
     }
 
 
@@ -197,7 +198,7 @@ public class AppManager {
      */
     public String getCount() {
 
-        return String.valueOf(counterCommunication.getCount());
+        return String.valueOf(new CounterModel(applicationContext).getCount());
     }
 
 
@@ -240,7 +241,7 @@ public class AppManager {
     }
 
 
-    public void saveHabit(Habit habit){
+    public void saveHabit(Habit habit) {
 
         habitCommunication.insertHabit(habit);
     }
@@ -251,7 +252,7 @@ public class AppManager {
      */
     public void resetCounter() {
 
-        counterCommunication.resetCounter();
+        new CounterModel(applicationContext).resetCounter();
     }
 
 
@@ -336,7 +337,7 @@ public class AppManager {
 
     /**
      * getScreen dayTasks from Task database
-     *
+     * <p>
      * to unSchedule it when new day is come
      *
      * @return Task List
@@ -372,5 +373,10 @@ public class AppManager {
     public void goCreateHabit() {
 
         activity.startActivity(new Intent(activity, CreateHabitActivity.class));
+    }
+
+    public void stopCounter() {
+
+        new CounterPresenter(applicationContext).stopCounter();
     }
 }

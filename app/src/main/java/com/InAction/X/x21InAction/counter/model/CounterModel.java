@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import com.InAction.X.x21InAction.AppCP;
 import com.InAction.X.x21InAction.counter.CounterContract;
 
-public class CounterModel implements CounterContract.Model{
+public class CounterModel implements CounterContract.Model {
 
 
     public static final String NAME_SHARED_PREFERENCES = AppCP.NAME_SHARED_PREFERENCES;

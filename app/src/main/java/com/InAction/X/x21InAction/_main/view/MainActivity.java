@@ -11,11 +11,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.InAction.X.x21InAction.AppCP;
 import com.InAction.X.x21InAction.R;
 import com.InAction.X.x21InAction._main.MainContract;
 import com.InAction.X.x21InAction._main.preseter.MainPresenter;
 import com.InAction.X.x21InAction.intro_screens.view.IntroScreensActivity;
-import com.InAction.X.x21InAction.manager.AppManager;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -25,13 +25,16 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View, SharedPreferences.OnSharedPreferenceChangeListener {
 
-    public static final String NAME_SHARED_PREFERENCES = "name-sharedPreferences";
-    public static final String KEY_FIRST_LAUNCH = "key-first_launch";
-    public static final String KEY_COUNT = "key-count";
-    public static final String ID_ADMOB_App = "ca-app-pub-6179224755708033~6791952879";
+
+    public static final String NAME_SHARED_PREFERENCES = AppCP.NAME_SHARED_PREFERENCES;
+    public static final String KEY_FIRST_LAUNCH = AppCP.KEY_FIRST_LAUNCH;
+    public static final String KEY_COUNT = AppCP.KEY_COUNT;
+    public static final String AD_MOB_App_ID = AppCP.AD_MOB_App_ID;
+
 
     private MainPresenter presenter;
     private SharedPreferences sharedPreferences;
+
 
     @BindView(R.id.counter_textView)
     TextView counterTextView;
@@ -42,18 +45,18 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     @BindView(R.id.adView)
     AdView adView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        //initialize AdMob
-        MobileAds.initialize(this, ID_ADMOB_App);
-
+        //***Ads
+        MobileAds.initialize(this, AD_MOB_App_ID);
         AdRequest adRequest = new AdRequest.Builder().build();
-
         adView.loadAd(adRequest);
+
 
         sharedPreferences = getSharedPreferences(NAME_SHARED_PREFERENCES, MODE_PRIVATE);
 
@@ -62,7 +65,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
             //start intro screens
             startActivity(new Intent(MainActivity.this, IntroScreensActivity.class));
+            finish();
         }
+
 
         presenter = new MainPresenter(this, this);
 
@@ -71,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
         presenter.setCounter();
     }
+
 
     @Override
     protected void onResume() {

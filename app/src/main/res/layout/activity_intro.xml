@@ -5,6 +5,7 @@
     android:id="@+id/root_intro"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundWindow"
     android:orientation="vertical"
     tools:context=".intro_screens.view.IntroScreensActivity">
 
@@ -12,7 +13,7 @@
         android:id="@+id/intro_screens_viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="7" />
+        android:layout_weight="9" />
 
     <View
         android:layout_width="match_parent"

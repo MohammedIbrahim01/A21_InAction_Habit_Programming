@@ -48,6 +48,7 @@ public class AchievementsAdapter extends RecyclerView.Adapter<AchievementsAdapte
         Achievement currentAchievement = achievementList.get(position);
 
         holder.nameTextView.setText(currentAchievement.getName());
+        holder.dayTextView.setText(String.valueOf(currentAchievement.getDay()));
     }
 
 

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.InAction.X.x21InAction.R;
 import com.InAction.X.x21InAction.temp_task.model.TempTask;
+import com.InAction.X.x21InAction.utils.StringFormats;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,7 +43,7 @@ public class TempTasksAdapter extends RecyclerView.Adapter<TempTasksAdapter.View
     public void onBindViewHolder(@NonNull TempTasksAdapter.ViewHolder holder, int position) {
 
         holder.nameTextView.setText(tempTaskList.get(position).getName());
-        holder.timeTextView.setText(tempTaskList.get(position).getCalendar().get(Calendar.HOUR) + " : " + tempTaskList.get(position).getCalendar().get(Calendar.MINUTE));
+        holder.timeTextView.setText(StringFormats.formattedTime(tempTaskList.get(position).getCalendar()));
     }
 
 

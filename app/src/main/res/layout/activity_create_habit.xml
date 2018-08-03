@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/root_create_habit"
-    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_create_habit"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundCounter"
+    android:orientation="vertical"
     tools:context=".habit.view.CreateHabitActivity">
 
     <com.InAction.X.x21InAction.utils.CustomViewPager
         android:id="@+id/create_habit_viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="7" />
+        android:layout_weight="9" />
 
     <View
         android:layout_width="match_parent"

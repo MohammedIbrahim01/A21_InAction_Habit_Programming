@@ -3,37 +3,46 @@ package com.InAction.X.x21InAction.counter.Communication;
 import android.content.Context;
 
 import com.InAction.X.x21InAction.counter.CounterContract;
+import com.InAction.X.x21InAction.counter.model.CounterModel;
 import com.InAction.X.x21InAction.counter.presenter.CounterPresenter;
 import com.InAction.X.x21InAction.manager.AppManager;
 
 public class CounterCommunication implements CounterContract.Communication {
 
 
-    private CounterPresenter presenter;
+    private Context context;
+    private CounterModel model;
 
 
     public CounterCommunication(Context applicationContext) {
 
-        presenter = new CounterPresenter(applicationContext);
+        this.context = applicationContext;
+        model = new CounterModel(applicationContext);
     }
 
 
     @Override
     public int getCount() {
 
-        return presenter.getCount();
+        return model.getCount();
     }
 
     @Override
     public void resetCounter() {
 
-        presenter.resetCounter();
+        model.resetCounter();
     }
 
 
     @Override
-    public void startCountingIfMidnight(AppManager manager) {
+    public void startCountingIfMidnight() {
 
-        presenter.startCountingIfMidnight(manager);
+        new CounterPresenter(context).startCountingIfMidnight();
+    }
+
+    @Override
+    public void stopCounter() {
+
+        new CounterPresenter(context).stopCounter();
     }
 }

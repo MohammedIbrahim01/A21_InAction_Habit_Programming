@@ -15,15 +15,9 @@ public interface CounterContract {
 
     interface Presenter {
 
-        void startCountingIfMidnight(AppManager manager);
+        void startCountingIfMidnight();
 
-        void notifyCountingStart(String habitName);
-
-        void increaseCount();
-
-        int getCount();
-
-        void resetCounter();
+        void notifyCountingStart();
     }
 
     interface Communication {
@@ -32,6 +26,8 @@ public interface CounterContract {
 
         void resetCounter();
 
-        void startCountingIfMidnight(AppManager manager);
+        void startCountingIfMidnight();
+
+        void stopCounter();
     }
 }
