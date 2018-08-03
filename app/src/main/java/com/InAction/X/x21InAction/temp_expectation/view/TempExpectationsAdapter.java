@@ -61,6 +61,7 @@ public class TempExpectationsAdapter extends RecyclerView.Adapter<TempExpectatio
             super(itemView);
 
             ButterKnife.bind(this, itemView);
+            expectationNameTextView.setTextSize(26f);
         }
     }
 }

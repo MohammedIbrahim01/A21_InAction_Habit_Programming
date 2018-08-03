@@ -9,9 +9,9 @@ public class AppCP {
     public static final int REQUEST_CODE_COUNTER_ALARM = 44;
     public static final int REQUEST_CODE_MIDNIGHT_ALARM = 33;
     public static final int HOUR_MIDNIGHT = 18;
-    public static final int MINUTE_MIDNIGHT = 6;
+    public static final int MINUTE_MIDNIGHT = 50;
     public static final int SECOND_MIDNIGHT = 0;
-    public static final long INTERVAL_COUNTER = 2 * 60 * 1000;
+    public static final long INTERVAL_COUNTER = 3 * 60 * 1000;
 
     public static final String KEY_COUNT = "key-count";
 

@@ -4,5 +4,11 @@
     android:id="@+id/expectation_row_name_textView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:background="#e1e5e9"
+    android:fontFamily="casual"
     android:gravity="center"
+    android:minHeight="30dp"
+    android:textColor="#395caf"
+    android:textSize="@dimen/XSmallTextSize"
     tools:text="achievement #1" />

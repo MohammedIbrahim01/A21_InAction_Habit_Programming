@@ -6,11 +6,18 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_marginTop="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="casual"
+        android:text=" Habit Over View"
+        android:textSize="@dimen/SmallTextSize" />
+
+    <TextView
         android:id="@+id/habit_overview_habit_name_textView"
         style="@style/IntroSpotText"
+        android:layout_marginTop="8dp"
         android:gravity="center"
-        android:textSize="50sp"
+        android:textSize="40sp"
         tools:text="Habit Name" />
 
     <LinearLayout
@@ -50,6 +57,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorLineGray" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/habit_overview_expectations_recyclerView"

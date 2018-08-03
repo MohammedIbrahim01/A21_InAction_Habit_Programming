@@ -3,20 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:background="#e1e5e9"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/achievement_row_name_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="casual"
         android:gravity="center"
+        android:textColor="#2e7d9f"
+        android:textSize="@dimen/XSmallTextSize"
         tools:text="Achievement #1" />
 
     <TextView
         android:id="@+id/achievement_row_day_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="casual"
         android:gravity="center"
+        android:textColor="@color/colorSpotText"
+        android:textSize="22sp"
         tools:text="day : 0" />
 
 </LinearLayout>

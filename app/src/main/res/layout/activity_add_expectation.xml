@@ -17,7 +17,9 @@
             android:id="@+id/add_expectation_name_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/white"
             android:hint="expectation name"
+            android:minHeight="40dp"
             android:singleLine="true" />
 
     </android.support.design.widget.TextInputLayout>
@@ -28,8 +30,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
-        android:padding="4dp"
         android:background="#1e2acf"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         android:text="save expectation"
         android:textColor="#fff" />
 

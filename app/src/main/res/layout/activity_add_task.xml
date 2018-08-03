@@ -21,7 +21,9 @@
                 android:id="@+id/add_task_name_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="task name" />
+                android:background="@android:color/white"
+                android:hint="task name"
+                android:minHeight="40dp" />
 
 
         </android.support.design.widget.TextInputLayout>
@@ -39,8 +41,9 @@
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
             android:background="#1e2acf"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:text="save task"
-            android:padding="4dp"
             android:textColor="#fff" />
     </LinearLayout>
 

@@ -67,6 +67,8 @@ public class TempTasksAdapter extends RecyclerView.Adapter<TempTasksAdapter.View
             super(itemView);
 
             ButterKnife.bind(this, itemView);
+            timeTextView.setTextSize(26f);
+            nameTextView.setTextSize(22f);
         }
     }
 }

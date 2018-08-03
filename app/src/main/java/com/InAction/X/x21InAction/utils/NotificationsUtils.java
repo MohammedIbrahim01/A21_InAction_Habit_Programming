@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 
+import com.InAction.X.x21InAction.R;
 import com.InAction.X.x21InAction._main.view.MainActivity;
 import com.InAction.X.x21InAction.tasks.model.Task;
 
@@ -34,16 +35,16 @@ public class NotificationsUtils {
             notificationManager.createNotificationChannel(notificationChannel);
         }
 
-        Notification notification = getNotification(task.getHabitName(), task.getName());
+        Notification notification = getTaskNotification(task.getHabitName(), task.getName());
 
         notificationManager.notify(1000, notification);
     }
 
-    private Notification getNotification(String habitName, String name) {
+    private Notification getTaskNotification(String habitName, String name) {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, ID_NOTIFICATION_CHANNEL)
-                .setSmallIcon(android.support.v4.R.drawable.notify_panel_notification_icon_bg)
-                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), android.support.v4.R.drawable.notification_action_background))
+                .setSmallIcon(R.drawable.ic_stat_ac_unit)
+                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_stat_bubble_chart))
                 .setContentTitle("habit to program : " + habitName)
                 .setContentText("its time for : " + name)
                 .setStyle(new NotificationCompat.BigTextStyle().setBigContentTitle(" You are to program : " + habitName))
@@ -78,13 +79,13 @@ public class NotificationsUtils {
     private Notification getCountingStartNotification(String habitName) {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, ID_NOTIFICATION_CHANNEL)
-                .setSmallIcon(android.support.v4.R.drawable.notify_panel_notification_icon_bg)
-                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), android.support.v4.R.drawable.notification_action_background))
+                .setSmallIcon(R.drawable.ic_stat_ac_unit)
+                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_stat_bubble_chart))
                 .setContentTitle("Start programming : " + habitName)
-                .setContentText("now you can start finishing tasks\nclick for to see what tasks you have")
+                .setContentText("now you can start finishing tasks")
                 .setStyle(new NotificationCompat.BigTextStyle().setBigContentTitle("Start programming : " + habitName))
                 .setStyle(new NotificationCompat.BigTextStyle().bigText("now you can start finishing tasks\nclick for to see what tasks you have"))
-                .setContentIntent(PendingIntent.getActivity(context, 32323, new Intent(context, MainActivity.class), PendingIntent.FLAG_CANCEL_CURRENT))
+                .setContentIntent(PendingIntent.getActivity(context, 77, new Intent(context, MainActivity.class), PendingIntent.FLAG_CANCEL_CURRENT))
                 .setAutoCancel(true);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -93,5 +94,39 @@ public class NotificationsUtils {
         }
 
         return builder.build();
+    }
+
+    private Notification getCountingFinishNotification(String habitName) {
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, ID_NOTIFICATION_CHANNEL)
+                .setSmallIcon(R.drawable.ic_stat_ac_unit)
+                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_stat_bubble_chart))
+                .setContentTitle("End programming : " + habitName)
+                .setContentText("You finish 21 day of programming ")
+                .setStyle(new NotificationCompat.BigTextStyle().bigText("You finish 21 day of programming"))
+                .setContentIntent(PendingIntent.getActivity(context, 66, new Intent(context, MainActivity.class), PendingIntent.FLAG_CANCEL_CURRENT))
+                .setAutoCancel(true);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            builder.setPriority(NotificationCompat.PRIORITY_HIGH);
+        }
+
+        return builder.build();
+    }
+
+    public void notifyCountingEnd(String habitName) {
+
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            NotificationChannel notificationChannel = new NotificationChannel(ID_NOTIFICATION_CHANNEL, NAME_NOTIFICATION_CHANNEL, NotificationManager.IMPORTANCE_HIGH);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+
+        Notification notification = getCountingFinishNotification(habitName);
+
+        notificationManager.notify(1000, notification);
     }
 }

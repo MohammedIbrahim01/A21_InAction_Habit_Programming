@@ -25,6 +25,7 @@ import com.InAction.X.x21InAction.tasks.model.Task;
 import com.InAction.X.x21InAction.temp_task.model.TempTask;
 import com.InAction.X.x21InAction.temp_task.view.AddTaskActivity;
 import com.InAction.X.x21InAction.utils.AppExecutors;
+import com.InAction.X.x21InAction.utils.NotificationsUtils;
 import com.InAction.X.x21InAction.utils.Scheduler;
 
 import java.util.ArrayList;
@@ -325,5 +326,6 @@ public class AppManager {
     public static void stopCounter(Context context) {
 
         new CounterPresenter(context).stopCounter();
+        new NotificationsUtils(context).notifyCountingEnd(getHabitName(context));
     }
 }

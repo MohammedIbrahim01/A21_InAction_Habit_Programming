@@ -58,6 +58,7 @@ public class CounterPresenter implements CounterContract.Presenter {
             alarmManager.setRepeating(AlarmManager.RTC, System.currentTimeMillis() + INTERVAL_COUNTER, INTERVAL_COUNTER, operation);
 
             notifyCountingStart();
+            AppManager.startFirstDay(applicationContext);
         } else {
 
             //next midnight is in the next day (paused)
