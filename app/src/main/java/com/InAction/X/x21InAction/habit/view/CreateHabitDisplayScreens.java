@@ -61,6 +61,18 @@ public class CreateHabitDisplayScreens extends Fragment {
             case 4:
                 layout = R.layout.guide_4;
                 break;
+            case 5:
+                layout = R.layout.guide_5;
+                break;
+            case 8:
+                layout = R.layout.guide_8;
+                break;
+            case 9:
+                layout = R.layout.guide_9;
+                break;
+            case 10:
+                layout = R.layout.guide_10;
+                break;
 
             default:
                 layout = -1;

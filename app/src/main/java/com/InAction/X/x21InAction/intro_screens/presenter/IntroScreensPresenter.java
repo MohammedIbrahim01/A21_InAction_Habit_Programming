@@ -29,6 +29,7 @@ public class IntroScreensPresenter implements IntroScreensContract.Presenter {
         adapter.addFragment(IntroScreens.getScreen(1));
         adapter.addFragment(IntroScreens.getScreen(2));
         adapter.addFragment(IntroScreens.getScreen(3));
+        adapter.addFragment(IntroScreens.getScreen(4));
 
         viewPager.setAdapter(adapter);
     }

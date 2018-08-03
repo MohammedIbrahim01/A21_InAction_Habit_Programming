@@ -48,7 +48,7 @@ public class AddTaskActivity extends AppCompatActivity implements TempTaskContra
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
-        getWindow().setLayout((int) (width * 0.8), (int) (height * 0.7));
+        getWindow().setLayout((int) (width * 0.7), (int) (height * 0.6));
 
 
         Intent intent = getIntent();

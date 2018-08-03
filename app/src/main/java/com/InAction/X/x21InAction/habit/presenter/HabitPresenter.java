@@ -65,6 +65,10 @@ public class HabitPresenter implements HabitContract.Presenter {
         adapter.addFragment(CreateHabitScreens.getScreen(4));
         adapter.addFragment(CreateHabitScreens.getScreen(5));
         adapter.addFragment(CreateHabitScreens.getScreen(6));
+        adapter.addFragment(CreateHabitScreens.getScreen(7));
+        adapter.addFragment(CreateHabitScreens.getScreen(8));
+        adapter.addFragment(CreateHabitScreens.getScreen(9));
+        adapter.addFragment(CreateHabitScreens.getScreen(10));
 
         viewPager.setAdapter(adapter);
     }

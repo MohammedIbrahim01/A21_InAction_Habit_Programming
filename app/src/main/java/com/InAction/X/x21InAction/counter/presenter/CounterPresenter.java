@@ -51,7 +51,7 @@ public class CounterPresenter implements CounterContract.Presenter {
         midnight.set(Calendar.SECOND, SECOND_MIDNIGHT);
 
         //check if now is in midnight hour
-        if (now.get(Calendar.HOUR_OF_DAY) == midnight.get(Calendar.HOUR_OF_DAY)) {
+        if (now.get(Calendar.HOUR_OF_DAY) == midnight.get(Calendar.HOUR_OF_DAY) && now.get(Calendar.MINUTE) == midnight.get(Calendar.MINUTE)) {
 
             Intent intent = new Intent(applicationContext, CounterReceiver.class);
             PendingIntent operation = PendingIntent.getBroadcast(applicationContext, REQUEST_CODE_COUNTER_ALARM, intent, PendingIntent.FLAG_CANCEL_CURRENT);

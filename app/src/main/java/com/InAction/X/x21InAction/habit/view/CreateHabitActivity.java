@@ -1,5 +1,6 @@
 package com.InAction.X.x21InAction.habit.view;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.InAction.X.x21InAction.R;
+import com.InAction.X.x21InAction._main.view.MainActivity;
 import com.InAction.X.x21InAction.habit.HabitContract;
 import com.InAction.X.x21InAction.habit.model.Habit;
 import com.InAction.X.x21InAction.habit.presenter.HabitPresenter;
@@ -85,13 +87,15 @@ public class CreateHabitActivity extends AppCompatActivity implements View.OnCli
                 break;
 
             case R.id.create_habit_start:
+                AppManager.setFirstLaunch(getApplicationContext(), false);
                 AppManager.startHabitPrograming(getApplicationContext(), habitName);
                 presenter.nextPage();
                 break;
 
             case R.id.create_habit_finish:
-                finish();
+                startActivity(new Intent(CreateHabitActivity.this, MainActivity.class));
                 Toast.makeText(CreateHabitActivity.this, "Tasks Will Start in next midnight", Toast.LENGTH_LONG).show();
+                finish();
                 break;
         }
     }
@@ -110,14 +114,14 @@ public class CreateHabitActivity extends AppCompatActivity implements View.OnCli
                 finish.setVisibility(View.GONE);
                 break;
 
-            case 5:
+            case 6:
                 back.setVisibility(View.VISIBLE);
                 next.setVisibility(View.GONE);
                 start.setVisibility(View.VISIBLE);
                 finish.setVisibility(View.GONE);
                 break;
 
-            case 6:
+            case 10:
                 back.setVisibility(View.VISIBLE);
                 next.setVisibility(View.GONE);
                 start.setVisibility(View.GONE);

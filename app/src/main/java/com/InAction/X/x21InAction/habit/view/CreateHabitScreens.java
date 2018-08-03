@@ -17,10 +17,10 @@ public class CreateHabitScreens {
             case 3:
                 return new TempExpectationsFragment();
 
-            case 5:
+            case 6:
                 return new TempTasksFragment();
 
-            case 6:
+            case 7:
                 return new HabitOverviewScreen();
 
             default:

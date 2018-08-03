@@ -8,18 +8,10 @@
         style="@style/IntroNormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         android:gravity="center"
-        android:text="You should enter many tasks to be scheduled"
+        android:text="Don't forget to checkout your expectations every day to found them in your life"
+        android:textColor="#6d7b8e"
         android:textSize="@dimen/MediumTextSize" />
-
-    <TextView
-        style="@style/IntroNormalText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:gravity="center"
-        android:text="One task can be entered more than onece but in a deferent time"
-        android:textSize="@dimen/XSmallTextSize" />
 
 </LinearLayout>

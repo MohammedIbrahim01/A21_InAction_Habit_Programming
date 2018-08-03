@@ -8,18 +8,11 @@
         style="@style/IntroNormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="100dp"
         android:gravity="center"
-        android:text="You should enter many tasks to be scheduled"
+        android:textColor="#414c91"
+        android:text="when you Finish a Task swipe to the Right to add it to Achievements"
         android:textSize="@dimen/MediumTextSize" />
 
-    <TextView
-        style="@style/IntroNormalText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:gravity="center"
-        android:text="One task can be entered more than onece but in a deferent time"
-        android:textSize="@dimen/XSmallTextSize" />
 
 </LinearLayout>

@@ -64,6 +64,9 @@ public class IntroScreens extends Fragment {
             case 3:
                 layout = R.layout.intro_3;
                 break;
+            case 4:
+                layout = R.layout.intro_4;
+                break;
 
             default:
                 layout = -1;

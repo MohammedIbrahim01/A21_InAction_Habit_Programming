@@ -76,7 +76,6 @@ public class IntroScreensActivity extends AppCompatActivity implements View.OnCl
                 break;
 
             case R.id.start:
-                AppManager.setFirstLaunch(getApplicationContext(), false);
                 AppManager.goCreateHabit(this);
                 finish();
                 break;
@@ -96,7 +95,7 @@ public class IntroScreensActivity extends AppCompatActivity implements View.OnCl
                 start.setVisibility(View.GONE);
                 break;
 
-            case 3:
+            case 4:
                 back.setVisibility(View.VISIBLE);
                 next.setVisibility(View.GONE);
                 start.setVisibility(View.VISIBLE);

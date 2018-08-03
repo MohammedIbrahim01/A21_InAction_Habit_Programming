@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import com.InAction.X.x21InAction.R;
 import com.InAction.X.x21InAction.habit.view.CreateHabitActivity;
 import com.InAction.X.x21InAction.temp_task.TempTaskContract;
-import com.InAction.X.x21InAction.intro_screens.view.IntroScreensActivity;
 import com.InAction.X.x21InAction.manager.AppManager;
 import com.InAction.X.x21InAction.temp_task.presenter.TempTaskPresenter;
 
@@ -47,7 +46,7 @@ public class TempTasksFragment extends Fragment implements TempTaskContract.View
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.guide_5, container, false);
+        View view = inflater.inflate(R.layout.guide_6, container, false);
         ButterKnife.bind(this, view);
 
         presenter = new TempTaskPresenter(getContext().getApplicationContext(), this);

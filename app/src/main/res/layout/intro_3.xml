@@ -6,12 +6,44 @@
     android:paddingTop="@dimen/LargePadding">
 
     <TextView
-        style="@style/IntroSpotText"
-        android:text="So" />
-
-    <TextView
         style="@style/IntroNormalText"
-        android:textSize="@dimen/MediumTextSize"
-        android:text="Lets get started !" />
+        android:text="With This "
+        android:textSize="@dimen/MediumTextSize" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/IntroSpotText"
+            android:text="  Demo " />
+
+        <TextView
+            style="@style/IntroNormalText"
+            android:text="but"
+            android:textSize="@dimen/SmallTextSize" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/IntroNormalText"
+            android:text="fully functional"
+            android:textSize="@dimen/MediumTextSize" />
+
+        <TextView
+            style="@style/IntroSpotText"
+            android:text=" App"
+            android:textSize="@dimen/LargeTextSize" />
+
+
+    </LinearLayout>
+
 
 </LinearLayout>
