@@ -22,7 +22,6 @@ import butterknife.ButterKnife;
 public class CreateHabitActivity extends AppCompatActivity implements View.OnClickListener, HabitContract.View {
 
 
-    private AppManager manager;
     private HabitPresenter presenter;
     private CreateHabitAdapter adapter;
     public String habitName;
@@ -47,7 +46,6 @@ public class CreateHabitActivity extends AppCompatActivity implements View.OnCli
         ButterKnife.bind(this);
 
 
-        manager = new AppManager(getApplicationContext());
         presenter = new HabitPresenter(getApplicationContext(), this);
         adapter = new CreateHabitAdapter(getSupportFragmentManager());
 
@@ -87,7 +85,7 @@ public class CreateHabitActivity extends AppCompatActivity implements View.OnCli
                 break;
 
             case R.id.create_habit_start:
-                manager.startHabitPrograming(habitName);
+                AppManager.startHabitPrograming(getApplicationContext(), habitName);
                 presenter.nextPage();
                 break;
 

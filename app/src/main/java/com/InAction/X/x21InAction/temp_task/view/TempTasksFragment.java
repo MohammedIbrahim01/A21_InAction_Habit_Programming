@@ -27,7 +27,6 @@ public class TempTasksFragment extends Fragment implements TempTaskContract.View
 
 
     private TempTaskPresenter presenter;
-    private AppManager manager;
     private TempTasksAdapter adapter;
     private TempTasksViewModel viewModel;
 
@@ -40,7 +39,7 @@ public class TempTasksFragment extends Fragment implements TempTaskContract.View
     @OnClick(R.id.guidance_add_task_button)
     void addTask() {
 
-        manager.goAddTask(((CreateHabitActivity) getActivity()).habitName);
+        AppManager.goAddTask(getActivity(), ((CreateHabitActivity) getActivity()).habitName);
     }
 
 
@@ -52,7 +51,6 @@ public class TempTasksFragment extends Fragment implements TempTaskContract.View
         ButterKnife.bind(this, view);
 
         presenter = new TempTaskPresenter(getContext().getApplicationContext(), this);
-        manager = new AppManager(getContext().getApplicationContext(), getActivity());
         adapter = new TempTasksAdapter();
         viewModel = ViewModelProviders.of(getActivity()).get(TempTasksViewModel.class);
 

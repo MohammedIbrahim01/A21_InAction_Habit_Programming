@@ -74,7 +74,7 @@ public class CounterPresenter implements CounterContract.Presenter {
     public void notifyCountingStart() {
 
         NotificationsUtils notificationsUtils = new NotificationsUtils(applicationContext);
-        notificationsUtils.notifyCountingStart(new AppManager(applicationContext).getHabitName());
+        notificationsUtils.notifyCountingStart(AppManager.getHabitName(applicationContext));
     }
 
 

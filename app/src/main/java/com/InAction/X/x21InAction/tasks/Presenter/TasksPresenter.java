@@ -20,7 +20,6 @@ public class TasksPresenter implements TasksContract.Presenter {
 
 
     private TaskModel model;
-    private AppManager manager;
     private TasksContract.View view;
     private TasksViewModel viewModel;
     private Context applicationContext;
@@ -37,7 +36,6 @@ public class TasksPresenter implements TasksContract.Presenter {
 
         this.view = view;
         model = new TaskModel(applicationContext);
-        manager = new AppManager(applicationContext);
         this.applicationContext = applicationContext;
     }
 
@@ -148,7 +146,7 @@ public class TasksPresenter implements TasksContract.Presenter {
                 //when task was swiped : getScreen that Task then delete it
                 Task swipedTask = view.getAdapter().getTaskList().get(viewHolder.getAdapterPosition());
                 deleteTask(swipedTask);
-                manager.addAchievementFromTask(swipedTask);
+                AppManager.addAchievementFromTask(applicationContext, swipedTask);
             }
         });
 

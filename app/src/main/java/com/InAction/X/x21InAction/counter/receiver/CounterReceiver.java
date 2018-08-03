@@ -10,27 +10,25 @@ import com.InAction.X.x21InAction.manager.AppManager;
 
 public class CounterReceiver extends BroadcastReceiver {
 
-    private AppManager manager;
     private CounterModel model;
 
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        manager = new AppManager(context);
         model = new CounterModel(context);
 
         int count = model.getCount();
 
         if (count < 20) {
 
-            manager.newDay();
+            AppManager.newDay(context);
             model.increaseCount();
         }
         else if (count == 20){
 
-            manager.newDay();
+            AppManager.newDay(context);
             model.increaseCount();
-            manager.stopCounter();
+            AppManager.stopCounter(context);
         }
     }
 }

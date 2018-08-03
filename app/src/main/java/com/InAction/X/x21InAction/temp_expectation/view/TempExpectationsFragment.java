@@ -26,7 +26,6 @@ public class TempExpectationsFragment extends Fragment implements TempExpectatio
 
 
     private TempExpectationPresenter presenter;
-    private AppManager manager;
     private TempExpectationsAdapter adapter;
     private TempExpectationsViewModel viewModel;
 
@@ -38,7 +37,7 @@ public class TempExpectationsFragment extends Fragment implements TempExpectatio
     @OnClick(R.id.guidance_add_expectation_button)
     void addExpectation() {
 
-        manager.goAddExpectation(((CreateHabitActivity) getActivity()).habitName);
+        AppManager.goAddExpectation(getActivity(), ((CreateHabitActivity) getActivity()).habitName);
     }
 
 
@@ -51,7 +50,6 @@ public class TempExpectationsFragment extends Fragment implements TempExpectatio
 
 
         presenter = new TempExpectationPresenter(getContext().getApplicationContext(), this);
-        manager = new AppManager(getContext().getApplicationContext(), getActivity());
         adapter = new TempExpectationsAdapter();
         viewModel = ViewModelProviders.of(getActivity()).get(TempExpectationsViewModel.class);
 

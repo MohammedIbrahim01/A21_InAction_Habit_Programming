@@ -13,7 +13,6 @@ public class MainPresenter implements MainContract.Presenter {
     private FragmentActivity fragmentActivity;
     private MainModel model;
     private MainContract.View view;
-    private AppManager manager;
 
 
     public MainPresenter(FragmentActivity fragmentActivity, MainContract.View view) {
@@ -21,7 +20,6 @@ public class MainPresenter implements MainContract.Presenter {
         this.fragmentActivity = fragmentActivity;
         this.model = new MainModel();
         this.view = view;
-        manager = new AppManager(fragmentActivity.getApplicationContext(), fragmentActivity);
     }
 
 
@@ -43,7 +41,7 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void clearDatabase() {
 
-        manager.clearDatabase();
+        AppManager.clearDatabase(fragmentActivity.getApplicationContext());
     }
 
 
@@ -53,6 +51,6 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void setCounter() {
 
-        view.displayCounter(manager.getCount());
+        view.displayCounter(AppManager.getCount(fragmentActivity.getApplicationContext()));
     }
 }

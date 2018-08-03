@@ -38,57 +38,6 @@ public class AppManager {
     public static final String KEY_HABIT_NAME = AppCP.KEY_HABIT_NAME;
 
 
-    private Context applicationContext;
-    private Activity activity;
-
-    private TaskCommunication taskCommunication;
-    private AchievementCommunication achievementCommunication;
-    private ExpectationCommunication expectationCommunication;
-    private TempTaskCommunication tempTaskCommunication;
-    private TempExpectationCommunication tempExpectationCommunication;
-    private HabitCommunication habitCommunication;
-
-
-    /**
-     * normal constructor to use when there is no navigation need
-     *
-     * @param applicationContext
-     */
-    public AppManager(Context applicationContext) {
-
-        initAllCommunications(applicationContext);
-    }
-
-
-    /**
-     * special constructor to use when there is navigation need
-     *
-     * @param applicationContext
-     * @param activity
-     */
-    public AppManager(Context applicationContext, Activity activity) {
-
-        this.activity = activity;
-        initAllCommunications(applicationContext);
-    }
-
-
-    /**
-     * to use in constructors
-     *
-     * @param applicationContext
-     */
-    private void initAllCommunications(Context applicationContext) {
-
-        this.applicationContext = applicationContext;
-        taskCommunication = new TaskCommunication(applicationContext);
-        achievementCommunication = new AchievementCommunication(applicationContext);
-        expectationCommunication = new ExpectationCommunication(applicationContext);
-        tempTaskCommunication = new TempTaskCommunication(applicationContext);
-        tempExpectationCommunication = new TempExpectationCommunication(applicationContext);
-        habitCommunication = new HabitCommunication(applicationContext);
-    }
-
 
     /********************************************************* Navigation *************************************************/
 
@@ -96,22 +45,33 @@ public class AppManager {
     /**
      * navigate to AddTaskActivity
      */
-    public void goAddTask(String habitName) {
+    public static void goAddTask(Activity currentActivity, String habitName) {
 
-        Intent intent = new Intent(activity, AddTaskActivity.class);
+        Intent intent = new Intent(currentActivity, AddTaskActivity.class);
         intent.putExtra(KEY_HABIT_NAME, habitName);
-        activity.startActivity(intent);
+        currentActivity.startActivity(intent);
     }
 
 
     /**
      * navigate to AddExpectationActivity
      */
-    public void goAddExpectation(String habitName) {
+    public static void goAddExpectation(Activity currentActivity, String habitName) {
 
-        Intent intent = new Intent(activity, AddExpectationActivity.class);
+        Intent intent = new Intent(currentActivity, AddExpectationActivity.class);
         intent.putExtra(KEY_HABIT_NAME, habitName);
-        activity.startActivity(intent);
+        currentActivity.startActivity(intent);
+    }
+
+
+    /**
+     * navigate to CreateHabitActivity
+     *
+     * @param currentActivity
+     */
+    public static void goCreateHabit(Activity currentActivity) {
+
+        currentActivity.startActivity(new Intent(currentActivity, CreateHabitActivity.class));
     }
 
 
@@ -125,9 +85,11 @@ public class AppManager {
      *
      * @param task
      */
-    public void addAchievementFromTask(Task task) {
+    public static void addAchievementFromTask(Context context, Task task) {
 
-        int day = new CounterModel(applicationContext).getCount();
+        int day = new CounterModel(context).getCount();
+        AchievementCommunication achievementCommunication = new AchievementCommunication(context);
+
         achievementCommunication.insertAchievement(new Achievement(task.getName(), day));
     }
 
@@ -139,7 +101,9 @@ public class AppManager {
      *
      * @return Task List
      */
-    public List<Task> getTaskListFromTemp() {
+    public static List<Task> getTaskListFromTemp(Context context) {
+
+        TempTaskCommunication tempTaskCommunication = new TempTaskCommunication(context);
 
         List<Task> taskList = new ArrayList<>();
         List<TempTask> tempTaskList = tempTaskCommunication.getTempTaskList();
@@ -147,7 +111,7 @@ public class AppManager {
         for (TempTask tempTask : tempTaskList) {
 
             taskList.add(new Task(tempTask.getName(), tempTask.getCalendar(), tempTask.getHabitName()));
-            Log.i("WWW", "getTaskListFromTemp: " + tempTask.getHabitName());
+            Log.i("WWW", "getTaskListFromTemp: habit name >>> " + tempTask.getHabitName());
         }
 
         return taskList;
@@ -161,7 +125,9 @@ public class AppManager {
      *
      * @return Expectation List
      */
-    public List<Expectation> getExpectationListFromTemp() {
+    public static List<Expectation> getExpectationListFromTemp(Context context) {
+
+        TempExpectationCommunication tempExpectationCommunication = new TempExpectationCommunication(context);
 
         List<Expectation> expectationList = new ArrayList<>();
         List<TempExpectation> tempExpectationList = tempExpectationCommunication.getTempExpectationList();
@@ -169,6 +135,7 @@ public class AppManager {
         for (TempExpectation tempExpectation : tempExpectationList) {
 
             expectationList.add(new Expectation(tempExpectation.getName(), tempExpectation.getHabitName()));
+            Log.i("WWW", "getExpectationListFromTemp: habit name >>> ");
         }
 
         return expectationList;
@@ -180,12 +147,12 @@ public class AppManager {
      *
      * @param habitName
      */
-    public void startHabitPrograming(String habitName) {
+    public static void startHabitPrograming(Context context, String habitName) {
 
-        Habit habit = new Habit(habitName, getTaskListFromTemp(), getExpectationListFromTemp());
-        saveHabit(habit);
-        showExpectationList(getExpectationListFromHabit());
-        new CounterPresenter(applicationContext).startCountingIfMidnight();
+        Habit habit = new Habit(habitName, getTaskListFromTemp(context), getExpectationListFromTemp(context));
+        saveHabit(context, habit);
+        showExpectationList(context, getExpectationListFromHabit(context));
+        new CounterPresenter(context).startCountingIfMidnight();
     }
 
 
@@ -196,9 +163,9 @@ public class AppManager {
      *
      * @return
      */
-    public String getCount() {
+    public static String getCount(Context context) {
 
-        return String.valueOf(new CounterModel(applicationContext).getCount());
+        return String.valueOf(new CounterModel(context).getCount());
     }
 
 
@@ -207,8 +174,9 @@ public class AppManager {
      *
      * @return
      */
-    public String getHabitName() {
+    public static String getHabitName(Context context) {
 
+        HabitCommunication habitCommunication = new HabitCommunication(context);
         return habitCommunication.getHabit().getName();
     }
 
@@ -216,65 +184,53 @@ public class AppManager {
     /**
      * To Use In CounterPresenter
      */
-    public void startFirstDay() {
+    public static void startFirstDay(Context context) {
 
-        List<Task> taskList = getTaskListFromHabit();
+        List<Task> taskList = getTaskListFromHabit(context);
 
-        showTaskList(taskList);
-        scheduleDayTasks(taskList);
+        showTaskList(context, taskList);
+        scheduleDayTasks(context, taskList);
     }
 
 
     /**
      * To Use In CounterReceiver
      */
-    public void newDay() {
+    public static void newDay(Context context) {
 
-        unScheduleLateTasks(getTaskListFromTasks());  // if there
-        clearLateTasks();               // if there
-
-
-        List<Task> taskList = getTaskListFromHabit();
-
-        showTaskList(taskList);
-        scheduleDayTasks(taskList);
-    }
+        clearLateTasks(context);               // if there
 
 
-    public void saveHabit(Habit habit) {
+        List<Task> taskList = getTaskListFromHabit(context);
 
-        habitCommunication.insertHabit(habit);
+        showTaskList(context, taskList);
+        scheduleDayTasks(context, taskList);
     }
 
 
     /**
      * To Use In MainActivity
      */
-    public void resetCounter() {
+    public static void resetCounter(Context context) {
 
-        new CounterModel(applicationContext).resetCounter();
+        new CounterModel(context).resetCounter();
     }
 
 
     /****************************************************** Inner Methods **************************************************/
 
 
-    /**
-     * unScheduleTask late tasks
-     *
-     * @param taskList
-     */
-    private void unScheduleLateTasks(List<Task> taskList) {
+    public static void saveHabit(Context context, Habit habit) {
 
-        Scheduler scheduler = new Scheduler(applicationContext);
+        HabitCommunication habitCommunication = new HabitCommunication(context);
 
-        for (Task task : taskList) {
-
-            scheduler.unScheduleTask(task);
-        }
+        habitCommunication.insertHabit(habit);
     }
 
-    private void clearLateTasks() {
+
+    private static void clearLateTasks(Context context) {
+
+        TaskCommunication taskCommunication = new TaskCommunication(context);
 
         taskCommunication.deleteAllTasks();
     }
@@ -283,7 +239,9 @@ public class AppManager {
     /**
      * show tasks in tasks Tab
      */
-    public void showTaskList(List<Task> taskList) {
+    public static void showTaskList(Context context, List<Task> taskList) {
+
+        TaskCommunication taskCommunication = new TaskCommunication(context);
 
         taskCommunication.insertTaskList(taskList);
     }
@@ -292,7 +250,9 @@ public class AppManager {
     /**
      * show expectations in DayZero Tab
      */
-    public void showExpectationList(List<Expectation> expectationList) {
+    public static void showExpectationList(Context context, List<Expectation> expectationList) {
+
+        ExpectationCommunication expectationCommunication = new ExpectationCommunication(context);
 
         expectationCommunication.insertExpectationList(expectationList);
     }
@@ -303,9 +263,9 @@ public class AppManager {
      *
      * @param taskList
      */
-    public void scheduleDayTasks(List<Task> taskList) {
+    public static void scheduleDayTasks(Context context, List<Task> taskList) {
 
-        Scheduler scheduler = new Scheduler(applicationContext);
+        Scheduler scheduler = new Scheduler(context);
 
         for (Task task : taskList) {
 
@@ -319,64 +279,51 @@ public class AppManager {
      *
      * @return Task List
      */
-    public List<Task> getTaskListFromHabit() {
+    public static List<Task> getTaskListFromHabit(Context context) {
+
+        HabitCommunication habitCommunication = new HabitCommunication(context);
 
         return habitCommunication.getHabit().getTaskList();
     }
+
 
     /**
      * getScreen habitExpectations that stores inside the habit
      *
      * @return Expectation List
      */
-    public List<Expectation> getExpectationListFromHabit() {
+    public static List<Expectation> getExpectationListFromHabit(Context context) {
+
+        HabitCommunication habitCommunication = new HabitCommunication(context);
 
         return habitCommunication.getHabit().getExpectationList();
     }
 
 
     /**
-     * getScreen dayTasks from Task database
-     * <p>
-     * to unSchedule it when new day is come
-     *
-     * @return Task List
-     */
-    public List<Task> getTaskListFromTasks() {
-
-        return taskCommunication.getAllTasks();
-    }
-
-
-    /**
      * clear database
      */
-    public void clearDatabase() {
+    public static void clearDatabase(final Context context) {
 
         AppExecutors.getInstance().getDiskIO().execute(new Runnable() {
             @Override
             public void run() {
 
-                AppDatabase.getInstance(applicationContext).clearAllTables();
+                AppDatabase.getInstance(context).clearAllTables();
             }
         });
     }
 
 
-    public void setFirstLaunch(boolean firstLaunch) {
+    public static void setFirstLaunch(Context context, boolean firstLaunch) {
 
-        applicationContext.getSharedPreferences(NAME_SHARED_PREFERENCES, Context.MODE_PRIVATE).edit().putBoolean(KEY_FIRST_LAUNCH, false).apply();
+        context.getSharedPreferences(NAME_SHARED_PREFERENCES, Context.MODE_PRIVATE).edit().putBoolean(KEY_FIRST_LAUNCH, false).apply();
 
     }
 
 
-    public void goCreateHabit() {
+    public static void stopCounter(Context context) {
 
-        activity.startActivity(new Intent(activity, CreateHabitActivity.class));
-    }
-
-    public void stopCounter() {
-
-        new CounterPresenter(applicationContext).stopCounter();
+        new CounterPresenter(context).stopCounter();
     }
 }

@@ -18,7 +18,6 @@ import butterknife.ButterKnife;
 public class IntroScreensActivity extends AppCompatActivity implements View.OnClickListener, IntroScreensContract.View {
 
 
-    private AppManager manager;
     private IntroScreensPresenter presenter;
     private IntoScreensAdapter adapter;
 
@@ -40,7 +39,6 @@ public class IntroScreensActivity extends AppCompatActivity implements View.OnCl
         ButterKnife.bind(this);
 
 
-        manager = new AppManager(getApplicationContext(), IntroScreensActivity.this);
         adapter = new IntoScreensAdapter(getSupportFragmentManager());
         presenter = new IntroScreensPresenter(this);
 
@@ -78,8 +76,8 @@ public class IntroScreensActivity extends AppCompatActivity implements View.OnCl
                 break;
 
             case R.id.start:
-                manager.setFirstLaunch(false);
-                manager.goCreateHabit();
+                AppManager.setFirstLaunch(getApplicationContext(), false);
+                AppManager.goCreateHabit(this);
                 finish();
                 break;
         }
