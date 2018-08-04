@@ -14,7 +14,7 @@
         style="@style/IntroNormalText"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="scheduled Tasks that was repeated everyday"
+        android:text="scheduled Tasks that will repeated everyday"
         android:textSize="20sp" />
 
     <TextView
@@ -43,7 +43,7 @@
     <TextView
         style="@style/IntroNormalText"
         android:gravity="center"
-        android:text="decide tasks settings carefully ; it cant be changed during 21 day journy"
+        android:text="decide tasks settings carefully ; it cant be changed during the 21 day journy"
         android:textSize="18sp" />
 
 </LinearLayout>

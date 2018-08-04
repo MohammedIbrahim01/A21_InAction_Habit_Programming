@@ -16,6 +16,7 @@ import com.InAction.X.x21InAction.R;
 import com.InAction.X.x21InAction._main.MainContract;
 import com.InAction.X.x21InAction._main.preseter.MainPresenter;
 import com.InAction.X.x21InAction.intro_screens.view.IntroScreensActivity;
+import com.InAction.X.x21InAction.manager.AppManager;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     TabLayout tabLayout;
     @BindView(R.id.viewPager)
     ViewPager viewPager;
+    @BindView(R.id.main_activity_habit_name_textView)
+    TextView habitNameTextView;
     @BindView(R.id.adView)
     AdView adView;
 
@@ -68,11 +71,17 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
             finish();
         }
 
+        if (AppManager.getHabitName(this) != null) {
+
+            habitNameTextView.setText(AppManager.getHabitName(this));
+        }
+
 
         presenter = new MainPresenter(this, this);
 
 
         presenter.setupTabLayoutAndViewPager();
+
 
         presenter.setCounter();
     }
@@ -103,6 +112,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        if (item.getItemId() == R.id.action_settings) {
+            startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+        }
         return super.onOptionsItemSelected(item);
     }
 

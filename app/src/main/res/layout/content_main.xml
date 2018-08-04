@@ -6,21 +6,38 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/counter_textView"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="@color/backgroundCounter"
-        android:gravity="center"
-        android:textSize="100sp"
-        tools:text="0" />
+        android:layout_height="150dp">
+
+        <TextView
+            android:id="@+id/counter_textView"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@color/backgroundCounter"
+            android:gravity="center"
+            android:textSize="100sp"
+            tools:text="0" />
+
+        <TextView
+            android:id="@+id/main_activity_habit_name_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:textColor="@color/colorSpotText"
+            android:textSize="@dimen/XSmallTextSize"
+            tools:text="habit name" />
+
+
+    </RelativeLayout>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/backgroundTabLayout"
-        app:tabSelectedTextColor="@color/colorTabTextSelected"/>
+        app:tabSelectedTextColor="@color/colorTabTextSelected" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"

@@ -6,16 +6,22 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.InAction.X.x21InAction.AppCP;
 import com.InAction.X.x21InAction.R;
 import com.InAction.X.x21InAction.intro_screens.IntroScreensContract;
 import com.InAction.X.x21InAction.intro_screens.presenter.IntroScreensPresenter;
 import com.InAction.X.x21InAction.manager.AppManager;
 import com.InAction.X.x21InAction.utils.CustomViewPager;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class IntroScreensActivity extends AppCompatActivity implements View.OnClickListener, IntroScreensContract.View {
+
+    public static final String AD_MOB_App_ID = AppCP.AD_MOB_App_ID;
 
 
     private IntroScreensPresenter presenter;
@@ -30,6 +36,8 @@ public class IntroScreensActivity extends AppCompatActivity implements View.OnCl
     TextView start;
     @BindView(R.id.intro_screens_viewPager)
     CustomViewPager viewPager;
+    @BindView(R.id.into_adView)
+    AdView adView;
 
 
     @Override
@@ -38,6 +46,10 @@ public class IntroScreensActivity extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_intro);
         ButterKnife.bind(this);
 
+        //***Ads
+        MobileAds.initialize(this, AD_MOB_App_ID);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
         adapter = new IntoScreensAdapter(getSupportFragmentManager());
         presenter = new IntroScreensPresenter(this);

@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:gravity="center"
-        android:text="One task can be entered more than onece but in a deferent time"
+        android:text="One task can be entered more than once but with a deferent time"
         android:textSize="@dimen/XSmallTextSize" />
 
 </LinearLayout>

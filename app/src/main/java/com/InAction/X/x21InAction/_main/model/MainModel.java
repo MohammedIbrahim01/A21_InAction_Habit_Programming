@@ -28,7 +28,7 @@ public class MainModel implements MainContract.Model {
         AppFragmentPagerAdapter fragmentPagerAdapter = new AppFragmentPagerAdapter(supportFragmentManager);
         fragmentPagerAdapter.addFragment(new TasksFragment(), "tasks");
         fragmentPagerAdapter.addFragment(new AchievementsFragment(), "achievements");
-        fragmentPagerAdapter.addFragment(new ExpectationFragment(), "day zero");
+        fragmentPagerAdapter.addFragment(new ExpectationFragment(), "Day 21");
 
         return fragmentPagerAdapter;
     }

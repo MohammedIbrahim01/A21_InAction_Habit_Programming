@@ -11,7 +11,7 @@
         android:layout_marginTop="100dp"
         android:gravity="center"
         android:textColor="#414c91"
-        android:text="when you Finish a Task swipe to the Right to add it to Achievements"
+        android:text="when you Finish a Task swipe it to the Right to add it to Achievements"
         android:textSize="@dimen/MediumTextSize" />
 
 

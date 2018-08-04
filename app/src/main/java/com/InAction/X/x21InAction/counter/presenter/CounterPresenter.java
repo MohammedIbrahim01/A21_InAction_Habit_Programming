@@ -51,7 +51,7 @@ public class CounterPresenter implements CounterContract.Presenter {
         midnight.set(Calendar.SECOND, SECOND_MIDNIGHT);
 
         //check if now is in midnight hour
-        if (now.get(Calendar.HOUR_OF_DAY) == midnight.get(Calendar.HOUR_OF_DAY) && now.get(Calendar.MINUTE) == midnight.get(Calendar.MINUTE)) {
+        if (now.get(Calendar.HOUR_OF_DAY) == midnight.get(Calendar.HOUR_OF_DAY)) {
 
             Intent intent = new Intent(applicationContext, CounterReceiver.class);
             PendingIntent operation = PendingIntent.getBroadcast(applicationContext, REQUEST_CODE_COUNTER_ALARM, intent, PendingIntent.FLAG_CANCEL_CURRENT);
@@ -62,7 +62,7 @@ public class CounterPresenter implements CounterContract.Presenter {
         } else {
 
             //next midnight is in the next day (paused)
-//            midnight.set(Calendar.DAY_OF_YEAR, now.get(Calendar.DAY_OF_YEAR));
+            midnight.set(Calendar.DAY_OF_YEAR, (now.get(Calendar.DAY_OF_YEAR)) + 1);
 
             Intent intent = new Intent(applicationContext, NextMidnightReceiver.class);
             PendingIntent operation = PendingIntent.getBroadcast(applicationContext, REQUEST_CODE_MIDNIGHT_ALARM, intent, PendingIntent.FLAG_CANCEL_CURRENT);

@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.InAction.X.x21InAction.AppCP;
 import com.InAction.X.x21InAction.R;
 import com.InAction.X.x21InAction._main.view.MainActivity;
 import com.InAction.X.x21InAction.habit.HabitContract;
@@ -17,11 +18,16 @@ import com.InAction.X.x21InAction.habit.model.Habit;
 import com.InAction.X.x21InAction.habit.presenter.HabitPresenter;
 import com.InAction.X.x21InAction.manager.AppManager;
 import com.InAction.X.x21InAction.utils.CustomViewPager;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class CreateHabitActivity extends AppCompatActivity implements View.OnClickListener, HabitContract.View {
+
+    public static final String AD_MOB_App_ID = AppCP.AD_MOB_App_ID;
 
 
     private HabitPresenter presenter;
@@ -39,6 +45,8 @@ public class CreateHabitActivity extends AppCompatActivity implements View.OnCli
     TextView finish;
     @BindView(R.id.create_habit_viewPager)
     CustomViewPager viewPager;
+    @BindView(R.id.create_habit_adView)
+    AdView adView;
 
 
     @Override
@@ -47,6 +55,10 @@ public class CreateHabitActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_create_habit);
         ButterKnife.bind(this);
 
+        //***Ads
+        MobileAds.initialize(this, AD_MOB_App_ID);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
         presenter = new HabitPresenter(getApplicationContext(), this);
         adapter = new CreateHabitAdapter(getSupportFragmentManager());

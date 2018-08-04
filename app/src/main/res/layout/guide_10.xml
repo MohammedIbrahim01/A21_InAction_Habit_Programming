@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:gravity="center"
-        android:text="Don't forget to checkout your expectations every day to found them in your life"
+        android:text="Don't forget to checkout your expectations every day to find them in your life"
         android:textColor="#6d7b8e"
         android:textSize="@dimen/MediumTextSize" />
 
