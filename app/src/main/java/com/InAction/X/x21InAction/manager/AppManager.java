@@ -29,6 +29,7 @@ import com.InAction.X.x21InAction.utils.NotificationsUtils;
 import com.InAction.X.x21InAction.utils.Scheduler;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class AppManager {
@@ -270,6 +271,7 @@ public class AppManager {
 
         for (Task task : taskList) {
 
+            task.getCalendar().set(Calendar.DAY_OF_YEAR, Calendar.getInstance().get(Calendar.DAY_OF_YEAR));
             scheduler.scheduleTask(task);
         }
     }
